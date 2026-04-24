@@ -48,6 +48,7 @@ export function Navbar() {
             alt="NavisLabs logo"
             width={28}
             height={28}
+            priority
             className="rounded-md border border-black/5 bg-white object-contain shadow-sm"
             style={{ objectFit: "contain" }}
           />
