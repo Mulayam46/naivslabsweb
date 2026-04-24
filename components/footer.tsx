@@ -2,17 +2,19 @@ import Link from "next/link";
 
 const FOOTER_LINKS = {
   Products: [
-    { label: "Navis AI", href: "https://n-avis.live" },
-    { label: "HireAI", href: "https://navishire.com" },
+    { label: "HireAI", href: "/products/hireai" },
+    { label: "Navis AI", href: "/products/navis-ai" },
+    { label: "All products", href: "/products" },
   ],
   Company: [
-    { label: "About", href: "#about" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/navis-ai/about/" },
+    { label: "About", href: "/company" },
     { label: "Contact", href: "mailto:hello@navislabs.ai" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/navis-ai/about/" },
   ],
-  Developers: [
+  Resources: [
+    { label: "Homepage", href: "/" },
+    { label: "Waitlist", href: "/products#notify" },
     { label: "GitHub", href: "https://github.com/navis-labs" },
-    { label: "Docs (coming soon)", href: "#" },
   ],
 };
 
@@ -21,62 +23,38 @@ export function Footer() {
     <footer
       className="px-4 py-16 md:px-8"
       style={{
-        borderTop: "1px solid rgba(255,255,255,0.05)",
-        backgroundColor: "#09090b",
+        borderTop: "1px solid var(--border)",
+        backgroundColor: "rgba(246,242,234,0.92)",
       }}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_repeat(3,1fr)]">
-
-          {/* Brand */}
+        <div className="grid gap-12 md:grid-cols-[1.3fr_repeat(3,1fr)]">
           <div>
-            <span
-              className="font-serif text-lg"
-              style={{
-                color: "#f4f4f5",
-                fontFamily: "var(--font-playfair), Georgia, serif",
-              }}
-            >
+            <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--text)" }}>
               NavisLabs
             </span>
-
-            {/* 🔥 Strong brand line */}
-            <p
-              className="mt-3 max-w-xs text-sm font-light leading-relaxed"
-              style={{ color: "#52525b" }}
-            >
-              AI that tells you what to do next.
-              We turn your emails, meetings, and workflows into clear decisions.
+            <p className="mt-3 max-w-sm text-sm leading-7" style={{ color: "var(--muted)" }}>
+              A multi-product AI company building HireAI, Navis AI, and the public brand around them.
             </p>
-
-            <p className="mt-6 text-xs" style={{ color: "#3f3f46" }}>
-              Bangalore · Global · Founded 2026
+            <p className="mt-6 text-xs uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
+              Bangalore · Global
             </p>
           </div>
 
-          {/* Link columns */}
           {Object.entries(FOOTER_LINKS).map(([category, links]) => (
             <div key={category}>
-              <p
-                className="mb-4 text-xs font-medium uppercase tracking-widest"
-                style={{ color: "#52525b" }}
-              >
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--muted)" }}>
                 {category}
               </p>
-
               <ul className="flex flex-col gap-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={
-                        link.href.startsWith("http")
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                      className="text-sm transition-opacity hover:opacity-80"
-                      style={{ color: "#71717a" }}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-sm transition-opacity hover:opacity-70"
+                      style={{ color: "var(--muted-strong)" }}
                     >
                       {link.label}
                     </Link>
@@ -87,18 +65,15 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom */}
         <div
-          className="mt-16 flex flex-col gap-3 pt-8 md:flex-row md:items-center md:justify-between"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+          className="mt-16 flex flex-col gap-3 border-t pt-8 md:flex-row md:items-center md:justify-between"
+          style={{ borderColor: "var(--border)" }}
         >
-          <p className="text-xs" style={{ color: "#3f3f46" }}>
+          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
             NavisLabs © 2026
           </p>
-
-          {/* 🔥 Updated tags (more premium) */}
-          <p className="text-xs" style={{ color: "#3f3f46" }}>
-            Decision Intelligence · Context Memory · Agentic Systems
+          <p className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
+            HireAI · Navis AI · Decision intelligence
           </p>
         </div>
       </div>

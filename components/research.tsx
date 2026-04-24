@@ -1,116 +1,101 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { companyPillars } from "@/lib/site-data";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
 
-const FEATURES = [
+const FLOW = [
   {
     number: "01",
-    title: "Understands your work",
-    body: "Navis connects your emails, meetings, and workflows to understand what you're actually working on.",
+    title: "Capture the signal",
+    body: "Bring together the work inputs that matter so the product can understand the organization instead of just one workflow.",
   },
   {
     number: "02",
-    title: "Builds real context",
-    body: "It tracks your priorities, conversations, and decisions — not just isolated tasks or messages.",
+    title: "Turn it into product behavior",
+    body: "Each product is designed around a specific outcome, with UX that reduces work instead of adding new dashboards.",
   },
   {
     number: "03",
-    title: "Tells you what to do next",
-    body: "Instead of dashboards or summaries, Navis surfaces clear actions so you can focus on what actually matters.",
+    title: "Scale the platform",
+    body: "The structure leaves room for more products, more pages, and more capabilities without changing the brand direction.",
   },
 ];
 
 export function HowItWorks() {
   return (
     <section
-      id="research"
-      className="px-4 py-32 md:px-8"
+      id="platform"
+      className="px-4 py-24 md:px-8"
       style={{
-        backgroundColor: "#050507",
-        borderTop: "1px solid rgba(255,255,255,0.05)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
+        borderTop: "1px solid var(--border)",
+        borderBottom: "1px solid var(--border)",
+        backgroundColor: "rgba(255,255,255,0.58)",
       }}
     >
-      <div className="mx-auto max-w-7xl">
-
-        {/* Header */}
+      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.95fr_1.05fr]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: EASING }}
-          className="mb-20 max-w-2xl"
         >
           <p
-            className="mb-3 text-xs font-medium uppercase tracking-widest"
-            style={{ color: "#52525b" }}
+            className="text-xs font-semibold uppercase tracking-[0.28em]"
+            style={{ color: "var(--muted)" }}
           >
-            Navis AI
+            Platform thinking
           </p>
-
-          <h2
-            className="font-serif text-4xl font-normal tracking-tight md:text-5xl"
-            style={{
-              color: "#f4f4f5",
-              fontFamily: "var(--font-playfair), Georgia, serif",
-            }}
-          >
-            What Navis does.
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
+            Built to become a product company, not a splash page.
           </h2>
-
-          <p
-            className="mt-6 text-base font-light leading-relaxed"
-            style={{ color: "#71717a" }}
-          >
-            Most tools show you more information. Navis helps you decide what to do next.
+          <p className="mt-5 max-w-xl text-lg leading-8" style={{ color: "var(--muted)" }}>
+            The experience is organized around how a real AI company grows: a clear brand, distinct products, shared principles, and room for expansion.
           </p>
+
+          <div className="mt-8 grid gap-4">
+            {companyPillars.map((pillar) => (
+              <div
+                key={pillar.title}
+                className="rounded-2xl border p-5"
+                style={{
+                  borderColor: "var(--border)",
+                  backgroundColor: "rgba(255,255,255,0.74)",
+                }}
+              >
+                <h3 className="text-sm font-semibold tracking-tight">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                  {pillar.body}
+                </p>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Features */}
         <div className="flex flex-col">
-          {FEATURES.map((item, i) => (
+          {FLOW.map((item, i) => (
             <motion.div
               key={item.number}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.9, ease: EASING }}
-              className="grid gap-6 py-10 md:grid-cols-[80px_1fr]"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+              transition={{ delay: i * 0.08, duration: 0.8, ease: EASING }}
+              className="grid gap-5 py-8 md:grid-cols-[84px_1fr]"
+              style={{ borderTop: "1px solid var(--border)" }}
             >
-              {/* Number */}
-              <span
-                className="font-mono text-xs"
-                style={{ color: "#3f3f46", paddingTop: "2px" }}
-              >
+              <span className="pt-1 text-xs font-semibold uppercase tracking-[0.24em]" style={{ color: "var(--muted)" }}>
                 {item.number}
               </span>
-
-              {/* Content */}
               <div>
-                <h3
-                  className="font-serif text-lg font-normal leading-snug"
-                  style={{
-                    color: "#e4e4e7",
-                    fontFamily: "var(--font-playfair), Georgia, serif",
-                  }}
-                >
-                  {item.title}
-                </h3>
-
-                <p
-                  className="mt-2 text-sm font-light leading-relaxed"
-                  style={{ color: "#71717a" }}
-                >
+                <h3 className="text-xl font-semibold tracking-tight">{item.title}</h3>
+                <p className="mt-2 text-sm leading-7" style={{ color: "var(--muted)" }}>
                   {item.body}
                 </p>
               </div>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

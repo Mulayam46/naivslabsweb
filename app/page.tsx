@@ -9,31 +9,15 @@ import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
-    <main
-      className="flex min-h-screen flex-col"
-      style={{ backgroundColor: "#09090b" }}
-    >
+    <main className="flex min-h-screen flex-col">
       <Navbar />
 
-      {/* 1. Hook */}
       <Hero />
-
-      {/* 2. Problem framing */}
       <StatsBanner />
-
-      {/* 3. Product clarity */}
       <ProductGrid />
-
-      {/* 4. How it works (high level) */}
       <HowItWorks />
-
-      {/* 🔥 5. Conversion (moved up) */}
-      <NotifySection />
-
-      {/* 6. Credibility */}
       <About />
-
-      {/* 7. Footer */}
+      <NotifySection />
       <Footer />
     </main>
   );

@@ -1,32 +1,41 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
-import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "NavisLabs — AI that tells you what to do next",
+  title: {
+    default: "NavisLabs",
+    template: "%s | NavisLabs",
+  },
   description:
-    "NavisLabs builds AI that understands your work — emails, meetings, and workflows — and turns them into clear decisions.",
+    "NavisLabs is a multi-product AI company building HireAI and Navis AI for hiring and decision intelligence.",
+  keywords: [
+    "NavisLabs",
+    "HireAI",
+    "Navis AI",
+    "AI products",
+    "decision intelligence",
+    "hiring automation",
+  ],
   icons: {
     icon: "/navis-logo.png",
     apple: "/navis-logo.png",
     shortcut: "/navis-logo.png",
   },
   openGraph: {
-    title: "NavisLabs — AI that tells you what to do next",
+    title: "NavisLabs",
     description:
-      "Stop guessing. Navis observes your work and tells you what actually matters.",
+      "A clean multi-product AI company site for HireAI and Navis AI.",
     siteName: "NavisLabs",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/navis-logo.png", width: 800, height: 800, alt: "NavisLabs" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NavisLabs",
+    description:
+      "A clean multi-product AI company site for HireAI and Navis AI.",
   },
 };
 
@@ -36,17 +45,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(GeistSans.variable, playfair.variable)}
-      style={{ colorScheme: "dark", backgroundColor: "#09090b" }}
+      data-scroll-behavior="smooth"
+      className={cn(GeistSans.variable)}
+      style={{ colorScheme: "light", backgroundColor: "var(--background)" }}
     >
       <body
-        className={cn(
-          GeistSans.className,
-          "min-h-screen antialiased"
-        )}
+        className={cn(GeistSans.className, "min-h-screen antialiased")}
         style={{
-          backgroundColor: "#09090b",
-          color: "#e4e4e7",
+          backgroundColor: "var(--background)",
+          color: "var(--text)",
           fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
         }}
       >

@@ -3,18 +3,22 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Products", href: "#products" },
-  { label: "Research", href: "#research" },
-  { label: "Company", href: "#about" },
+  { label: "Products", href: "/products" },
+  { label: "HireAI", href: "/products/hireai" },
+  { label: "Navis AI", href: "/products/navis-ai" },
+  { label: "Company", href: "/company" },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const waitlistHref = pathname === "/" ? "#notify" : "/products#notify";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -27,10 +31,10 @@ export function Navbar() {
       className="fixed inset-x-0 top-0 z-50 transition-all duration-500"
       style={{
         backgroundColor: scrolled
-          ? "rgba(9,9,11,0.85)"
-          : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+          ? "rgba(246,242,234,0.8)"
+          : "rgba(246,242,234,0.5)",
+        backdropFilter: scrolled ? "blur(18px)" : "blur(8px)",
+        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
       }}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8">
@@ -44,15 +48,12 @@ export function Navbar() {
             alt="NavisLabs logo"
             width={28}
             height={28}
-            className="rounded-md"
+            className="rounded-md border border-black/5 bg-white object-contain shadow-sm"
             style={{ objectFit: "contain" }}
           />
           <span
-            className="font-serif text-lg tracking-tight"
-            style={{
-              color: "#f4f4f5",
-              fontFamily: "var(--font-playfair), Georgia, serif",
-            }}
+            className="text-lg font-semibold tracking-tight"
+            style={{ color: "var(--text)" }}
           >
             NavisLabs
           </span>
@@ -64,8 +65,8 @@ export function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm transition-colors hover:opacity-100"
-              style={{ color: "#71717a" }}
+              className="text-sm transition-colors hover:opacity-80"
+              style={{ color: "var(--muted-strong)" }}
             >
               {link.label}
             </Link>
@@ -75,37 +76,33 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden items-center gap-4 md:flex">
           <Link
-            href="https://navishire.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/products"
             className="text-sm transition-colors"
-            style={{ color: "#71717a" }}
+            style={{ color: "var(--muted-strong)" }}
           >
-            Log in
+            Explore products
           </Link>
           <Link
-            href="https://app.navislabs.ai"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={waitlistHref}
             className="rounded-full px-5 py-2 text-sm font-medium transition-all active:scale-95"
             style={{
-              backgroundColor: "#f4f4f5",
-              color: "#09090b",
+              backgroundColor: "var(--text)",
+              color: "#f8fafc",
             }}
           >
-            Try Navis
+            Join waitlist
           </Link>
         </div>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex h-8 w-8 items-center justify-center rounded-md transition-colors md:hidden"
-          style={{ color: "#71717a" }}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+            className="flex h-8 w-8 items-center justify-center rounded-md transition-colors md:hidden"
+            style={{ color: "var(--muted-strong)" }}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
       </nav>
 
       {/* Mobile menu */}
@@ -118,8 +115,8 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="px-4 py-6 md:hidden"
             style={{
-              backgroundColor: "rgba(9,9,11,0.97)",
-              borderTop: "1px solid rgba(255,255,255,0.06)",
+              backgroundColor: "rgba(246,242,234,0.96)",
+              borderTop: "1px solid var(--border)",
             }}
           >
             <div className="flex flex-col gap-5">
@@ -129,20 +126,19 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="text-base transition-colors"
-                  style={{ color: "#a1a1aa" }}
+                  style={{ color: "var(--muted-strong)" }}
                 >
                   {link.label}
                 </Link>
               ))}
-              <hr style={{ borderColor: "rgba(255,255,255,0.08)" }} />
+              <hr style={{ borderColor: "var(--border)" }} />
               <Link
-                href="https://app.navislabs.ai"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={waitlistHref}
+                onClick={() => setMobileOpen(false)}
                 className="rounded-full px-5 py-2.5 text-center text-sm font-medium"
-                style={{ backgroundColor: "#f4f4f5", color: "#09090b" }}
+                style={{ backgroundColor: "var(--text)", color: "#f8fafc" }}
               >
-                Try Navis
+                Join waitlist
               </Link>
             </div>
           </motion.div>

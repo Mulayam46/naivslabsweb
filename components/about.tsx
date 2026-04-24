@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
 
@@ -8,152 +9,129 @@ const COMPANY_FACTS = [
   { value: "2026", label: "Founded" },
   { value: "Bangalore", label: "Headquarters" },
   { value: "Global", label: "Market focus" },
-  { value: "Multi-product", label: "AI platform" },
+  { value: "Product-led", label: "Operating model" },
+];
+
+const PRINCIPLES = [
+  "Clear product boundaries",
+  "Useful AI over vague AI",
+  "A platform that can expand",
+  "A premium public brand",
 ];
 
 export function About() {
   return (
     <section
-      id="about"
-      className="px-4 py-32 md:px-8"
-      style={{ backgroundColor: "#09090b" }}
+      id="company"
+      className="px-4 py-24 md:px-8"
+      style={{ backgroundColor: "rgba(246,242,234,0.9)" }}
     >
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-16 lg:grid-cols-2">
-          
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.9, ease: EASING }}
+      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: EASING }}
+        >
+          <p
+            className="text-xs font-semibold uppercase tracking-[0.28em]"
+            style={{ color: "var(--muted)" }}
           >
-            <p
-              className="mb-3 text-xs font-medium uppercase tracking-widest"
-              style={{ color: "#52525b" }}
-            >
-              About
-            </p>
+            Company
+          </p>
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
+            NavisLabs is the company behind the products.
+          </h2>
+          <p className="mt-5 max-w-xl text-lg leading-8" style={{ color: "var(--muted)" }}>
+            We are building a family of AI products that help teams hire better,
+            understand context faster, and move toward the right next action.
+          </p>
 
-            <h2
-              className="font-serif text-4xl font-normal tracking-tight md:text-5xl"
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="mailto:hello@navislabs.ai"
+              className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold"
               style={{
-                color: "#f4f4f5",
-                fontFamily: "var(--font-playfair), Georgia, serif",
+                backgroundColor: "var(--text)",
+                color: "#f8fafc",
               }}
             >
-              NavisLabs.
-            </h2>
-
-            {/* 🔥 Core positioning */}
-            <p
-              className="mt-6 max-w-lg text-base font-light leading-relaxed"
-              style={{ color: "#a1a1aa" }}
-            >
-              NavisLabs builds AI that tells you what to do next.
-              We connect signals across your work — emails, meetings, and workflows — 
-              and turn them into clear, actionable decisions.
-            </p>
-
-            {/* 🔥 Product clarity */}
-            <p
-              className="mt-4 max-w-lg text-base font-light leading-relaxed"
-              style={{ color: "#71717a" }}
-            >
-              Navis AI is currently in development — a decision intelligence system 
-              that observes your work, builds memory over time, and guides your next move.
-              We are building the intelligence layer for modern work.
-            </p>
-
-            {/* 🔥 Buttons */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="https://www.linkedin.com/company/navis-ai/about/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-all"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  color: "#a1a1aa",
-                }}
-              >
-                LinkedIn
-              </a>
-
-              <a
-                href="mailto:hello@navislabs.ai"
-                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-all"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  color: "#a1a1aa",
-                }}
-              >
-                Contact us
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Right — company facts */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: 0.1, duration: 0.9, ease: EASING }}
-            className="self-start"
-          >
-            <div
-              className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl"
+              Contact us
+            </Link>
+            <Link
+              href="/products"
+              className="inline-flex h-11 items-center justify-center rounded-full border px-5 text-sm font-semibold"
               style={{
-                border: "1px solid rgba(255,255,255,0.06)",
-                backgroundColor: "rgba(255,255,255,0.04)",
+                borderColor: "var(--border)",
+                color: "var(--text)",
+                backgroundColor: "rgba(255,255,255,0.7)",
               }}
             >
-              {COMPANY_FACTS.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="flex flex-col gap-1.5 p-8"
-                  style={{ backgroundColor: "#09090b" }}
-                >
-                  <span
-                    className="font-serif text-2xl font-normal"
-                    style={{
-                      color: "#f4f4f5",
-                      fontFamily: "var(--font-playfair), Georgia, serif",
-                    }}
-                  >
-                    {fact.value}
-                  </span>
+              View products
+            </Link>
+          </div>
 
-                  <span className="text-xs" style={{ color: "#52525b" }}>
-                    {fact.label}
-                  </span>
-                </div>
-              ))}
-            </div>
+          <div className="mt-10 flex flex-wrap gap-2">
+            {PRINCIPLES.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border px-3 py-1 text-xs font-medium"
+                style={{
+                  borderColor: "var(--border)",
+                  color: "var(--muted-strong)",
+                  backgroundColor: "rgba(255,255,255,0.72)",
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </motion.div>
 
-            {/* 🔥 Updated specialties */}
-            <div className="mt-6 flex flex-wrap gap-2">
-              {[
-                "Decision Intelligence",
-                "AI Systems",
-                "Context Memory",
-                "Agentic Workflows",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full px-3 py-1 text-xs"
-                  style={{
-                    border: "1px solid rgba(255,255,255,0.06)",
-                    color: "#52525b",
-                  }}
-                >
-                  {tag}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ delay: 0.1, duration: 0.85, ease: EASING }}
+        >
+          <div
+            className="grid grid-cols-2 gap-px overflow-hidden rounded-[2rem] border"
+            style={{
+              borderColor: "var(--border)",
+              backgroundColor: "rgba(15,23,42,0.06)",
+            }}
+          >
+            {COMPANY_FACTS.map((fact) => (
+              <div
+                key={fact.label}
+                className="flex flex-col gap-1.5 p-6 sm:p-8"
+                style={{ backgroundColor: "rgba(255,255,255,0.88)" }}
+              >
+                <span className="text-2xl font-semibold tracking-tight text-[color:var(--text)]">
+                  {fact.value}
                 </span>
-              ))}
-            </div>
-          </motion.div>
+                <span className="text-xs uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
+                  {fact.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-        </div>
+          <div
+            className="mt-6 rounded-[2rem] border p-6"
+            style={{
+              borderColor: "var(--border)",
+              backgroundColor: "rgba(255,255,255,0.74)",
+            }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--muted)" }}>
+              Mission
+            </p>
+            <p className="mt-3 text-lg leading-8">
+              Build AI products that remove uncertainty from work and give teams a clearer path forward.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
