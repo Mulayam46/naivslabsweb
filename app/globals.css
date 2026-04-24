@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* ─── Force dark background globally ──────────────────── */
+html,
+body {
+  background-color: #09090b !important;
+  color: #e4e4e7;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Design tokens ─────────────────────────────────────── */
+:root {
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-playfair);
+}
+
+/* ─── Tailwind v4 theme tokens ──────────────────────────── */
+@theme inline {
+  --color-background: #09090b;
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-playfair);
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #09090b;
+  color: #e4e4e7;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* ─── Ensure font-serif utility works ───────────────────── */
+.font-serif {
+  font-family: var(--font-playfair), Georgia, serif !important;
+}
