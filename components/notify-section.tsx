@@ -9,10 +9,15 @@ const EASING = [0.22, 1, 0.36, 1] as const;
 export function NotifySection() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    setLoading(true);
+    // Future: await api call here
+    await new Promise((r) => setTimeout(r, 800));
+    setLoading(false);
     setSubmitted(true);
   };
 
@@ -74,7 +79,8 @@ export function NotifySection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@company.com"
-                className="h-12 flex-1 rounded-full border px-5 text-sm outline-none"
+                disabled={loading}
+                className="h-12 flex-1 rounded-full border px-5 text-sm outline-none transition-shadow focus:ring-2 focus:ring-[rgba(29,78,216,0.35)] focus:border-[var(--accent)] disabled:opacity-60"
                 style={{
                   borderColor: "var(--border)",
                   backgroundColor: "rgba(255,255,255,0.92)",
@@ -84,14 +90,27 @@ export function NotifySection() {
 
               <button
                 type="submit"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition-transform active:scale-[0.98]"
+                disabled={loading}
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition-all duration-200 hover:opacity-85 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{
                   backgroundColor: "var(--text)",
                   color: "#f8fafc",
                 }}
               >
-                Join waitlist
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                {loading ? (
+                  <>
+                    <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                    </svg>
+                    Joining...
+                  </>
+                ) : (
+                  <>
+                    Join waitlist
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </>
+                )}
               </button>
             </form>
           )}

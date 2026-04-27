@@ -42,7 +42,10 @@ export function Hero() {
               color: "var(--muted-strong)",
             }}
           >
-            <Sparkles className="h-3.5 w-3.5" />
+            <Sparkles
+              className="h-3.5 w-3.5"
+              style={{ color: "var(--accent)" }}
+            />
             NavisLabs is building a multi-product AI company
           </motion.div>
 
@@ -78,7 +81,7 @@ export function Hero() {
           >
             <Link
               href="/products"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition-transform active:scale-[0.98]"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold transition-all duration-200 hover:opacity-85 active:scale-[0.98]"
               style={{
                 backgroundColor: "var(--text)",
                 color: "#f8fafc",
@@ -89,7 +92,7 @@ export function Hero() {
             </Link>
             <Link
               href="#notify"
-              className="inline-flex h-12 items-center justify-center rounded-full border px-7 text-sm font-semibold transition-colors"
+              className="inline-flex h-12 items-center justify-center rounded-full border px-7 text-sm font-semibold transition-all duration-200 hover:bg-white hover:border-[rgba(29,78,216,0.25)] active:scale-[0.98]"
               style={{
                 borderColor: "var(--border)",
                 color: "var(--text)",
@@ -131,7 +134,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASING, delay: 0.12 }}
-          className="relative"
+          className="relative self-start pt-8 lg:pt-8"
         >
           <div
             className="absolute -inset-6 rounded-[2rem] blur-3xl"
@@ -147,9 +150,15 @@ export function Hero() {
               backgroundColor: "rgba(255,255,255,0.82)",
             }}
           >
-            <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: "var(--border)" }}>
+            <div
+              className="flex items-center justify-between border-b pb-4"
+              style={{ borderColor: "var(--border)" }}
+            >
               <div>
-                <p className="text-xs uppercase tracking-[0.24em]" style={{ color: "var(--muted)" }}>
+                <p
+                  className="text-xs uppercase tracking-[0.24em]"
+                  style={{ color: "var(--muted)" }}
+                >
                   Product family
                 </p>
                 <h2 className="mt-1 text-lg font-semibold tracking-tight">
@@ -172,7 +181,7 @@ export function Hero() {
               {productFamily.map((product) => (
                 <div
                   key={product.slug}
-                  className="rounded-[1.35rem] border p-5"
+                  className="rounded-[1.35rem] border p-5 transition-all duration-200 hover:shadow-md hover:border-[rgba(29,78,216,0.2)]"
                   style={{
                     borderColor: "var(--border)",
                     backgroundColor:
@@ -183,36 +192,56 @@ export function Hero() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.24em]" style={{ color: "var(--muted)" }}>
+                      <p
+                        className="text-xs uppercase tracking-[0.24em]"
+                        style={{ color: "var(--muted)" }}
+                      >
                         {product.eyebrow}
                       </p>
                       <h3 className="mt-1 text-xl font-semibold tracking-tight">
                         {product.name}
                       </h3>
-                      <p className="mt-2 max-w-md text-sm leading-6" style={{ color: "var(--muted)" }}>
+                      <p
+                        className="mt-2 max-w-md text-sm leading-6"
+                        style={{ color: "var(--muted)" }}
+                      >
                         {product.blurb}
                       </p>
                     </div>
                     <span
-                      className="rounded-full border px-3 py-1 text-xs font-medium"
+                      className="shrink-0 rounded-full border px-3 py-1 text-xs font-medium"
                       style={{
-                        borderColor: "var(--border)",
-                        backgroundColor: "rgba(255,255,255,0.8)",
-                        color: "var(--muted-strong)",
+                        borderColor:
+                          product.status === "live"
+                            ? "rgba(22,163,74,0.25)"
+                            : "rgba(217,119,6,0.25)",
+                        backgroundColor:
+                          product.status === "live"
+                            ? "rgba(22,163,74,0.08)"
+                            : "rgba(217,119,6,0.08)",
+                        color:
+                          product.status === "live" ? "#15803d" : "#b45309",
                       }}
                     >
-                      {product.slug === "hireai" ? "Live" : "Build"}
+                      {product.status === "live" ? "Live" : "In development"}
                     </span>
                   </div>
                   <div className="mt-4 flex items-center gap-3 text-sm font-medium">
-                    <Link href={product.secondaryHref} className="text-[color:var(--text)] hover:opacity-70">
+                    <Link
+                      href={product.secondaryHref}
+                      className="text-[color:var(--text)] hover:opacity-70"
+                    >
                       {product.secondaryCta}
                     </Link>
                     <span style={{ color: "var(--muted)" }}>•</span>
                     <Link
                       href={product.href}
                       target={product.slug === "hireai" ? "_blank" : undefined}
-                      rel={product.slug === "hireai" ? "noopener noreferrer" : undefined}
+                      rel={
+                        product.slug === "hireai"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
                       className="text-[color:var(--muted-strong)] hover:opacity-70"
                     >
                       {product.cta}

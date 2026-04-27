@@ -3,22 +3,37 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Products", href: "/products" },
+  { label: "Products", href: "/#products" },
   { label: "HireAI", href: "/products/hireai" },
   { label: "Navis AI", href: "/products/navis-ai" },
-  { label: "Company", href: "/company" },
+  { label: "Company", href: "/#company" },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const waitlistHref = pathname === "/" ? "#notify" : "/products#notify";
+
+  function handleSectionClick(
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) {
+    if (!href.startsWith("/#")) return; // let normal links pass through
+    e.preventDefault();
+    const id = href.slice(2); // strip "/#"
+    if (pathname === "/") {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push(href);
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -66,8 +81,14 @@ export function Navbar() {
             <Link
               key={link.label}
               href={link.href}
+              onClick={(e) => handleSectionClick(e, link.href)}
               className="text-sm transition-colors hover:opacity-80"
-              style={{ color: "var(--muted-strong)" }}
+              style={{
+                color: pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href.replace("/#", "/")))
+                  ? "var(--text)"
+                  : "var(--muted-strong)",
+                fontWeight: pathname === link.href ? 600 : 400,
+              }}
             >
               {link.label}
             </Link>
@@ -77,15 +98,8 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden items-center gap-4 md:flex">
           <Link
-            href="/products"
-            className="text-sm transition-colors"
-            style={{ color: "var(--muted-strong)" }}
-          >
-            Explore products
-          </Link>
-          <Link
             href={waitlistHref}
-            className="rounded-full px-5 py-2 text-sm font-medium transition-all active:scale-95"
+            className="rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 hover:opacity-85 active:scale-95"
             style={{
               backgroundColor: "var(--text)",
               color: "#f8fafc",
@@ -125,7 +139,10 @@ export function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => {
+                    handleSectionClick(e, link.href);
+                    setMobileOpen(false);
+                  }}
                   className="text-base transition-colors"
                   style={{ color: "var(--muted-strong)" }}
                 >

@@ -58,7 +58,7 @@ export function HowItWorks() {
             {companyPillars.map((pillar) => (
               <div
                 key={pillar.title}
-                className="rounded-2xl border p-5"
+                className="rounded-2xl border p-5 transition-all duration-200 hover:shadow-sm hover:border-[rgba(29,78,216,0.2)] hover:bg-white/90"
                 style={{
                   borderColor: "var(--border)",
                   backgroundColor: "rgba(255,255,255,0.74)",

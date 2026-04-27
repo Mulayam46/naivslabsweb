@@ -50,7 +50,7 @@ export function About() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="mailto:hello@navislabs.ai"
-              className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold"
+              className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition-all duration-200 hover:opacity-85 active:scale-95"
               style={{
                 backgroundColor: "var(--text)",
                 color: "#f8fafc",
@@ -60,7 +60,7 @@ export function About() {
             </Link>
             <Link
               href="/products"
-              className="inline-flex h-11 items-center justify-center rounded-full border px-5 text-sm font-semibold"
+              className="inline-flex h-11 items-center justify-center rounded-full border px-5 text-sm font-semibold transition-all duration-200 hover:bg-white hover:border-[rgba(29,78,216,0.25)] active:scale-95"
               style={{
                 borderColor: "var(--border)",
                 color: "var(--text)",

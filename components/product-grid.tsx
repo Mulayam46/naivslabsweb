@@ -1,11 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowRight, ExternalLink, Users, Zap, RefreshCw, Brain, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { productFamily } from "@/lib/site-data";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
+
+// Distinct icons per pillar — keyed by title for both products
+const PILLAR_ICONS: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  "Screen at scale": Zap,
+  "Keep humans in the loop": Users,
+  "Move with consistency": RefreshCw,
+  "Understand the work": Brain,
+  "Build context memory": Clock,
+  "Recommend the next step": Sparkles,
+};
 
 export function ProductGrid() {
   return (
@@ -73,14 +83,14 @@ export function ProductGrid() {
                     </p>
                   </div>
                   <span
-                    className="rounded-full border px-3 py-1 text-xs font-medium"
+                    className="shrink-0 rounded-full border px-3 py-1 text-xs font-medium"
                     style={{
-                      borderColor: "var(--border)",
-                      color: "var(--muted-strong)",
-                      backgroundColor: "rgba(255,255,255,0.8)",
+                      borderColor: product.status === "live" ? "rgba(22,163,74,0.25)" : "rgba(217,119,6,0.25)",
+                      backgroundColor: product.status === "live" ? "rgba(22,163,74,0.08)" : "rgba(217,119,6,0.08)",
+                      color: product.status === "live" ? "#15803d" : "#b45309",
                     }}
                   >
-                    {product.status === "live" ? "Live" : "In build"}
+                    {product.status === "live" ? "Live" : "In development"}
                   </span>
                 </div>
 
@@ -103,33 +113,36 @@ export function ProductGrid() {
                 </div>
 
                 <div className="mt-8 space-y-3">
-                  {product.pillars.map((pillar) => (
-                    <div
-                      key={pillar.title}
-                      className="flex gap-3 rounded-2xl border p-4"
-                      style={{
-                        borderColor: "var(--border)",
-                        backgroundColor:
-                          product.slug === "hireai"
-                            ? "rgba(15,23,42,0.03)"
-                            : "rgba(29,78,216,0.03)",
-                      }}
-                    >
-                      <Sparkles className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--accent)" }} />
-                      <div>
-                        <h4 className="text-sm font-semibold tracking-tight">{pillar.title}</h4>
-                        <p className="mt-1 text-sm leading-6" style={{ color: "var(--muted)" }}>
-                          {pillar.body}
-                        </p>
+                  {product.pillars.map((pillar) => {
+                    const PillarIcon = PILLAR_ICONS[pillar.title] ?? Sparkles;
+                    return (
+                      <div
+                        key={pillar.title}
+                        className="flex gap-3 rounded-2xl border p-4"
+                        style={{
+                          borderColor: "var(--border)",
+                          backgroundColor:
+                            product.slug === "hireai"
+                              ? "rgba(15,23,42,0.03)"
+                              : "rgba(29,78,216,0.03)",
+                        }}
+                      >
+                        <PillarIcon className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--accent)" }} />
+                        <div>
+                          <h4 className="text-sm font-semibold tracking-tight">{pillar.title}</h4>
+                          <p className="mt-1 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                            {pillar.body}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
                     href={product.secondaryHref}
-                    className="group inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold"
+                    className="group inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-all duration-200 hover:bg-white hover:border-[rgba(29,78,216,0.25)]"
                     style={{
                       border: "1px solid var(--border)",
                       backgroundColor: "rgba(255,255,255,0.82)",
