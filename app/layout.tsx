@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Inter } from "next/font/google";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: {
@@ -46,7 +49,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={cn(GeistSans.variable)}
+      className={cn(GeistSans.variable, "font-sans", inter.variable)}
       style={{ colorScheme: "light", backgroundColor: "var(--background)" }}
     >
       <body

@@ -6,10 +6,11 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Button } from "../components/ui/moving-border";
 
 const NAV_LINKS = [
   { label: "Products", href: "/#products" },
-  { label: "HireAI", href: "/products/hireai" },
+  // { label: "HireAI", href: "/products/hireai" },
   { label: "Navis AI", href: "/products/navis-ai" },
   { label: "Company", href: "/#company" },
 ];
@@ -99,14 +100,15 @@ export function Navbar() {
         <div className="hidden items-center gap-4 md:flex">
           <Link
             href={waitlistHref}
-            className="rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 hover:opacity-85 active:scale-95"
-            style={{
-              backgroundColor: "var(--text)",
-              color: "#f8fafc",
-            }}
           >
-            Join waitlist
+             <Button
+        borderRadius="1.75rem"
+        className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+      >
+        Join waitlist
+      </Button>
           </Link>
+           
         </div>
 
         {/* Mobile toggle */}
