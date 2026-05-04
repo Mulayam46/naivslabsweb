@@ -15,15 +15,15 @@ const STEPS = [
     cursor: { x: "14%", y: "13%" },
     tooltip: { side: "right" as const },
     label: "Next decision",
-    body: "Navis surfaces the single most important action right now — no inbox triage needed.",
+    body: "Navis ranks every open decision by impact and behavior. You see one screen, one next move.",
     color: "#1d4ed8",
   },
   {
     id: "ask-navis",
     cursor: { x: "38%", y: "28%" },
     tooltip: { side: "right" as const },
-    label: "Ask Navis anything",
-    body: "Chat with your Company Brain. Ask about deals, people, or what changed since yesterday.",
+    label: "Question or command",
+    body: "Same engine. Ask why Arjun is the priority, or just say \"call Arjun\" — Navis routes both through the Decision Engine.",
     color: "#7c3aed",
   },
   {
@@ -31,15 +31,15 @@ const STEPS = [
     cursor: { x: "82%", y: "62%" },
     tooltip: { side: "left" as const },
     label: "Company Brain",
-    body: "Episodic, semantic, state and decision memory — all cited in every answer.",
+    body: "Episodic, Semantic, State, and Decision memory — all cited per answer with the exact event behind it.",
     color: "#059669",
   },
   {
     id: "decision-skills",
     cursor: { x: "14%", y: "72%" },
     tooltip: { side: "right" as const },
-    label: "Decision Skills",
-    body: "Navis scores your readiness on deals, investor prep, and onboarding risk in real time.",
+    label: "Policy + audit trace",
+    body: "Every executed action passes a per-channel policy gate and writes a tamper-evident trace to the Audit Log.",
     color: "#d97706",
   },
 ];
@@ -164,18 +164,19 @@ export function AskNavis() {
             className="max-w-xl"
           >
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-violet-500">
-              LLM Copilot · Ask Navis
+              Command Center · Ask Navis
             </p>
             <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-              Your work, explained{" "}
+              You can click. Or you can just{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
-                on demand.
+                tell Navis.
               </span>
             </h2>
             <p className="mt-4 max-w-lg text-base leading-7 text-slate-500">
-              Ask about priorities, deals, people, or what changed since
-              yesterday. Navis answers from your Company Brain and cites the
-              memory it used.
+              Same engine. Ask a question — Navis answers from your Company
+              Brain with citations. Give a command — Navis routes it through
+              the Decision Engine, honors your action policies, and writes
+              every step to the Audit Log.
             </p>
           </motion.div>
 

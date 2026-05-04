@@ -44,7 +44,7 @@ function HeroTitle() {
       >
         Your AI chief of staff.{" "}
         <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
-          Always in the room.
+          One next decision.
         </span>
       </motion.h1>
 
@@ -54,9 +54,9 @@ function HeroTitle() {
         transition={{ delay: 0.22, duration: 0.8, ease: EASING }}
         className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-500"
       >
-        Navis connects to Gmail, Slack, and your calendar — runs 24/7 in the
-        cloud, joins your meetings live, and surfaces the one question that
-        changes your week.
+        Navis reads your Gmail, Slack, and calendar, structures it into a
+        Company Brain across four memory types, and surfaces the single most
+        important decision right now — with full audit trace + governance.
       </motion.p>
 
       <motion.div
@@ -80,7 +80,7 @@ function HeroTitle() {
         </Link>
       </motion.div>
 
-      {/* Social proof strip */}
+      {/* Architecture proof strip */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -89,15 +89,15 @@ function HeroTitle() {
       >
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          43 beta users · ₹0 marketing
+          4 memory types · cited per answer
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-          70% weekly active rate
+          Decision Trace · tamper-evident audit
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-          NPS 60 · benchmark is 40
+          Per-channel action policies
         </span>
       </motion.div>
     </div>

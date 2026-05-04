@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { Mail, Hash, CalendarDays, Video, FileText, Check, ShieldCheck } from "lucide-react";
+import { Mail, Hash, CalendarDays, Video, FileText, Check, Plug, ShieldCheck } from "lucide-react";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
 
@@ -14,6 +14,7 @@ const SOURCES = [
     color: "#ea4335",
     bg: "#fff1f0",
     border: "#fecaca",
+    state: "connected" as const,
     what: "Reads important threads, reply gaps, customer messages, and follow-ups.",
     contributed: "Customer commitments, buying intent, investor follow-ups, and reply silence.",
     caps: ["Read threads", "Draft replies", "Detect silence"],
@@ -24,6 +25,7 @@ const SOURCES = [
     color: "#4a154b",
     bg: "#fdf4ff",
     border: "#e9d5ff",
+    state: "connected" as const,
     what: "Finds blockers, decisions, team requests, and project drift.",
     contributed: "Team decisions, ownership gaps, escalations, and unblock patterns.",
     caps: ["Read channels", "Detect blockers", "Track mentions"],
@@ -34,6 +36,7 @@ const SOURCES = [
     color: "#1d4ed8",
     bg: "#eff6ff",
     border: "#bfdbfe",
+    state: "connected" as const,
     what: "Understands deadlines, meeting load, prep windows, and schedule conflicts.",
     contributed: "Deadlines, prep windows, decision timing, and overloaded days.",
     caps: ["Read events", "Detect conflicts", "Prep windows"],
@@ -44,19 +47,21 @@ const SOURCES = [
     color: "#059669",
     bg: "#f0fdf4",
     border: "#a7f3d0",
-    what: "Joins live, captures decisions, action items, and follow-up signals.",
-    contributed: "Live context, action items, and post-meeting follow-up drafts.",
-    caps: ["Join live", "Capture actions", "Draft follow-ups"],
+    state: "available" as const,
+    what: "Will turn calls into memory, action items, and decision evidence.",
+    contributed: "Meeting facts, objections, next steps, and commitments.",
+    caps: ["Import transcripts", "Extract action items", "Store commitments"],
   },
   {
     icon: FileText,
-    name: "Docs",
+    name: "Notion",
     color: "#f59e0b",
     bg: "#fffbeb",
     border: "#fde68a",
-    what: "Indexes shared documents, proposals, and data room files.",
-    contributed: "Proposal context, data room status, and document gaps.",
-    caps: ["Index docs", "Track gaps", "Surface context"],
+    state: "available" as const,
+    what: "Indexes specs, investor materials, and project docs for grounding.",
+    contributed: "Project state, doc updates, written decisions, and structured plans.",
+    caps: ["Read pages", "Track updates", "Extract structure"],
   },
 ];
 
@@ -103,10 +108,17 @@ function SourceRow({ s, index }: { s: (typeof SOURCES)[0]; index: number }) {
             <p className="text-xs text-slate-400">{s.what}</p>
           </div>
         </div>
-        <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">
-          <Check className="h-3 w-3" />
-          Connected
-        </span>
+        {s.state === "connected" ? (
+          <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">
+            <Check className="h-3 w-3" />
+            Connected
+          </span>
+        ) : (
+          <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold text-slate-500">
+            <Plug className="h-3 w-3" />
+            Available
+          </span>
+        )}
       </div>
 
       {/* Knowledge contributed */}
@@ -183,7 +195,7 @@ export function Connections() {
                   <div className="flex items-center gap-1.5">
                     <span
                       className={`flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black ${
-                        i < 2
+                        i < 3
                           ? "bg-slate-900 text-white"
                           : "bg-slate-100 text-slate-400"
                       }`}
@@ -192,7 +204,7 @@ export function Connections() {
                     </span>
                     <span
                       className={`text-xs font-semibold ${
-                        i < 2 ? "text-slate-700" : "text-slate-400"
+                        i < 3 ? "text-slate-700" : "text-slate-400"
                       }`}
                     >
                       {step}

@@ -17,7 +17,7 @@ export type Product = {
 
 export const companyStats = [
   { value: "2", label: "Core products" },
-  { value: "1", label: "Platform vision" },
+  { value: "Decision", label: "intelligence focus" },
   { value: "Bangalore", label: "HQ" },
   { value: "Global", label: "Market" },
 ];
@@ -60,30 +60,30 @@ export const productFamily: Product[] = [
     name: "Navis AI",
     eyebrow: "In development",
     status: "build",
-    blurb: "Decision intelligence for emails, meetings, and workflows.",
+    blurb: "Decision intelligence for Gmail, Slack, and Calendar.",
     description:
-      "Navis AI connects signals across work, builds memory over time, and turns scattered inputs into a clear next action. It is the intelligence layer for modern teams.",
+      "Navis AI reads your work, structures it into a Company Brain across four memory types, ranks every open decision by impact and behavior, and executes through real connectors with full audit trace + governance.",
     href: "#notify",
     cta: "Join waitlist",
     secondaryHref: "/products/navis-ai",
     secondaryCta: "View product page",
     metrics: [
-      { value: "Memory", label: "over time" },
-      { value: "Context", label: "across work" },
-      { value: "Decisions", label: "not dashboards" },
+      { value: "4 types", label: "of memory" },
+      { value: "3 skills", label: "shipped" },
+      { value: "Audit", label: "on every action" },
     ],
     pillars: [
       {
-        title: "Understand the work",
-        body: "Connect meetings, messages, and workflow signals into one coherent picture of what is happening.",
+        title: "Company Brain · 4 memory types",
+        body: "Episodic, Semantic, State, and Decision memory. Every recommendation lands with the exact memory citations behind it.",
       },
       {
-        title: "Build context memory",
-        body: "Track priorities, decisions, and repeated patterns so the system gets sharper the longer it is used.",
+        title: "Decision Skills · versioned + evolving",
+        body: "Reusable skills with v1 → v2 → v3 evolution. Each skill declares which memory types it consumes and learns from outcomes.",
       },
       {
-        title: "Recommend the next step",
-        body: "Surface what matters most instead of another summary, chart, or inbox full of noise.",
+        title: "Audit + governance · per-channel policies",
+        body: "Auto · confirm · require approval · blocked. Tamper-evident trace per decision. Every action is exposed via the Decision API.",
       },
     ],
   },
@@ -91,12 +91,12 @@ export const productFamily: Product[] = [
 
 export const companyPillars = [
   {
-    title: "Product-first AI",
-    body: "We build concrete products, not abstract demos. Every release should feel useful on its own.",
+    title: "Decision-first AI",
+    body: "We build systems that decide, not chatbots that summarise. Every product surfaces an action with cited memory behind it.",
   },
   {
-    title: "Operational clarity",
-    body: "Our systems are designed to reduce friction and help teams act faster with more confidence.",
+    title: "Trace + governance, by default",
+    body: "Every external action passes a per-channel policy gate and writes a tamper-evident trace. AI is only safe when it is auditable.",
   },
   {
     title: "Expandable platform",

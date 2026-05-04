@@ -30,10 +30,10 @@ const EASING = [0.22, 1, 0.36, 1] as const;
 const LAYERS = [
   {
     number: "01",
-    tag: "The Hands",
-    title: "Autonomous execution — 24/7 in the cloud",
+    tag: "The Pipeline",
+    title: "Sources to Memory, in one pass",
     description:
-      "Navis runs continuously in the background. It does not wait for you to open it.",
+      "Navis plugs into Gmail, Slack, and Calendar. Every signal becomes a structured event with extracted entities, writes to one of four memory types, and can trigger a Decision Skill — automatically.",
     color: "#1d4ed8",
     bg: "rgba(29,78,216,0.04)",
     border: "rgba(29,78,216,0.15)",
@@ -41,84 +41,84 @@ const LAYERS = [
     features: [
       {
         icon: Mail,
-        title: "Gmail Intelligence",
-        body: "Reads every incoming email. Categorises by urgency. Drafts replies with full thread context. Flags team conflicts. Surfaces top 20 in your morning briefing.",
+        title: "Gmail",
+        body: "Reads important threads, reply gaps, and customer messages. Feeds Episodic + Semantic + State memory. Powers Deal Recovery and Investor Prep skills.",
       },
       {
         icon: MessageSquare,
-        title: "Slack Intelligence",
-        body: "Monitors team channels. Detects 3-day stuck threads. Drafts smart replies. Sends daily channel digest. Escalates blockers before you notice them.",
+        title: "Slack",
+        body: "Detects ownership gaps, blockers, and team escalations. Routes \"waiting on you\" signals into the light team layer so the right teammate is unblocked.",
       },
       {
         icon: CalendarClock,
-        title: "Smart Calendar",
-        body: "\u201cSchedule a call with Rajan about Series A docs\u201d \u2192 reads email history \u2192 finds mutual free slots \u2192 creates invite with AI agenda \u2192 books it.",
+        title: "Calendar",
+        body: "Drives the urgency window for skills \u2014 CFO-named deals trigger Deal Recovery; Friday investor sync triggers Investor Prep with prep window mapped.",
       },
       {
         icon: Zap,
-        title: "Live Activity Feed",
-        body: "\u201c07:42 Drafted reply to investor email. 08:15 Flagged 3 critical messages. 09:00 Blocked 2\u20134pm focus time.\u201d \u2014 makes Navis feel alive.",
+        title: "Structured event types",
+        body: "customer_deal_risk \u00b7 investor_followup \u00b7 team_unblock \u00b7 meeting_prep \u00b7 doc_update \u2014 typed events with entities, memory writes, and skill triggers.",
       },
     ],
   },
   {
     number: "02",
-    tag: "The Eyes",
-    title: "Real-time meeting intelligence",
+    tag: "The Brain",
+    title: "Four memory types · cited per answer",
     description:
-      "Navis joins every meeting as a silent bot. A macOS overlay panel appears on your screen. This is the feature no competitor has built at this depth.",
+      "Episodic, Semantic, State, and Decision memory. Every recommendation lands with the exact memory citations behind it. People are derived from your team roster + active decisions, not editorial.",
     color: "#7c3aed",
     bg: "rgba(124,58,237,0.04)",
     border: "rgba(124,58,237,0.15)",
-    icon: Video,
+    icon: Brain,
     features: [
       {
-        icon: Clock,
-        title: "Pre-Meeting Brief (T\u221230 min)",
-        body: "Who is attending and their background. Last email thread summary. Open action items. 3\u20135 sharp questions to ask.",
+        icon: Brain,
+        title: "Memory feeds Decision Skills",
+        body: "Each Decision Skill declares which memory types it consumes. Deal Recovery uses all four; Investor Prep uses all four; Onboarding Risk uses three.",
       },
       {
-        icon: Video,
-        title: "Live Copilot (macOS overlay)",
-        body: "\u201c20% discount\u201d \u2192 \u20b940K off \u20b92L deal. \u201cThey\u2019ve mentioned pricing 3x \u2014 ask budget.\u201d You should say this\u2026 Action items captured live.",
+        icon: BarChart2,
+        title: "Behavior model",
+        body: "Reads memory + outcomes to model your response patterns and per-stakeholder profiles. Adds a personalised modifier to every recommendation.",
       },
       {
         icon: CheckCircle2,
-        title: "Post-Meeting Pipeline (T+5 min)",
-        body: "Full searchable transcript saved. Action items \u2192 Navis tasks. Follow-up email drafted. Goal progress updated.",
+        title: "Operating rules with provenance",
+        body: "Every State rule traces back to the Decision Memory entry that produced it. \"Direct calls beat email at late stage\" \u2192 learned from outcome dm_001.",
       },
     ],
   },
   {
     number: "03",
-    tag: "The Brain",
-    title: "Reverse prompting — the feature no one else has built",
+    tag: "The Hands",
+    title: "Decisions, governance, audit trace",
     description:
-      "Every AI tool waits for you to ask it something. Navis asks YOU the questions you should be asking yourself. This is the #1 differentiator.",
+      "Navis ranks every open decision, gates external actions through per-channel policies, executes through real connectors, and writes a tamper-evident trace to the Audit Log on every step.",
     color: "#059669",
     bg: "rgba(5,150,105,0.04)",
     border: "rgba(5,150,105,0.15)",
-    icon: Brain,
+    icon: Inbox,
     features: [
       {
-        icon: Brain,
-        title: "Behavioral Pattern Engine",
-        body: "Tracks meeting hours, email load, focus time, Slack activity \u2014 compares against your stated goals every week.",
+        icon: Inbox,
+        title: "Multi-decision priority engine",
+        body: "Decisions are scored by predicted impact, behavior modifier, downstream effects, and conflict with other open work. One screen, one next move.",
       },
       {
         icon: AlertCircle,
-        title: "macOS Native Push Notifications",
-        body: "Not a dashboard card. A direct alert on your screen. Forces the question.",
+        title: "Per-channel action policies",
+        body: "Auto · Confirm · Require approval · Blocked. Reply email = confirm. Cold email = approval. Schedule meeting = auto. Editable per workspace.",
       },
       {
-        icon: BarChart2,
-        title: "Sunday Weekly Digest",
-        body: "Week in numbers (meetings vs deep work vs goals) + one action for next week. Sent automatically every Sunday 8pm.",
+        icon: CheckCircle2,
+        title: "Decision Trace + Audit Log",
+        body: "Every decision emits a 6–7 step trace: trigger → memory → reasoning → simulation → decision → execution → outcome. Stored immutable; exposed via /api/v1/decisions/{id}/trace.",
       },
       {
         icon: Users,
-        title: "B2B Team Intelligence",
-        body: "\u201cYour team spent 58% of time in meetings. Engineering benchmark: 32%.\u201d Manager dashboard with no individual privacy breach.",
+        title: "Light team layer",
+        body: "Owner + delegates per decision. Multi-actor traces capture teammate acknowledgements. Delegate via chat \u2014 \"Ask Priya to handle data room\" \u2014 fully audited.",
       },
     ],
   },
@@ -127,21 +127,21 @@ const LAYERS = [
 const REVERSE_PROMPTS = [
   {
     prompt:
-      "You said reducing meetings was your top priority. Meeting hours went 12 \u2192 14 this week. Was this intentional?",
+      "Rank 1 \u00b7 Deal Recovery \u00b7 Call Arjun before the CFO window closes. Close probability moves 34% \u2192 66% with a direct call. Behavior modifier: +12% (your fast-actor pattern).",
     color: "#dc2626",
     bg: "rgba(220,38,38,0.05)",
     border: "rgba(220,38,38,0.15)",
   },
   {
     prompt:
-      "You spent 8 hours in product reviews, but your Q2 goal is to close 3 enterprise deals. Should we protect more time for sales?",
+      "Rank 2 \u00b7 Investor Prep \u00b7 Prepare Sequoia brief. Friday sync in 24h, 4 data room items unassigned. Owner-assigned data rooms close 41% faster (learned from dm_002).",
     color: "#d97706",
     bg: "rgba(217,119,6,0.05)",
     border: "rgba(217,119,6,0.15)",
   },
   {
     prompt:
-      "Engineering has been stuck on the auth bug for 5 days. No one has escalated. Do you know what is blocking them?",
+      "Rank 3 \u00b7 Team Ops \u00b7 Reply to Priya in #founder-priorities. 4 unanswered messages, 6h silent on your side. Naming owners now unblocks parallel work for 3 teammates.",
     color: "#7c3aed",
     bg: "rgba(124,58,237,0.05)",
     border: "rgba(124,58,237,0.15)",
@@ -151,14 +151,14 @@ const REVERSE_PROMPTS = [
 const PRICING = [
   {
     name: "Starter",
-    price: "\u20b9499",
-    period: "/month",
+    price: "TBD",
+    period: "",
     tag: "Individual",
     features: [
-      "Gmail + Slack triage",
-      "Smart scheduling",
-      "Weekly digest",
-      "Up to 5 meetings/month via bot",
+      "Gmail + Slack + Calendar connectors",
+      "Company Brain \u00b7 4 memory types",
+      "Decision Stack \u00b7 top 3 ranked",
+      "Ask Navis chat \u00b7 same engine",
     ],
     cta: "Join waitlist",
     href: "#waitlist",
@@ -166,15 +166,15 @@ const PRICING = [
   },
   {
     name: "Power",
-    price: "\u20b92,000",
-    period: "/month",
+    price: "TBD",
+    period: "",
     tag: "Power user",
     features: [
       "Everything in Starter",
-      "Live meeting copilot (unlimited)",
-      "macOS overlay + push alerts",
-      "Full behavioral analytics",
-      "Razorpay billing",
+      "Decision Skills \u00b7 versioned + evolving",
+      "Behavior model \u00b7 personalised modifiers",
+      "Decision Trace \u00b7 audit chain per decision",
+      "Per-channel action policies",
     ],
     cta: "Join waitlist",
     href: "#waitlist",
@@ -182,15 +182,15 @@ const PRICING = [
   },
   {
     name: "Team",
-    price: "\u20b98,000\u201325,000",
-    period: "/month",
-    tag: "Per org / 5\u201350 seats",
+    price: "TBD",
+    period: "",
+    tag: "Per workspace",
     features: [
       "Everything in Power",
-      "Manager team dashboard",
-      "Org-level Slack insights",
-      "Admin controls + SSO",
-      "Dedicated onboarding",
+      "Light team layer \u00b7 owner + delegates",
+      "Multi-actor traces + delegate-via-chat",
+      "Audit Log \u00b7 tamper-evident, exportable",
+      "Decision API \u00b7 v1 endpoints",
     ],
     cta: "Contact us",
     href: "mailto:hello@navislabs.ai",
@@ -200,11 +200,11 @@ const PRICING = [
 
 const HOW_IT_WORKS = [
   { step: "01", title: "Connect your work", body: "Gmail, Slack, and Google Calendar connect in minutes. Navis starts reading immediately — no manual setup, no tagging.", color: "#1d4ed8" },
-  { step: "02", title: "Build context memory", body: "Navis tracks priorities, decisions, and repeated patterns. After 90 days it knows your work patterns better than you do.", color: "#7c3aed" },
-  { step: "03", title: "Join every meeting", body: "A silent bot joins via Recall.ai. A macOS overlay shows you what to say in real-time. Action items captured automatically.", color: "#059669" },
-  { step: "04", title: "Watch for drift", body: "Behavioral pattern engine compares your actual time allocation against your stated goals every single week.", color: "#d97706" },
-  { step: "05", title: "Ask the question", body: "When you drift, Navis pushes a direct notification to your screen. Not a report. A question that forces a decision.", color: "#dc2626" },
-  { step: "06", title: "Get sharper over time", body: "The longer you use Navis, the more accurate its recommendations. Switching means starting from zero. That is the moat.", color: "#0891b2" },
+  { step: "02", title: "Build the Company Brain", body: "Every signal becomes a typed event with extracted entities, written to one of four memory types — Episodic, Semantic, State, Decision.", color: "#7c3aed" },
+  { step: "03", title: "Trigger Decision Skills", body: "When a pattern matches a skill — Deal Recovery, Investor Prep, Onboarding Risk — Navis surfaces the next decision with cited memory.", color: "#059669" },
+  { step: "04", title: "Rank the stack", body: "Multi-decision priority engine scores every open decision by impact, behavior modifier, downstream effects, and conflicts.", color: "#d97706" },
+  { step: "05", title: "Execute with governance", body: "Per-channel action policies (auto / confirm / approval / blocked) gate every external action. You see one screen, one next move.", color: "#dc2626" },
+  { step: "06", title: "Audit, learn, evolve", body: "Every action emits a tamper-evident trace. Outcomes feed Decision Memory, update behavior model, and produce operating rules.", color: "#0891b2" },
 ];
 
 // ─── Reusable fade-up wrapper ─────────────────────────────────────────────────
@@ -237,15 +237,15 @@ export default function NavisAIPage() {
           <FadeUp>
             <div className="mb-14 max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
-                Three layers. One operating system for how you work.
+                Three layers. One decision system.
               </p>
               <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                Not a meeting tool.{" "}
-                <span className="text-slate-400">Not an email tool.</span>
+                Not a chatbot.{" "}
+                <span className="text-slate-400">Not a dashboard.</span>
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-500">
-                Navis is the intelligence layer that connects every signal into one loop and then asks you
-                the questions you should be asking yourself.
+                Navis is decision infrastructure. It reads your work, structures it into a Company Brain,
+                ranks every open decision, and executes with full governance and audit trace.
               </p>
             </div>
           </FadeUp>
@@ -389,20 +389,21 @@ export default function NavisAIPage() {
             <FadeUp>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600/80 mb-3">
-                  Reverse prompting
+                  Decision Stack
                 </p>
                 <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                  The only AI that asks{" "}
-                  <span className="text-emerald-600">you</span>{" "}
-                  the questions.
+                  The AI that ranks{" "}
+                  <span className="text-emerald-600">every decision</span>{" "}
+                  in your week.
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-500">
-                  Every other tool waits for you to ask it something. Navis watches your patterns and
-                  pushes the question directly to your screen — not a dashboard card, a direct alert.
+                  Most AI tools wait for you to ask. Navis ranks the top open decisions across your
+                  company — by impact, behavior modifier, downstream effects, and conflict — and shows
+                  you one screen with one next move.
                 </p>
                 <p className="mt-4 text-base leading-7 text-slate-400">
-                  No competitor in the YC W26 batch, no funded AI meeting tool, no enterprise SaaS has
-                  reverse prompting at behavioral depth. This is a genuine category-defining feature.
+                  Each ranking is grounded in cited memory and tied to a Decision Skill. Behavior model
+                  applies your personalised modifier on top.
                 </p>
               </div>
             </FadeUp>
@@ -424,7 +425,7 @@ export default function NavisAIPage() {
                       </div>
                       <div>
                         <p className="text-[10px] font-semibold uppercase tracking-[0.22em] mb-2" style={{ color: item.color }}>
-                          Navis is asking
+                          Navis is ranking
                         </p>
                         <p className="text-sm leading-6 text-slate-700">{item.prompt}</p>
                       </div>
@@ -444,10 +445,11 @@ export default function NavisAIPage() {
             <div className="mb-12 text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">How it works</p>
               <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                One loop. Every signal.
+                One pipeline. One brain.
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-slate-500">
-                Email → Slack → Calendar → Meeting → Reflection → Goal. The full loop, connected.
+                Sources → Ingestion → Memory → Context → Decision → UI. The canonical pipeline,
+                fully traced and governed.
               </p>
             </div>
           </FadeUp>
@@ -482,7 +484,7 @@ export default function NavisAIPage() {
                 Individual → Team → Enterprise
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-slate-500">
-                Gross margin starts at 59% and scales to 75%+ at 1,000 users. Margins improve with scale.
+                In private beta. Pricing finalised at public launch — early-access users get founding rates.
               </p>
             </div>
           </FadeUp>
@@ -549,13 +551,13 @@ export default function NavisAIPage() {
               </span>
             </blockquote>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-500">
-              In 5 years, every founder, operator, and engineering lead will have a Navis. Not because
-              they chose a productivity tool. Because they chose an intelligence layer that made them
-              irreversibly better at deciding what matters. The moat is not the product — it is 90 days
-              of pattern data that no competitor can replicate.
+              In 5 years, every founder, operator, and engineering lead will run their week on a Navis.
+              Not because they picked a productivity tool — because they picked a decision system that
+              cited its memory, traced every action, and got sharper with every outcome. The moat is
+              the Decision Memory: every approve and ignore makes the next recommendation smarter.
             </p>
             <p className="mt-4 text-base text-slate-400">
-              Someone still has to be in charge. Navis makes that person 10x better at it.
+              Someone still has to be in charge. Navis makes that person 10× better at it.
             </p>
           </div>
         </FadeUp>
@@ -573,8 +575,8 @@ export default function NavisAIPage() {
               Be early to Navis AI.
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-500">
-              We are onboarding founders, operators, and engineering leads who want to be part of the
-              beta. Live product at n-avis.live. Paying users already on Razorpay.
+              We are onboarding founders, operators, and engineering leads who want a decision system,
+              not another inbox. Private beta — limited seats.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
@@ -585,16 +587,14 @@ export default function NavisAIPage() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="https://n-avis.live"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-200 px-7 text-sm font-semibold text-slate-600 transition-all duration-200 hover:border-slate-300 hover:text-slate-900"
               >
-                Try live product
+                Back to home
               </Link>
             </div>
             <p className="mt-6 text-xs text-slate-400 uppercase tracking-[0.22em]">
-              n-avis.live · Bangalore · Seed round open
+              Private beta · Bangalore · Built on the Decision API
             </p>
           </div>
         </FadeUp>

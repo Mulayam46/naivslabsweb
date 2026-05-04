@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Inbox, Video, Brain, CalendarClock, BarChart2 } from "lucide-react";
+import { Inbox, GitBranch, Brain, ShieldCheck, Users } from "lucide-react";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
@@ -10,10 +10,10 @@ const EASING = [0.22, 1, 0.36, 1] as const;
 const INSIGHTS = [
   {
     icon: Inbox,
-    stat: "Reads your inbox so you don't have to",
-    highlight: "Reads your inbox",
+    stat: "Turns scattered work into structured memory",
+    highlight: "structured memory",
     context:
-      "Navis monitors Gmail and Slack continuously — categorises by urgency, drafts replies with full thread context, flags stuck threads, and surfaces what actually needs your attention each morning.",
+      "Email, Slack, calendar, and doc events become typed events with extracted entities. Each one writes to one of four memory types — Episodic, Semantic, State, Decision — and can trigger a Decision Skill automatically.",
     gradientFrom: "#bfdbfe",
     gradientTo: "#bae6fd",
     iconColor: "#1d4ed8",
@@ -24,11 +24,11 @@ const INSIGHTS = [
     area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
   },
   {
-    icon: CalendarClock,
-    stat: "Smart scheduling from plain language",
-    highlight: "Smart scheduling",
+    icon: GitBranch,
+    stat: "Ranks every decision by impact + your behavior",
+    highlight: "Ranks every decision",
     context:
-      'Say \u201cSchedule a call with Rajan about Series A docs\u201d and Navis reads your email history, finds mutual free slots, creates an invite with an AI-generated agenda, and books it.',
+      "Navis runs a multi-decision priority engine. Decisions are scored by predicted impact, your behavior modifier, downstream effects, and conflict with other open work. You see one screen, one next move \u2014 not an inbox.",
     gradientFrom: "#c7d2fe",
     gradientTo: "#e9d5ff",
     iconColor: "#4f46e5",
@@ -39,11 +39,11 @@ const INSIGHTS = [
     area: "md:[grid-area:2/1/3/7] xl:[grid-area:2/1/3/5]",
   },
   {
-    icon: Video,
-    stat: "A live copilot inside every meeting",
-    highlight: "live copilot inside every meeting",
+    icon: ShieldCheck,
+    stat: "Governance and audit trace on every action",
+    highlight: "audit trace on every action",
     context:
-      "Navis joins as a silent bot and shows a real-time overlay on your screen. Pre-meeting brief, sharp questions to ask, live deal context as it comes up, action items captured automatically, follow-up email drafted before you close the tab.",
+      "Per-channel action policies (auto · confirm · require approval · blocked) gate every external action. Each execution writes a tamper-evident trace — trigger → memory → reasoning → simulation → decision → execution → outcome — to the Audit Log.",
     gradientFrom: "#ddd6fe",
     gradientTo: "#fbcfe8",
     iconColor: "#7c3aed",
@@ -55,10 +55,10 @@ const INSIGHTS = [
   },
   {
     icon: Brain,
-    stat: "Asks the questions you should be asking yourself",
-    highlight: "questions you should be asking yourself",
+    stat: "A Company Brain that cites the memory it used",
+    highlight: "cites the memory it used",
     context:
-      'Every other tool waits for you to ask it something. Navis watches your patterns and pushes the question directly to your screen: \u201cMeeting hours went up this week. Was this intentional?\u201d',
+      "Every recommendation lands with the exact memory citations behind it: which episodic event, which person, which past decision pattern. People are derived from your team roster + active decisions, not editorial.",
     gradientFrom: "#a7f3d0",
     gradientTo: "#99f6e4",
     iconColor: "#059669",
@@ -69,11 +69,11 @@ const INSIGHTS = [
     area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
   },
   {
-    icon: BarChart2,
-    stat: "A weekly digest that actually means something",
-    highlight: "weekly digest",
+    icon: Users,
+    stat: "Coordinates the team around the right decision",
+    highlight: "Coordinates the team",
     context:
-      "Every Sunday at 8pm: your week in numbers — meetings vs deep work vs stated goals — plus one concrete action for next week. Not a dashboard. A decision.",
+      "Every decision carries an owner + delegates. Multi-actor traces show when a teammate acknowledges. \"Waiting on you\" signals surface in the sidebar. Navis doesn't just help you decide — it routes the work.",
     gradientFrom: "#fde68a",
     gradientTo: "#fca5a5",
     iconColor: "#d97706",

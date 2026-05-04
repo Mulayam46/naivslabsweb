@@ -16,9 +16,9 @@ const STEPS = [
     bg: "#f0f9ff",
     darkColor: "#38bdf8",
     title: "Connect your signals",
-    subtitle: "Gmail · Slack · Calendar · Meetings",
+    subtitle: "Gmail · Slack · Calendar",
     body: "Navis plugs into the tools you already use. No migration, no new inbox. It reads the stream silently and starts building context from day one.",
-    checks: ["Gmail & Slack connected in < 2 min", "Calendar read access only", "Zero data stored on-device"],
+    checks: ["OAuth in under 2 minutes", "Read-only scopes, revocable any time", "Per-channel action policies before any send"],
     visual: <SignalVisual />,
   },
   {
@@ -48,10 +48,10 @@ const STEPS = [
     color: "#f59e0b",
     bg: "#fffbeb",
     darkColor: "#fbbf24",
-    title: "Surface the next action",
-    subtitle: "Today · Ask Navis · Weekly digest",
-    body: "Every morning: one screen, one next action. Every Sunday: a digest that tells you what changed, what you missed, and what to do differently next week.",
-    checks: ["Next decision on wake", "Weekly digest every Sunday 8pm", "NPS 60 · benchmark is 40"],
+    title: "Execute with governance",
+    subtitle: "Today · Ask Navis · Audit Log",
+    body: "One screen, one next decision. Type a question or a command — same engine. Every external action passes a per-channel policy gate, executes through real connectors, and writes a tamper-evident trace to the Audit Log.",
+    checks: ["Per-channel action policies (auto · confirm · approval · blocked)", "Audit trace + outcome stored to Decision Memory", "Owner + delegates per decision · multi-actor traces"],
     visual: <ActionVisual />,
   },
 ];
@@ -62,7 +62,7 @@ function SignalVisual() {
     { label: "Gmail", color: "#ea4335", n: 12 },
     { label: "Slack", color: "#4a154b", n: 8 },
     { label: "Calendar", color: "#1d4ed8", n: 3 },
-    { label: "Meetings", color: "#059669", n: "live" },
+    { label: "Meetings", color: "#94a3b8", n: "soon" },
   ];
   return (
     <div className="flex flex-col gap-2">
@@ -129,8 +129,8 @@ function BrainVisual() {
 function SkillVisual() {
   const skills = [
     { label: "Deal Recovery", pct: 92, color: "#7c3aed", fired: true },
-    { label: "Investor Prep", pct: 84, color: "#0ea5e9", fired: false },
-    { label: "Onboarding Risk", pct: 78, color: "#f59e0b", fired: true },
+    { label: "Investor Prep", pct: 84, color: "#0ea5e9", fired: true },
+    { label: "Onboarding Risk", pct: 78, color: "#f59e0b", fired: false },
   ];
   return (
     <div className="flex flex-col gap-2.5">
@@ -162,9 +162,9 @@ function ActionVisual() {
   return (
     <div className="flex flex-col gap-2.5">
       {[
-        { time: "8:02 AM", text: "Call Arjun before CFO window closes", urgent: true },
-        { time: "Sunday 8PM", text: "Weekly digest ready — 3 decisions this week", urgent: false },
-        { time: "Live", text: "NPS 60 · 43 beta users · 70% WAU", urgent: false },
+        { time: "Rank 1", text: "Call Arjun before CFO window closes", urgent: true },
+        { time: "Policy", text: "Schedule meeting · auto · Calendar connected", urgent: false },
+        { time: "Trace", text: "trace_dec_001_act_004 · stored to Audit Log", urgent: false },
       ].map((item, i) => (
         <motion.div
           key={i}

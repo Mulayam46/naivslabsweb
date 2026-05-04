@@ -12,12 +12,12 @@ const TICKER = [
   "Gmail · 12 signals",
   "Slack · 8 signals",
   "Calendar · 3 signals",
-  "Meetings · live",
-  "Docs · indexed",
-  "Auto-archive noise",
-  "Label behavior",
-  "Feedback loop",
-  "Decision engine",
+  "Episodic memory",
+  "Semantic memory",
+  "State memory",
+  "Decision memory",
+  "Skills triggered · 3",
+  "Audit trace · live",
   "Self-improving routing",
 ];
 
@@ -63,12 +63,12 @@ const SIGNALS = [
     from: { x: -30, y: 10 },
   },
   {
-    icon: Video,
+    icon: Hash,
     color: "#059669",
     bg: "#f0fdf4",
     border: "#a7f3d0",
-    label: "Meeting · Acme Corp",
-    text: "Proposal feedback — CFO needs a call tomorrow.",
+    label: "Slack · #onboarding",
+    text: "Meera no product login for 5 days — onboarding stall flagged.",
     tag: "ROUTED",
     tagColor: "#059669",
     pos: "bottom-24 -right-6 lg:-right-16",
@@ -223,7 +223,7 @@ export function IncomingKnowledge() {
                   { icon: Mail, label: "Gmail", n: 12, color: "#ea4335" },
                   { icon: Hash, label: "Slack", n: 8, color: "#4a154b" },
                   { icon: CalendarDays, label: "Calendar", n: 3, color: "#1d4ed8" },
-                  { icon: Video, label: "Meetings", n: null, color: "#059669" },
+                  { icon: Video, label: "Meetings", n: "soon", color: "#94a3b8" },
                 ].map((src, i) => {
                   const Icon = src.icon;
                   return (

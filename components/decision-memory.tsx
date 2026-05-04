@@ -50,12 +50,12 @@ const LEARNINGS = [
   },
   {
     skill: "Onboarding Risk",
-    color: "#ef4444",
-    bg: "#fff1f2",
-    border: "#ffe4e6",
-    quote: "Delay at onboarding correlates with early churn. Ship rough, iterate fast.",
-    impact: "−78%",
-    positive: false,
+    color: "#10b981",
+    bg: "#ecfdf5",
+    border: "#a7f3d0",
+    quote: "Manager-led 15-min unblock on day 5 catches silent stalls early.",
+    impact: "+44%",
+    positive: true,
   },
 ];
 
