@@ -193,7 +193,7 @@ const PRICING = [
       "Decision API \u00b7 v1 endpoints",
     ],
     cta: "Contact us",
-    href: "mailto:hello@navislabs.ai",
+    href: "mailto:hello@navislabs.in",
     highlight: false,
   },
 ];
@@ -236,16 +236,18 @@ export default function NavisAIPage() {
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-14 max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
                 Three layers. One decision system.
               </p>
-              <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
                 Not a chatbot.{" "}
-                <span className="text-slate-400">Not a dashboard.</span>
+                <span className="text-slate-400">Not a dashboard. Not a productivity tool.</span>
               </h2>
-              <p className="mt-5 text-lg leading-8 text-slate-500">
-                Navis is decision infrastructure. It reads your work, structures it into a Company Brain,
-                ranks every open decision, and executes with full governance and audit trace.
+              <p className="mt-5 text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+                Navis is the decision infrastructure layer for modern teams.
+                It reads your work, structures it into a Company Brain, ranks
+                every open decision by impact, and executes with per-channel
+                action policies and a tamper-evident audit trace.
               </p>
             </div>
           </FadeUp>
@@ -315,14 +317,14 @@ export default function NavisAIPage() {
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-12 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
                 Works with your stack
               </p>
-              <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                Connects in minutes
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                Reads where work happens
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-slate-500">
-                Navis integrates with the tools you already use. No migration. No new workflows.
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+                Sources connect in minutes. No migration, no new inbox, no manual tagging.
               </p>
             </div>
           </FadeUp>
@@ -388,22 +390,23 @@ export default function NavisAIPage() {
           <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
             <FadeUp>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600/80 mb-3">
+                <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600/80 mb-3">
                   Decision Stack
                 </p>
-                <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                  The AI that ranks{" "}
-                  <span className="text-emerald-600">every decision</span>{" "}
-                  in your week.
+                <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                  The AI that decides{" "}
+                  <span className="text-emerald-600">what matters now</span>.
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-500">
-                  Most AI tools wait for you to ask. Navis ranks the top open decisions across your
-                  company — by impact, behavior modifier, downstream effects, and conflict — and shows
-                  you one screen with one next move.
+                <p className="mt-5 text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+                  Most AI tools wait for you to ask. Navis ranks the top open
+                  decisions across your company — by impact, urgency window,
+                  behavior modifier, downstream effects, and conflict — and
+                  shows one screen with one next move.
                 </p>
-                <p className="mt-4 text-base leading-7 text-slate-400">
-                  Each ranking is grounded in cited memory and tied to a Decision Skill. Behavior model
-                  applies your personalised modifier on top.
+                <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">
+                  Each rank is grounded in cited memory and tied to a Decision
+                  Skill. The Behavior layer applies your personalised modifier
+                  on top.
                 </p>
               </div>
             </FadeUp>
@@ -443,13 +446,12 @@ export default function NavisAIPage() {
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-12 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">How it works</p>
-              <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                One pipeline. One brain.
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">How it works</p>
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                From signals to decisions.
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-slate-500">
-                Sources → Ingestion → Memory → Context → Decision → UI. The canonical pipeline,
-                fully traced and governed.
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+                Sources → Ingestion → Memory → Context → Decision → Action → Outcome → Learning. The canonical pipeline, fully traced and governed.
               </p>
             </div>
           </FadeUp>
@@ -479,12 +481,12 @@ export default function NavisAIPage() {
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-12 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">Pricing</p>
-              <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-                Individual → Team → Enterprise
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">Pricing</p>
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                Individual · Team · Enterprise
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-slate-500">
-                In private beta. Pricing finalised at public launch — early-access users get founding rates.
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+                Private beta. Pricing finalised at public launch — early-access users get founding rates.
               </p>
             </div>
           </FadeUp>
@@ -543,20 +545,20 @@ export default function NavisAIPage() {
       <section className="px-4 py-20 md:px-8 border-t border-slate-100">
         <FadeUp>
           <div className="mx-auto max-w-4xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-6">The vision</p>
-            <blockquote className="text-3xl font-semibold leading-snug tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-              Every company in 2026 is building AI that does the work.{" "}
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-6">The vision</p>
+            <blockquote className="text-2xl font-semibold leading-snug tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-5xl">
+              Navis doesn&apos;t summarize your work.{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
-                Navis builds the AI that decides which work matters.
+                It decides what matters — and executes.
               </span>
             </blockquote>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-500">
-              In 5 years, every founder, operator, and engineering lead will run their week on a Navis.
-              Not because they picked a productivity tool — because they picked a decision system that
-              cited its memory, traced every action, and got sharper with every outcome. The moat is
-              the Decision Memory: every approve and ignore makes the next recommendation smarter.
+            <p className="mx-auto mt-8 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              Every company is building AI that does the work. Navis builds the
+              AI that decides which work matters — cited, traced, and sharper
+              with every outcome. The moat is Decision Memory: every approve
+              and ignore makes the next recommendation smarter.
             </p>
-            <p className="mt-4 text-base text-slate-400">
+            <p className="mt-4 text-sm text-slate-400 sm:text-base">
               Someone still has to be in charge. Navis makes that person 10× better at it.
             </p>
           </div>
@@ -570,17 +572,17 @@ export default function NavisAIPage() {
       >
         <FadeUp>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-4">Early access</p>
-            <h2 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-              Be early to Navis AI.
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-4">Early access</p>
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              Join early access.
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-500">
-              We are onboarding founders, operators, and engineering leads who want a decision system,
-              not another inbox. Private beta — limited seats.
+            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              Onboarding founders, operators, and engineering leads who want a
+              decision system — not another inbox. Private beta · limited seats.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
-                href="mailto:hello@navislabs.ai"
+                href="mailto:hello@navislabs.in"
                 className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-slate-800 active:scale-[0.98]"
               >
                 Join via email

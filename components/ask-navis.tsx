@@ -14,8 +14,8 @@ const STEPS = [
     id: "next-decision",
     cursor: { x: "14%", y: "13%" },
     tooltip: { side: "right" as const },
-    label: "Next decision",
-    body: "Navis ranks every open decision by impact and behavior. You see one screen, one next move.",
+    label: "Today's #1 decision",
+    body: "Navis ranks every open decision by impact, urgency window, and your behavior pattern. One screen. One next move.",
     color: "#1d4ed8",
   },
   {
@@ -23,15 +23,15 @@ const STEPS = [
     cursor: { x: "38%", y: "28%" },
     tooltip: { side: "right" as const },
     label: "Question or command",
-    body: "Same engine. Ask why Arjun is the priority, or just say \"call Arjun\" — Navis routes both through the Decision Engine.",
+    body: "Same engine answers questions and executes commands. Both honor your action policies and write to the Audit Log.",
     color: "#7c3aed",
   },
   {
     id: "company-brain",
     cursor: { x: "82%", y: "62%" },
     tooltip: { side: "left" as const },
-    label: "Company Brain",
-    body: "Episodic, Semantic, State, and Decision memory — all cited per answer with the exact event behind it.",
+    label: "Cited from memory",
+    body: "Every answer cites the exact memory: which email, which meeting, which past decision. Episodic · Semantic · State · Decision.",
     color: "#059669",
   },
   {
@@ -163,20 +163,20 @@ export function AskNavis() {
             transition={{ duration: 0.8, ease: EASING }}
             className="max-w-xl"
           >
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-violet-500">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-500 sm:text-xs">
               Command Center · Ask Navis
             </p>
-            <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-              You can click. Or you can just{" "}
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              Ask a question. Or give{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
-                tell Navis.
+                a command.
               </span>
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-7 text-slate-500">
-              Same engine. Ask a question — Navis answers from your Company
-              Brain with citations. Give a command — Navis routes it through
-              the Decision Engine, honors your action policies, and writes
-              every step to the Audit Log.
+            <p className="mt-4 max-w-lg text-sm leading-6 text-slate-500 sm:text-base sm:leading-7">
+              Same engine. Ask &ldquo;why is Arjun the priority?&rdquo; — Navis
+              answers from memory with citations. Say &ldquo;call Arjun&rdquo; —
+              Navis routes through the Decision Engine, honors your action
+              policies, and writes every step to the Audit Log.
             </p>
           </motion.div>
 
@@ -212,7 +212,7 @@ export function AskNavis() {
               <span className="h-3 w-3 rounded-full bg-amber-400/70" />
               <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
               <div className="mx-auto flex h-6 w-56 items-center justify-center rounded-md bg-white/80 border border-slate-200 px-3">
-                <span className="text-[11px] text-slate-400 tracking-tight">app.navislabs.ai</span>
+                <span className="text-[11px] text-slate-400 tracking-tight">app.navislabs.in</span>
               </div>
             </div>
 

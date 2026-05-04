@@ -27,14 +27,29 @@ export function NotifySection() {
   const [email, setEmail]       = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setLoading(false);
-    setSubmitted(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "homepage-notify" }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Could not join waitlist");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -61,13 +76,13 @@ export function NotifySection() {
               Early access
             </p>
 
-            <h2 className="mt-3 max-w-2xl text-4xl font-extrabold tracking-tight text-balance text-slate-900 sm:text-5xl">
-              Be early to the NavisLabs product stack.
+            <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight text-balance text-slate-900 sm:text-4xl md:text-5xl">
+              Join early access.
             </h2>
 
-            <p className="mt-5 max-w-xl text-lg leading-8 text-slate-500">
-              Get updates on HireAI, Navis AI, and the public launch of the
-              broader company ecosystem.
+            <p className="mt-5 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              Founders, operators, and engineering leads are running their week
+              on Navis. Private beta — limited seats — founding rates locked in.
             </p>
 
             {submitted ? (
@@ -119,13 +134,19 @@ export function NotifySection() {
               </form>
             )}
 
+            {error && (
+              <p className="mt-3 text-xs font-medium text-red-500">
+                {error}
+              </p>
+            )}
+
             <p className="mt-5 text-xs uppercase tracking-[0.22em] text-slate-400">
-              No spam. Just product updates.
+              No spam. Just product updates · hello@navislabs.in
             </p>
           </div>
 
           {/* ── Right: Globe ── */}
-          <div className="absolute bottom-0 right-0 z-10 size-[500px] translate-x-1/4 translate-y-1/4 md:size-[580px]">
+          <div className="pointer-events-none absolute bottom-0 right-0 z-0 size-[320px] translate-x-1/3 translate-y-1/3 opacity-60 sm:size-[420px] sm:opacity-90 md:size-[580px] md:translate-x-1/4 md:translate-y-1/4 md:opacity-100">
             <Globe3D
               className="h-full w-full"
               markers={GLOBE_MARKERS}

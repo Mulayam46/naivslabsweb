@@ -9,27 +9,30 @@ const EASING = [0.22, 1, 0.36, 1] as const;
 
 const NAV = [
   {
-    heading: "Products",
+    heading: "Product",
     links: [
-      { label: "HireAI", href: "/products/hireai", ext: false },
       { label: "Navis AI", href: "/products/navis-ai", ext: false },
-      { label: "All products", href: "/products", ext: false },
+      { label: "HireAI", href: "/products/hireai", ext: false },
+      { label: "How it works", href: "/products/navis-ai#platform", ext: false },
+      { label: "Pricing", href: "/products/navis-ai#waitlist", ext: false },
+    ],
+  },
+  {
+    heading: "Platform",
+    links: [
+      { label: "Company Brain", href: "/products/navis-ai", ext: false },
+      { label: "Decision Memory", href: "/products/navis-ai", ext: false },
+      { label: "Action Policies", href: "/products/navis-ai", ext: false },
+      { label: "Audit Trace", href: "/products/navis-ai", ext: false },
     ],
   },
   {
     heading: "Company",
     links: [
       { label: "About", href: "/company", ext: false },
-      { label: "Contact", href: "mailto:hello@navislabs.ai", ext: true },
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/navis-ai/about/", ext: true },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      { label: "Waitlist", href: "#notify", ext: false },
+      { label: "Contact", href: "mailto:hello@navislabs.in", ext: true },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/navis-ai/", ext: true },
       { label: "GitHub", href: "https://github.com/navis-labs", ext: true },
-      { label: "Homepage", href: "/", ext: false },
     ],
   },
 ];
@@ -39,10 +42,24 @@ export function Footer() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <footer ref={ref} className="overflow-hidden bg-[#080c14]">
+    <footer ref={ref} className="relative overflow-hidden bg-[#05080f]">
+      {/* Ambient gradient glow */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full blur-[140px] opacity-25"
+          style={{
+            background:
+              "radial-gradient(ellipse, rgba(99,102,241,0.55) 0%, rgba(124,58,237,0.35) 50%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-1/4 h-[300px] w-[500px] rounded-full blur-[120px] opacity-15"
+          style={{ backgroundColor: "#0ea5e9" }}
+        />
+      </div>
 
       {/* ── Pre-footer CTA band ── */}
-      <div className="border-b border-white/6 px-4 py-16 md:px-8 md:py-20">
+      <div className="relative border-b border-white/10 px-4 py-16 md:px-8 md:py-20">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,13 +68,15 @@ export function Footer() {
             className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between"
           >
             <div className="max-w-xl">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
-                Early access · In development
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-violet-300/80">
+                Early access · Private beta
               </p>
-              <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl leading-[0.95]">
-                Be first when
+              <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl md:text-5xl leading-[0.95]">
+                Decide what matters.
                 <br />
-                <span className="text-white/30">Navis ships.</span>
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-violet-400 to-pink-300">
+                  Execute with control.
+                </span>
               </h2>
             </div>
 
@@ -71,7 +90,7 @@ export function Footer() {
               </Link>
               <Link
                 href="/products/navis-ai"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/10 px-7 text-sm font-semibold text-white/70 transition-all duration-200 hover:border-white/20 hover:text-white active:scale-[0.98]"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 text-sm font-semibold text-white transition-all duration-200 hover:border-white/40 hover:bg-white/10 active:scale-[0.98]"
               >
                 Learn more
               </Link>
@@ -81,11 +100,11 @@ export function Footer() {
       </div>
 
       {/* ── Main footer body ── */}
-      <div className="px-4 pt-16 pb-0 md:px-8 md:pt-20">
+      <div className="relative px-4 pt-16 pb-0 md:px-8 md:pt-20">
         <div className="mx-auto max-w-7xl">
 
           {/* Top row: brand + nav */}
-          <div className="grid grid-cols-2 gap-10 md:grid-cols-[1.5fr_repeat(3,1fr)]">
+          <div className="grid grid-cols-2 gap-8 sm:gap-10 md:grid-cols-[1.5fr_repeat(3,1fr)]">
 
             {/* Brand */}
             <motion.div
@@ -95,15 +114,22 @@ export function Footer() {
               className="col-span-2 md:col-span-1"
             >
               <span className="text-xl font-black tracking-tight text-white">NavisLabs</span>
-              <p className="mt-3 max-w-xs text-sm leading-7 text-white/35">
-                A multi-product AI company building decision intelligence for modern teams.
+              <p className="mt-3 max-w-xs text-sm leading-7 text-white/65">
+                Decision infrastructure for modern teams. AI Chief of Staff,
+                Company Brain, and Decision Intelligence — built for high-stakes work.
               </p>
+              <a
+                href="mailto:hello@navislabs.in"
+                className="mt-5 inline-block text-sm font-medium text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline"
+              >
+                hello@navislabs.in
+              </a>
               <div className="mt-6 flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/30">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/55">
                   Bangalore · Global
                 </span>
               </div>
@@ -117,7 +143,7 @@ export function Footer() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, ease: EASING, delay: 0.1 + ci * 0.07 }}
               >
-                <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/25">
+                <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/55">
                   {col.heading}
                 </p>
                 <ul className="flex flex-col gap-3.5">
@@ -127,7 +153,7 @@ export function Footer() {
                         href={link.href}
                         target={link.ext ? "_blank" : undefined}
                         rel={link.ext ? "noopener noreferrer" : undefined}
-                        className="group inline-flex items-center gap-1 text-sm text-white/45 transition-colors duration-150 hover:text-white"
+                        className="group inline-flex items-center gap-1 text-sm text-white/80 transition-colors duration-150 hover:text-white"
                       >
                         {link.label}
                         {link.ext && (
@@ -150,21 +176,28 @@ export function Footer() {
             aria-hidden
           >
             <p
-              className="select-none whitespace-nowrap font-black leading-none tracking-tighter text-white/4"
-              style={{ fontSize: "clamp(72px, 14vw, 180px)" }}
+              className="select-none whitespace-nowrap bg-clip-text font-black leading-none tracking-tighter text-transparent"
+              style={{
+                fontSize: "clamp(40px, 14vw, 180px)",
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 100%)",
+              }}
             >
               NAVISLABS
             </p>
           </motion.div>
 
           {/* ── Bottom bar ── */}
-          <div className="flex flex-col gap-3 border-t border-white/6 py-6 md:flex-row md:items-center md:justify-between">
-            <p className="text-[11px] font-medium text-white/20">
-              © 2026 NavisLabs. All rights reserved.
+          <div className="flex flex-col gap-3 border-t border-white/10 py-6 md:flex-row md:items-center md:justify-between">
+            <p className="text-[11px] font-medium text-white/55">
+              © 2026 NavisLabs · All rights reserved.
             </p>
-            <div className="flex items-center gap-5">
-              {["HireAI", "Navis AI", "Decision intelligence"].map((tag) => (
-                <span key={tag} className="text-[11px] text-white/20">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:gap-x-4">
+              {["AI Chief of Staff", "Company Brain", "Decision Memory", "Audit Trace"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-white/70"
+                >
                   {tag}
                 </span>
               ))}

@@ -15,10 +15,10 @@ const STEPS = [
     color: "#0ea5e9",
     bg: "#f0f9ff",
     darkColor: "#38bdf8",
-    title: "Connect your signals",
-    subtitle: "Gmail · Slack · Calendar",
-    body: "Navis plugs into the tools you already use. No migration, no new inbox. It reads the stream silently and starts building context from day one.",
-    checks: ["OAuth in under 2 minutes", "Read-only scopes, revocable any time", "Per-channel action policies before any send"],
+    title: "Capture every signal",
+    subtitle: "Gmail · Slack · Calendar · Meetings · Notion",
+    body: "Navis plugs into the tools you already use. Email threads, Slack messages, calendar events, meeting transcripts, and docs flow in continuously — no migration, no new inbox.",
+    checks: ["OAuth in under 2 minutes", "Read-only scopes, revocable any time", "Tokens encrypted at rest"],
     visual: <SignalVisual />,
   },
   {
@@ -26,10 +26,10 @@ const STEPS = [
     color: "#7c3aed",
     bg: "#f5f3ff",
     darkColor: "#a78bfa",
-    title: "Build the Company Brain",
-    subtitle: "Episodic · Semantic · State · Decision memory",
-    body: "Every email thread, meeting, and Slack message is parsed into structured memory. Navis knows who matters, what's at risk, and what was decided last week.",
-    checks: ["4 memory types, always in sync", "Cites the memory it used", "Gets sharper every week"],
+    title: "Structure into memory",
+    subtitle: "Episodic · Semantic · State · Decision",
+    body: "Every signal becomes a typed event with extracted entities and writes to one of four memory types. Navis knows who matters, what's at risk, what's been decided, and what changed today.",
+    checks: ["4 memory types · cited per answer", "Operating rules with provenance", "Behavior layer adapts to how you work"],
     visual: <BrainVisual />,
   },
   {
@@ -37,10 +37,10 @@ const STEPS = [
     color: "#059669",
     bg: "#f0fdf4",
     darkColor: "#34d399",
-    title: "Trigger Decision Skills",
+    title: "Apply Decision Skills",
     subtitle: "Deal Recovery · Investor Prep · Onboarding Risk",
-    body: "When a pattern matches a skill, Navis acts — drafts the follow-up, flags the risk, books the meeting. You approve. It learns from the outcome.",
-    checks: ["Skills fire automatically", "Human approval before action", "Outcome feeds next decision"],
+    body: "Versioned, reusable skills — your company's decision playbook. When a pattern matches, Navis simulates outcomes against modeled stakeholders, scores paths, and surfaces the recommendation with a confidence score.",
+    checks: ["Versioned skills · v1 → v2 → v3 evolution", "Simulated outcomes before you act", "Confidence drops when memory is stale"],
     visual: <SkillVisual />,
   },
   {
@@ -48,10 +48,10 @@ const STEPS = [
     color: "#f59e0b",
     bg: "#fffbeb",
     darkColor: "#fbbf24",
-    title: "Execute with governance",
-    subtitle: "Today · Ask Navis · Audit Log",
-    body: "One screen, one next decision. Type a question or a command — same engine. Every external action passes a per-channel policy gate, executes through real connectors, and writes a tamper-evident trace to the Audit Log.",
-    checks: ["Per-channel action policies (auto · confirm · approval · blocked)", "Audit trace + outcome stored to Decision Memory", "Owner + delegates per decision · multi-actor traces"],
+    title: "Execute. Trace. Learn.",
+    subtitle: "Action Policies · Decision Trace · Outcomes",
+    body: "Nothing executes without control. Per-channel policies gate every external action, real connectors run the work, a tamper-evident trace lands in the Audit Log, and the outcome trains the next recommendation.",
+    checks: ["Auto · Confirm · Approval · Blocked policies", "Tamper-evident Decision Trace per action", "Outcomes feed Decision Memory · skill confidence updates"],
     visual: <ActionVisual />,
   },
 ];
@@ -294,14 +294,15 @@ function SectionHeader() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-end">
-        <h2 className="text-5xl font-black tracking-tight text-slate-900 sm:text-6xl leading-[0.95]">
-          Four steps.
+        <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[0.95]">
+          From signals
           <br />
-          <span className="text-slate-300">One brain.</span>
+          <span className="text-slate-300">to decisions.</span>
         </h2>
-        <p className="text-lg leading-8 text-slate-500 max-w-md lg:pl-8">
-          Navis doesn't replace your tools — it sits above them, reads everything,
-          and turns scattered signals into a single clear next action.
+        <p className="text-base leading-7 text-slate-500 max-w-md lg:pl-8 sm:text-lg sm:leading-8">
+          Navis sits above your stack, structures every signal into memory,
+          and turns it into one ranked decision with an executable next move —
+          governed, traced, and learning from outcomes.
         </p>
       </div>
     </motion.div>

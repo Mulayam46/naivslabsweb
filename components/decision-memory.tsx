@@ -96,12 +96,12 @@ export function DecisionMemory() {
               </span>
             </div>
 
-            <h2 className="text-5xl font-black tracking-tight text-slate-900 sm:text-6xl xl:text-7xl leading-[0.95]">
-              Every choice.
+            <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl xl:text-7xl leading-[0.95]">
+              Every decision.
               <br />
               <span className="text-slate-300">Every outcome.</span>
               <br />
-              Every lesson.
+              Stored. Learned.
             </h2>
           </motion.div>
 
@@ -112,14 +112,14 @@ export function DecisionMemory() {
             transition={{ duration: 0.9, ease: EASING, delay: 0.1 }}
             className="flex flex-col gap-8 lg:pl-12"
           >
-            <p className="text-base leading-8 text-slate-500 max-w-sm">
+            <p className="text-sm leading-7 text-slate-500 max-w-sm sm:text-base sm:leading-8">
               Every entry is a choice your company made, what actually happened,
-              and the learning that updates the next recommendation. This is what
-              makes Navis smarter every week.
+              and the rule that updates the next recommendation. This is the
+              moat — Decision Memory makes Navis sharper every week.
             </p>
 
             {/* Stat row */}
-            <div className="flex gap-8 border-t border-slate-100 pt-8">
+            <div className="flex flex-wrap gap-6 border-t border-slate-100 pt-8 sm:gap-8">
               {[
                 { icon: Layers, value: 27, prefix: "", suffix: "", label: "Decisions logged", color: "#7c3aed" },
                 { icon: BookOpen, value: 9, prefix: "", suffix: "", label: "Learnings stored", color: "#0ea5e9" },
@@ -134,7 +134,7 @@ export function DecisionMemory() {
                     transition={{ delay: 0.2 + i * 0.08, duration: 0.6, ease: EASING }}
                     className="flex flex-col gap-1"
                   >
-                    <span className="text-3xl font-black tracking-tight" style={{ color: s.color }}>
+                    <span className="text-2xl font-black tracking-tight sm:text-3xl" style={{ color: s.color }}>
                       <Counter to={s.value} prefix={s.prefix} suffix={s.suffix} />
                     </span>
                     <span className="text-xs text-slate-400 leading-tight">{s.label}</span>

@@ -141,7 +141,7 @@ function SignalCard({ s }: { s: (typeof SIGNALS)[0] }) {
       initial={{ opacity: 0, x: s.from.x, y: s.from.y }}
       animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
       transition={{ delay: s.delay, duration: 0.8, ease: EASING }}
-      className={`absolute z-10 w-52 rounded-2xl border p-3 shadow-xl backdrop-blur-sm ${s.pos}`}
+      className={`absolute z-10 hidden w-52 rounded-2xl border p-3 shadow-xl backdrop-blur-sm md:block ${s.pos}`}
       style={{ borderColor: s.border, backgroundColor: s.bg }}
     >
       <div className="mb-2 flex items-center gap-2">
@@ -201,20 +201,21 @@ export function IncomingKnowledge() {
                   Incoming Knowledge · Live
                 </span>
               </div>
-              <h2 className="text-5xl font-black tracking-tight text-slate-900 sm:text-6xl leading-[0.95]">
-                Raw work.
+              <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[0.95]">
+                Raw signals.
                 <br />
-                <span className="text-slate-300">Structured</span>
+                <span className="text-slate-300">Auditable</span>
                 <br />
-                memory.
+                decisions.
               </h2>
             </div>
 
             {/* Right */}
             <div className="lg:pl-8">
-              <p className="text-lg leading-8 text-slate-500 max-w-md">
-                Email, Slack, calendar, docs, and meeting events become structured
-                events that update memory and trigger Decision Skills — automatically.
+              <p className="text-base leading-7 text-slate-500 max-w-md sm:text-lg sm:leading-8">
+                Sources → Ingestion → Memory → Skills → Decisions → Team. Every
+                email, Slack message, and calendar event becomes a typed event,
+                writes to memory, and routes through the Decision Engine.
               </p>
 
               {/* Source count row */}

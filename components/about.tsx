@@ -15,10 +15,10 @@ const FACTS = [
 ];
 
 const PRINCIPLES = [
-  "Clear product boundaries",
-  "Useful AI over vague AI",
-  "A platform that can expand",
-  "A premium public brand",
+  "Decisions, not summaries",
+  "Cited memory on every answer",
+  "Auditable execution",
+  "Outcome-driven learning",
 ];
 
 export function About() {
@@ -42,8 +42,8 @@ export function About() {
           >
             Company
           </p>
-          <h2 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-            NavisLabs is the company behind the products.
+          <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+            NavisLabs builds decision infrastructure.
           </h2>
         </motion.div>
 
@@ -82,11 +82,14 @@ export function About() {
                   >
                     Mission
                   </p>
-                  <h3 className="text-2xl font-semibold tracking-tight leading-snug">
-                    Build AI products that remove uncertainty from work and give teams a clearer path forward.
+                  <h3 className="text-xl font-semibold tracking-tight leading-snug sm:text-2xl">
+                    Build AI that decides — not AI that summarizes.
                   </h3>
                   <p className="text-sm leading-7" style={{ color: "var(--muted-foreground)" }}>
-                    We are building a family of AI products that help teams hire better, understand context faster, and move toward the right next action.
+                    Every Navis product surfaces an action with cited memory
+                    behind it. Every external action passes a per-channel
+                    policy gate and writes a tamper-evident trace. We build
+                    decision systems, not chatbots.
                   </p>
                 </div>
               </div>
@@ -166,7 +169,7 @@ export function About() {
 
           <div className="flex shrink-0 gap-3">
             <Link
-              href="mailto:hello@navislabs.ai"
+              href="mailto:hello@navislabs.in"
               className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full px-5 text-sm font-semibold transition-all duration-200 hover:opacity-85 active:scale-95"
               style={{ backgroundColor: "var(--text)", color: "#f8fafc" }}
             >

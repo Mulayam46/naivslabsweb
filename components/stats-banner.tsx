@@ -10,10 +10,10 @@ const EASING = [0.22, 1, 0.36, 1] as const;
 const INSIGHTS = [
   {
     icon: Inbox,
-    stat: "Turns scattered work into structured memory",
-    highlight: "structured memory",
+    stat: "Turn raw signals into auditable decisions",
+    highlight: "auditable decisions",
     context:
-      "Email, Slack, calendar, and doc events become typed events with extracted entities. Each one writes to one of four memory types — Episodic, Semantic, State, Decision — and can trigger a Decision Skill automatically.",
+      "Email, Slack, calendar, and meeting events become typed events with extracted entities. Each writes to one of four memory types — Episodic, Semantic, State, Decision — and can trigger a Decision Skill automatically.",
     gradientFrom: "#bfdbfe",
     gradientTo: "#bae6fd",
     iconColor: "#1d4ed8",
@@ -25,10 +25,10 @@ const INSIGHTS = [
   },
   {
     icon: GitBranch,
-    stat: "Ranks every decision by impact + your behavior",
-    highlight: "Ranks every decision",
+    stat: "See what matters now \u2014 and why",
+    highlight: "what matters now",
     context:
-      "Navis runs a multi-decision priority engine. Decisions are scored by predicted impact, your behavior modifier, downstream effects, and conflict with other open work. You see one screen, one next move \u2014 not an inbox.",
+      "Navis runs a multi-decision priority engine. Decisions are scored by predicted impact, your behavior modifier, downstream effects, and conflict with other open work. One screen. One next move. Not an inbox.",
     gradientFrom: "#c7d2fe",
     gradientTo: "#e9d5ff",
     iconColor: "#4f46e5",
@@ -40,8 +40,8 @@ const INSIGHTS = [
   },
   {
     icon: ShieldCheck,
-    stat: "Governance and audit trace on every action",
-    highlight: "audit trace on every action",
+    stat: "Nothing executes without control",
+    highlight: "without control",
     context:
       "Per-channel action policies (auto · confirm · require approval · blocked) gate every external action. Each execution writes a tamper-evident trace — trigger → memory → reasoning → simulation → decision → execution → outcome — to the Audit Log.",
     gradientFrom: "#ddd6fe",
@@ -55,10 +55,10 @@ const INSIGHTS = [
   },
   {
     icon: Brain,
-    stat: "A Company Brain that cites the memory it used",
-    highlight: "cites the memory it used",
+    stat: "Simulated outcomes before you act",
+    highlight: "Simulated outcomes",
     context:
-      "Every recommendation lands with the exact memory citations behind it: which episodic event, which person, which past decision pattern. People are derived from your team roster + active decisions, not editorial.",
+      "Every recommendation lands with cited memory and simulated paths. Navis models stakeholders, runs alternative paths against historical Decision Memory, and shows close probabilities before you commit.",
     gradientFrom: "#a7f3d0",
     gradientTo: "#99f6e4",
     iconColor: "#059669",
@@ -70,10 +70,10 @@ const INSIGHTS = [
   },
   {
     icon: Users,
-    stat: "Coordinates the team around the right decision",
-    highlight: "Coordinates the team",
+    stat: "Navis adapts to how you work",
+    highlight: "how you work",
     context:
-      "Every decision carries an owner + delegates. Multi-actor traces show when a teammate acknowledges. \"Waiting on you\" signals surface in the sidebar. Navis doesn't just help you decide — it routes the work.",
+      "The Behavior layer reads memory + outcomes to model your response patterns and weight every recommendation. Owner + delegates per decision, multi-actor traces, and \"waiting on you\" signals route work to the right teammate.",
     gradientFrom: "#fde68a",
     gradientTo: "#fca5a5",
     iconColor: "#d97706",
@@ -151,7 +151,7 @@ export function StatsBanner() {
                     {/* Text */}
                     <div className="relative space-y-3">
                       {/* Stat title with PointerHighlight */}
-                      <div className="font-sans text-xl/[1.375rem] font-semibold tracking-tight text-balance text-slate-900 md:text-2xl/[1.875rem]">
+                      <div className="font-sans text-lg/[1.25rem] font-semibold tracking-tight text-balance text-slate-900 sm:text-xl/[1.375rem] md:text-2xl/[1.875rem]">
                         {prefix}
                         <PointerHighlight
                           rectangleClassName={item.rectangleClassName}

@@ -173,7 +173,7 @@ export function Connections() {
                 Connections
               </span>
             </div>
-            <h2 className="text-5xl font-black tracking-tight text-slate-900 sm:text-6xl leading-[0.95]">
+            <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[0.95]">
               Connect the sources
               <br />
               <span className="text-slate-300">that feed your</span>
@@ -182,10 +182,10 @@ export function Connections() {
             </h2>
           </div>
           <div className="lg:pl-8">
-            <p className="text-lg leading-8 text-slate-500 max-w-md">
-              Navis reads work knowledge, structures it into memory, recommends
-              next actions, prepares drafts, and asks for approval before any
-              external action.
+            <p className="text-base leading-7 text-slate-500 max-w-md sm:text-lg sm:leading-8">
+              Navis reads work knowledge, structures it into memory, ranks the
+              next decision, prepares the draft, and asks for approval before
+              any external action. Tokens stored encrypted. Revocable any time.
             </p>
 
             {/* Onboarding steps */}

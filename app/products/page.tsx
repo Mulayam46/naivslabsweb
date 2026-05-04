@@ -121,7 +121,7 @@ export default function ProductsPage() {
               We&apos;ll use the same public front door for future launches, so this page can scale as the company grows.
             </p>
             <Link
-              href="mailto:hello@navislabs.ai"
+              href="mailto:hello@navislabs.in"
               className="mt-6 inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold"
               style={{
                 backgroundColor: "var(--text)",

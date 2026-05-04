@@ -37,7 +37,7 @@ export default function CompanyPage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="mailto:hello@navislabs.ai"
+                href="mailto:hello@navislabs.in"
                 className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold"
                 style={{
                   backgroundColor: "var(--text)",

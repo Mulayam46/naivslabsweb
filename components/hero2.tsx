@@ -31,20 +31,20 @@ function HeroTitle() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASING }}
-        className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-blue-600/70"
+        className="mb-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-blue-600/70 sm:text-xs"
       >
-        Navis AI · In development
+        Decision Intelligence · Company Brain
       </motion.p>
 
       <motion.h1
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.8, ease: EASING }}
-        className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl"
+        className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl"
       >
-        Your AI chief of staff.{" "}
+        Your AI Chief of Staff for{" "}
         <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
-          One next decision.
+          high-stakes decisions.
         </span>
       </motion.h1>
 
@@ -52,11 +52,11 @@ function HeroTitle() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.22, duration: 0.8, ease: EASING }}
-        className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-500"
+        className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8"
       >
-        Navis reads your Gmail, Slack, and calendar, structures it into a
-        Company Brain across four memory types, and surfaces the single most
-        important decision right now — with full audit trace + governance.
+        Navis turns scattered company data into ranked decisions, executes them
+        through real connectors, and learns from every outcome — with full
+        audit trace and per-channel action policies.
       </motion.p>
 
       <motion.div
@@ -69,14 +69,14 @@ function HeroTitle() {
           href="#notify"
           className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-slate-800 hover:shadow-xl active:scale-[0.98]"
         >
-          Join the waitlist
+          See today&apos;s decision
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </Link>
         <Link
           href="/products/navis-ai"
           className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-200 px-7 text-sm font-semibold text-slate-600 transition-all duration-200 hover:border-slate-300 hover:text-slate-900 active:scale-[0.98]"
         >
-          Learn more
+          How Navis works
         </Link>
       </motion.div>
 
@@ -89,15 +89,15 @@ function HeroTitle() {
       >
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          4 memory types · cited per answer
+          Episodic · Semantic · State · Decision memory
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-          Decision Trace · tamper-evident audit
+          Decision Trace · tamper-evident
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-          Per-channel action policies
+          Auto · Confirm · Approval · Blocked
         </span>
       </motion.div>
     </div>
