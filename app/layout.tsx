@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
+import { WarningsSuppressor } from "@/components/warning-suppressor";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -103,6 +104,7 @@ export default function RootLayout({
           fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
         }}
       >
+        <WarningsSuppressor />
         {children}
       </body>
     </html>
