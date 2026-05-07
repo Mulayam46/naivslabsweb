@@ -186,13 +186,16 @@ export function AskNavis() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASING, delay: 0.1 }}
           >
-            <Link
+            {/* <Link
               href="#notify"
-              className="group inline-flex h-11 items-center gap-2 rounded-full bg-slate-900 px-6 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-slate-800 hover:shadow-lg active:scale-[0.98]"
+              className="group inline-flex h-11 items-center gap-2 rounded-full bg-slate-900 px-6 text-sm font-semibold !text-white shadow-md transition-all duration-200 hover:bg-slate-800 hover:shadow-lg active:scale-[0.98]"
             >
-              Join the waitlist
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+              <span className="!text-white">
+                Join the waitlist
+              </span>
+
+              <ArrowRight className="h-3.5 w-3.5 !text-white transition-transform group-hover:translate-x-0.5" />
+            </Link> */}
           </motion.div>
         </div>
 

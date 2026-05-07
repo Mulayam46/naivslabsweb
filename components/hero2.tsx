@@ -65,13 +65,16 @@ function HeroTitle() {
         transition={{ delay: 0.34, duration: 0.7, ease: EASING }}
         className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
       >
-        <Link
-          href="#notify"
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-slate-800 hover:shadow-xl active:scale-[0.98]"
-        >
-          See today&apos;s decision
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
+       <Link
+  href="#notify"
+  className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-950 px-7 text-sm font-semibold !text-white shadow-lg transition-all duration-200 hover:bg-slate-800 hover:shadow-xl active:scale-[0.98]"
+>
+  <span className="!text-white">
+    See today&apos;s decision
+  </span>
+
+  <ArrowRight className="h-4 w-4 !text-white transition-transform group-hover:translate-x-0.5" />
+</Link>
         <Link
           href="/products/navis-ai"
           className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-200 px-7 text-sm font-semibold text-slate-600 transition-all duration-200 hover:border-slate-300 hover:text-slate-900 active:scale-[0.98]"
