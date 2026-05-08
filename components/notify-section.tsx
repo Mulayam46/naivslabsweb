@@ -108,12 +108,14 @@ export function NotifySection() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
                   disabled={loading}
+                  suppressHydrationWarning
                   className="h-12 flex-1 rounded-full border border-slate-200 bg-white px-5 text-sm text-slate-900 outline-none transition-shadow focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 disabled:opacity-60"
                 />
 
                 <button
                   type="submit"
                   disabled={loading}
+                  suppressHydrationWarning
                   className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-[0px_0px_10px_0px_rgba(255,255,255,0.2)_inset] ring ring-white/20 ring-offset-2 ring-offset-slate-900 ring-inset transition-all duration-200 hover:shadow-[0px_0px_20px_0px_rgba(255,255,255,0.4)_inset] hover:ring-white/40 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {loading ? (

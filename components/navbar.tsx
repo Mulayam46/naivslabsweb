@@ -9,7 +9,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "../components/ui/moving-border";
 
 const NAV_LINKS = [
-  { label: "Products", href: "/#products" },
+  // { label: "Products", href: "/#products" },
   // { label: "HireAI", href: "/products/hireai" },
   { label: "Navis AI", href: "/products/navis-ai" },
   { label: "Company", href: "/#company" },

@@ -86,21 +86,39 @@ export const MovingBorder = ({
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {
-    const length = pathRef.current?.getTotalLength();
-    if (length) {
-      const pxPerMillisecond = length / duration;
-      progress.set((time * pxPerMillisecond) % length);
+    try {
+      const length = pathRef.current?.getTotalLength();
+      if (length) {
+        const pxPerMillisecond = length / duration;
+        progress.set((time * pxPerMillisecond) % length);
+      }
+    } catch {
+      // SVG element not yet painted — skip frame
     }
   });
 
-  const x = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).x,
-  );
-  const y = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).y,
-  );
+  const x = useTransform(progress, (val) => {
+    const el = pathRef.current;
+    if (!el) return 0;
+    try {
+      const len = el.getTotalLength();
+      if (!len) return 0;
+      return el.getPointAtLength(val).x;
+    } catch {
+      return 0;
+    }
+  });
+  const y = useTransform(progress, (val) => {
+    const el = pathRef.current;
+    if (!el) return 0;
+    try {
+      const len = el.getTotalLength();
+      if (!len) return 0;
+      return el.getPointAtLength(val).y;
+    } catch {
+      return 0;
+    }
+  });
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 

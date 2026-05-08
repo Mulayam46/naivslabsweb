@@ -222,7 +222,7 @@ export function AskNavis() {
             {/* Screenshot + cursor layer */}
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
               <Image
-                src="/asknavis.png"
+                src="/ask.JPEG"
                 alt="Navis AI — Ask Navis interface"
                 fill
                 className="object-cover object-top"
@@ -255,6 +255,7 @@ export function AskNavis() {
               <button
                 key={step.id}
                 onClick={() => setActiveStep(i)}
+                suppressHydrationWarning
                 className="group flex items-center gap-2 rounded-full px-3 py-1.5 transition-all duration-200 hover:bg-white hover:shadow-sm"
               >
                 <motion.span

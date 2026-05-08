@@ -118,7 +118,7 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--text) !important;
+  color: var(--text);
 }
 
 body::before {

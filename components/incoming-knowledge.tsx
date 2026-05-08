@@ -266,7 +266,7 @@ export function IncomingKnowledge() {
             {/* Scroll-clipped image */}
             <motion.div style={{ clipPath, scale }} className="overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 ring-1 ring-slate-100">
               <Image
-                src="/incomingnavis.png"
+                src="/incomingnavis.jpeg"
                 alt="Navis Incoming Knowledge interface"
                 width={1400}
                 height={1000}

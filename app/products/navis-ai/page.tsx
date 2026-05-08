@@ -584,6 +584,7 @@ export default function NavisAIPage() {
               <Link
                 href="mailto:hello@navislabs.in"
                 className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-slate-800 active:scale-[0.98]"
+                style={{ color: "#ffffff" }}
               >
                 Join via email
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -165,7 +165,7 @@ export function DecisionMemory() {
             </div>
 
             <Image
-              src="/decisionnavis.png"
+              src="/decision.JPEG"
               alt="Navis Decision Memory — decisions, outcomes, and learnings"
               width={1400}
               height={1000}

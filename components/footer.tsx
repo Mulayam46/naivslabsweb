@@ -90,7 +90,8 @@ export function Footer() {
               </Link>
               <Link
                 href="/products/navis-ai"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 text-sm font-semibold text-white transition-all duration-200 hover:border-white/40 hover:bg-white/10 active:scale-[0.98]"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 text-sm font-semibold text-white transition-all duration-200 hover:border-white/50 hover:bg-white/20 active:scale-[0.98]"
+                style={{ color: "#ffffff" }}
               >
                 Learn more
               </Link>

@@ -175,7 +175,7 @@ export function About() {
             >
               Contact us
             </Link>
-            <Link
+            {/* <Link
               href="/products"
               className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-5 text-sm font-semibold transition-all duration-200 hover:bg-white active:scale-95"
               style={{
@@ -185,7 +185,7 @@ export function About() {
               }}
             >
               View products <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </Link> */}
           </div>
         </motion.div>
       </div>

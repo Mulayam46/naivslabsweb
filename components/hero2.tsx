@@ -83,6 +83,8 @@ function HeroTitle() {
         </Link>
       </motion.div>
 
+      
+
       {/* Architecture proof strip */}
       <motion.div
         initial={{ opacity: 0 }}
