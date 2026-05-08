@@ -26,13 +26,13 @@ export const productFamily: Product[] = [
   {
     slug: "hireai",
     name: "HireAI",
-    eyebrow: "Live product",
+    eyebrow: "Private preview",
     status: "live",
     blurb: "AI hiring workflows for teams that want signal over noise.",
     description:
       "HireAI screens candidates, reads resumes at scale, and routes only the strongest matches into the hiring process. It helps teams move faster without losing judgment.",
-    href: "https://hire-ai-voice-agent.vercel.app/",
-    cta: "Open HireAI",
+    href: "mailto:hello@navislabs.in?subject=HireAI%20access",
+    cta: "Request access",
     secondaryHref: "/products/hireai",
     secondaryCta: "View product page",
     metrics: [

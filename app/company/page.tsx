@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const facts = [
   { value: "Bangalore", label: "Headquarters" },
-  { value: "2026", label: "Founded" },
+  { value: "2025", label: "Founded" },
   { value: "Global", label: "Scope" },
   { value: "2", label: "Core products" },
 ];

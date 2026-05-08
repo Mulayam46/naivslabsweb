@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { productFamily } from "@/lib/site-data";
@@ -18,13 +18,13 @@ export default function ProductsPage() {
       <section className="px-4 pt-28 md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--muted)" }}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
               Products
             </p>
             <h1 className="mt-3 text-5xl font-semibold tracking-tight sm:text-6xl">
               A focused family of AI products.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8" style={{ color: "var(--muted)" }}>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
               Each NavisLabs product solves a specific problem. The goal is a clear portfolio, not a crowded catalog.
             </p>
           </div>
@@ -36,14 +36,14 @@ export default function ProductsPage() {
                 className="rounded-[2rem] border p-7 shadow-[0_20px_80px_rgba(15,23,42,0.06)]"
                 style={{
                   borderColor: "var(--border)",
-                  backgroundColor: "rgba(255,255,255,0.8)",
+                  backgroundColor: "rgba(255,255,255,0.9)",
                 }}
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--muted)" }}>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
                   {product.eyebrow}
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight">{product.name}</h2>
-                <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
+                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{product.name}</h2>
+                <p className="mt-4 text-base leading-7 text-slate-600">
                   {product.description}
                 </p>
 
@@ -54,11 +54,11 @@ export default function ProductsPage() {
                       className="rounded-2xl border p-4"
                       style={{
                         borderColor: "var(--border)",
-                        backgroundColor: "rgba(255,255,255,0.72)",
+                        backgroundColor: "rgba(248,250,252,0.92)",
                       }}
                     >
-                      <p className="text-xl font-semibold tracking-tight">{metric.value}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+                      <p className="text-xl font-semibold tracking-tight text-slate-950">{metric.value}</p>
+                      <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">
                         {metric.label}
                       </p>
                     </div>
@@ -72,7 +72,7 @@ export default function ProductsPage() {
                     style={{
                       borderColor: "var(--border)",
                       color: "var(--text)",
-                      backgroundColor: "rgba(255,255,255,0.8)",
+                      backgroundColor: "rgba(255,255,255,0.95)",
                     }}
                   >
                     {product.secondaryCta}
@@ -80,8 +80,8 @@ export default function ProductsPage() {
                   </Link>
                   <Link
                     href={product.href}
-                    target={product.slug === "hireai" ? "_blank" : undefined}
-                    rel={product.slug === "hireai" ? "noopener noreferrer" : undefined}
+                    target={product.slug === "hireai" ? "_self" : undefined}
+                    rel={undefined}
                     className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold"
                     style={{
                       backgroundColor: "var(--text)",
@@ -89,11 +89,7 @@ export default function ProductsPage() {
                     }}
                   >
                     {product.cta}
-                    {product.slug === "hireai" ? (
-                      <ExternalLink className="h-4 w-4" />
-                    ) : (
-                      <ArrowRight className="h-4 w-4" />
-                    )}
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </article>
@@ -108,16 +104,16 @@ export default function ProductsPage() {
             className="rounded-[2rem] border px-6 py-10 text-center shadow-[0_20px_80px_rgba(15,23,42,0.05)]"
             style={{
               borderColor: "var(--border)",
-              backgroundColor: "rgba(255,255,255,0.78)",
+              backgroundColor: "rgba(255,255,255,0.9)",
             }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--muted)" }}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
               Stay updated
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
               Want the next product update from NavisLabs?
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7" style={{ color: "var(--muted)" }}>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
               We&apos;ll use the same public front door for future launches, so this page can scale as the company grows.
             </p>
             <Link

@@ -8,7 +8,7 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 const EASING = [0.22, 1, 0.36, 1] as const;
 
 const FACTS = [
-  { icon: Calendar, value: "2026", label: "Founded" },
+  { icon: Calendar, value: "2025", label: "Founded" },
   { icon: MapPin, value: "Bangalore", label: "Headquarters" },
   { icon: Globe, value: "Global", label: "Market focus" },
   { icon: Layers, value: "Product-led", label: "Operating model" },
