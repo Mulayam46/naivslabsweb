@@ -1,73 +1,36 @@
 import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
-
-const TARGET_EMAIL = "hello@navislabs.in";
-
-export async function POST(request: Request) {
-  let body: { email?: string; source?: string } = {};
+export async function POST(req: Request) {
   try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
-  }
+    const body = await req.json();
+    const email = body.email?.trim();
 
-  const email = (body.email ?? "").trim().toLowerCase();
-  const source = (body.source ?? "homepage").slice(0, 64);
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json(
+        { error: "Email is required" },
+        { status: 400 }
+      );
+    }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ ok: false, error: "Invalid email" }, { status: 400 });
-  }
-
-  const resendKey = process.env.RESEND_API_KEY;
-  const resendFrom = process.env.RESEND_FROM_EMAIL;
-
-  if (resendKey && resendFrom) {
-    const res = await fetch("https://api.resend.com/emails", {
+    await fetch("https://formsubmit.co/ajax/hello@navislabs.in", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${resendKey}`,
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
-        from: resendFrom,
-        to: TARGET_EMAIL,
-        reply_to: email,
-        subject: `New waitlist signup · ${email}`,
-        text: `Source: ${source}\nEmail: ${email}\nReceived: ${new Date().toISOString()}`,
+      body: new URLSearchParams({
+        email,
       }),
     });
-    if (!res.ok) {
-      const text = await res.text();
-      console.error("Resend failed:", text);
-      return NextResponse.json({ ok: false, error: "Email service failed" }, { status: 502 });
-    }
-    return NextResponse.json({ ok: true });
-  }
 
-  let fsRes: Response;
-  try {
-    fsRes = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        email,
-        source,
-        received: new Date().toISOString(),
-        _subject: `New waitlist signup · ${email}`,
-        _replyto: email,
-      }),
+    return NextResponse.json({
+      ok: true,
     });
   } catch (error) {
-    console.error("FormSubmit request failed:", error);
-    return NextResponse.json({ ok: true, delivery: "accepted" });
-  }
+    console.error(error);
 
-  if (!fsRes.ok) {
-    const text = await fsRes.text();
-    console.error("FormSubmit failed:", text);
-    return NextResponse.json({ ok: true, delivery: "accepted" });
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ ok: true });
 }

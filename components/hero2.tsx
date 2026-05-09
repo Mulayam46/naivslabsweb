@@ -16,7 +16,8 @@ function NavisMockup() {
         src="/navisai.png"
         alt="Navis AI product interface"
         fill
-        className="object-cover object-top"
+        className="object-contain object-top md:object-cover"
+        sizes="(max-width: 768px) 100vw, 80vw"
         priority
       />
     </div>

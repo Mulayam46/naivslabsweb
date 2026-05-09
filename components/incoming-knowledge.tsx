@@ -119,7 +119,7 @@ function Ticker() {
         className="flex w-max gap-0"
       >
         {items.map((t, i) => (
-          <span key={i} className="flex items-center gap-3 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 whitespace-nowrap">
+          <span key={i} className="flex items-center gap-2 px-4 text-[10px] font-semibold whitespace-nowrap uppercase tracking-[0.18em] text-slate-400 sm:gap-3 sm:px-6 sm:text-xs sm:tracking-[0.2em]">
             {t}
             <span className="h-1 w-1 rounded-full bg-slate-300" />
           </span>

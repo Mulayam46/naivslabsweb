@@ -49,7 +49,7 @@ export function Footer() {
           <p>© 2025 NavisLabs</p>
           <a
             href="mailto:hello@navislabs.in"
-            className="transition-colors hover:text-slate-900"
+            className="max-w-full break-all transition-colors hover:text-slate-900 sm:break-normal"
           >
             hello@navislabs.in
           </a>
