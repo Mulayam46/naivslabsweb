@@ -154,6 +154,7 @@ export function DecisionMemory() {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, ease: EASING, delay: 0.12 }}
             className="relative overflow-hidden rounded-3xl shadow-2xl shadow-slate-200 ring-1 ring-slate-100"
+            style={{ aspectRatio: "16/10" }}
           >
             {/* Floating pill */}
             <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur-sm ring-1 ring-slate-100">
@@ -167,9 +168,8 @@ export function DecisionMemory() {
             <Image
               src="/decision.jpeg"
               alt="Navis Decision Memory — decisions, outcomes, and learnings"
-              width={1400}
-              height={1000}
-              className="w-full object-cover object-top"
+              fill
+              className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 60vw"
             />
 
