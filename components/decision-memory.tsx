@@ -165,12 +165,12 @@ export function DecisionMemory() {
             </div>
 
             <Image
-              src="/decision.JPEG"
+              src="/decision.jpeg"
               alt="Navis Decision Memory — decisions, outcomes, and learnings"
               width={1400}
               height={1000}
               className="w-full object-cover object-top"
-              priority
+              sizes="(max-width: 1024px) 100vw, 60vw"
             />
 
             {/* Bottom fade into white */}

@@ -240,12 +240,12 @@ export function Connections() {
               className="overflow-hidden rounded-2xl shadow-xl shadow-slate-200 ring-1 ring-slate-100"
             >
               <Image
-                src="/connection.JPEG"
+                src="/connection.jpeg"
                 alt="Navis Connections — connect sources to your Company Brain"
                 width={880}
                 height={660}
                 className="w-full object-cover object-top"
-                priority
+                sizes="(max-width: 1024px) 100vw, 440px"
               />
             </motion.div>
 

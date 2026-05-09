@@ -271,7 +271,7 @@ export function IncomingKnowledge() {
                 width={1400}
                 height={1000}
                 className="w-full object-cover object-top"
-                priority
+                sizes="(max-width: 1280px) 100vw, 80vw"
               />
             </motion.div>
           </div>

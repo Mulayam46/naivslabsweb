@@ -1,9 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { Globe3D, GlobeMarker } from "@/components/ui/3d-globe";
+import type { GlobeMarker } from "@/components/ui/3d-globe";
+
+const Globe3D = dynamic(
+  () => import("@/components/ui/3d-globe").then((mod) => mod.Globe3D),
+  { ssr: false }
+);
 
 const EASING = [0.22, 1, 0.36, 1] as const;
 
@@ -28,6 +34,23 @@ export function NotifySection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState<string | null>(null);
+  const [showGlobe, setShowGlobe] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      "(max-width: 767px), (pointer: coarse), (prefers-reduced-motion: reduce)"
+    );
+    const update = () => setShowGlobe(!mediaQuery.matches);
+    update();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", update);
+      return () => mediaQuery.removeEventListener("change", update);
+    }
+
+    mediaQuery.addListener(update);
+    return () => mediaQuery.removeListener(update);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,16 +172,27 @@ export function NotifySection() {
 
           {/* ── Right: Globe ── */}
           <div className="pointer-events-none absolute bottom-0 right-0 z-0 size-[320px] translate-x-1/3 translate-y-1/3 opacity-60 sm:size-[420px] sm:opacity-90 md:size-[580px] md:translate-x-1/4 md:translate-y-1/4 md:opacity-100">
-            <Globe3D
-              className="h-full w-full"
-              markers={GLOBE_MARKERS}
-              config={{
-                atmosphereColor: "#4da6ff",
-                atmosphereIntensity: 20,
-                bumpScale: 5,
-                autoRotateSpeed: 0.3,
-              }}
-            />
+            {showGlobe ? (
+              <Globe3D
+                className="h-full w-full"
+                markers={GLOBE_MARKERS}
+                config={{
+                  atmosphereColor: "#4da6ff",
+                  atmosphereIntensity: 20,
+                  bumpScale: 5,
+                  autoRotateSpeed: 0.25,
+                }}
+              />
+            ) : (
+              <div
+                className="h-full w-full rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 35% 35%, rgba(77,166,255,0.38), rgba(59,130,246,0.18) 35%, rgba(15,23,42,0.08) 62%, transparent 72%)",
+                  filter: "blur(6px)",
+                }}
+              />
+            )}
           </div>
         </motion.div>
       </div>

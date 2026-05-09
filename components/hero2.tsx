@@ -117,18 +117,18 @@ export function Hero2() {
       {/* Background radial glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
-          className="absolute -top-60 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full blur-[140px] opacity-10"
+          className="absolute -top-60 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full blur-[96px] opacity-8"
           style={{
             background:
               "radial-gradient(ellipse, rgba(29,78,216,0.5) 0%, rgba(109,40,217,0.3) 50%, transparent 70%)",
           }}
         />
         <div
-          className="absolute top-1/3 -left-40 h-[400px] w-[400px] rounded-full blur-[100px] opacity-8"
+          className="absolute top-1/3 -left-40 h-[400px] w-[400px] rounded-full blur-[72px] opacity-[0.06]"
           style={{ backgroundColor: "#0ea5e9" }}
         />
         <div
-          className="absolute top-1/3 -right-40 h-[400px] w-[400px] rounded-full blur-[100px] opacity-8"
+          className="absolute top-1/3 -right-40 h-[400px] w-[400px] rounded-full blur-[72px] opacity-[0.06]"
           style={{ backgroundColor: "#7c3aed" }}
         />
       </div>

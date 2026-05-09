@@ -144,11 +144,11 @@ export function AskNavis() {
       {/* Background blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
-          className="absolute -top-40 left-1/3 h-[500px] w-[700px] rounded-full blur-[140px] opacity-[0.07]"
+          className="absolute -top-40 left-1/3 h-[500px] w-[700px] rounded-full blur-[96px] opacity-[0.05]"
           style={{ background: "radial-gradient(ellipse, #7c3aed, #1d4ed8, transparent)" }}
         />
         <div
-          className="absolute bottom-0 right-1/4 h-[400px] w-[500px] rounded-full blur-[120px] opacity-[0.05]"
+          className="absolute bottom-0 right-1/4 h-[400px] w-[500px] rounded-full blur-[80px] opacity-[0.04]"
           style={{ background: "radial-gradient(ellipse, #0ea5e9, #059669, transparent)" }}
         />
       </div>
@@ -222,11 +222,11 @@ export function AskNavis() {
             {/* Screenshot + cursor layer */}
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
               <Image
-                src="/ask.JPEG"
+                src="/ask.jpeg"
                 alt="Navis AI — Ask Navis interface"
                 fill
                 className="object-cover object-top"
-                priority
+                sizes="(max-width: 768px) 100vw, 80vw"
               />
 
               {/* Dark overlay so tooltips pop */}
