@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowRight, BadgeCheck, CheckCircle2, Sparkles, X } from "lucide-react";
 import type { GlobeMarker } from "@/components/ui/3d-globe";
 
 const Globe3D = dynamic(
@@ -35,6 +35,7 @@ export function NotifySection() {
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState<string | null>(null);
   const [showGlobe, setShowGlobe] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(
@@ -68,6 +69,7 @@ export function NotifySection() {
         throw new Error(data.error || "Could not join waitlist");
       }
       setSubmitted(true);
+      setShowSuccessModal(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -196,6 +198,93 @@ export function NotifySection() {
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 px-4 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="waitlist-success-title"
+          >
+            <motion.div
+              className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-white/60 bg-white p-7 text-center shadow-[0_24px_80px_rgba(15,23,42,0.24)]"
+              initial={{ opacity: 0, y: 28, scale: 0.92 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 18, scale: 0.96 }}
+              transition={{ duration: 0.5, ease: EASING }}
+            >
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(96,165,250,0.30),transparent_34%),radial-gradient(circle_at_85%_18%,rgba(168,85,247,0.22),transparent_34%),linear-gradient(135deg,rgba(240,249,255,0.94),rgba(255,255,255,0.96)_48%,rgba(245,243,255,0.9))]" />
+              <motion.button
+                type="button"
+                aria-label="Close success message"
+                onClick={() => setShowSuccessModal(false)}
+                className="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-500 shadow-sm transition hover:text-slate-900"
+                whileTap={{ scale: 0.94 }}
+              >
+                <X className="h-4 w-4" />
+              </motion.button>
+
+              <div className="relative z-10">
+                <motion.div
+                  className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-emerald-400 via-sky-400 to-violet-500 text-white shadow-[0_16px_40px_rgba(59,130,246,0.35)]"
+                  initial={{ scale: 0.5, rotate: -14 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.1, duration: 0.55, ease: EASING }}
+                >
+                  <BadgeCheck className="h-10 w-10" />
+                </motion.div>
+
+                <motion.div
+                  className="mt-5 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-600"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.22, duration: 0.35 }}
+                >
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Early access unlocked
+                </motion.div>
+
+                <motion.h3
+                  id="waitlist-success-title"
+                  className="mt-5 text-4xl font-black tracking-tight text-slate-950"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.28, duration: 0.4 }}
+                >
+                  You Are In
+                </motion.h3>
+
+                <motion.p
+                  className="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-600"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.34, duration: 0.4 }}
+                >
+                  Thanks for joining Navis early access. We saved your spot
+                  and will reach out with the next beta wave.
+                </motion.p>
+
+                <motion.button
+                  type="button"
+                  onClick={() => setShowSuccessModal(false)}
+                  className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-6 text-sm font-bold text-white shadow-[0_16px_32px_rgba(15,23,42,0.22)] transition hover:bg-slate-800 active:scale-[0.98] sm:w-auto"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  Perfect
+                  <ArrowRight className="h-4 w-4" />
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -90,7 +90,7 @@ function HeroTitle() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.8 }}
-        className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400"
+        className="mt-10 hidden flex-wrap items-center justify-center gap-6 text-xs text-slate-400 md:flex"
       >
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
