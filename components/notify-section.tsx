@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import type { GlobeMarker } from "@/components/ui/3d-globe";
+import Earth from "./globe";
 
 const Globe3D = dynamic(
   () => import("@/components/ui/3d-globe").then((mod) => mod.Globe3D),
@@ -78,10 +79,10 @@ export function NotifySection() {
   return (
     <section
       id="notify"
-      className="px-4 py-24 md:px-8"
+      className="relative px-4 py-24 md:px-8"
       style={{
-        borderTop: "1px solid var(--border)",
-        backgroundColor: "rgba(255,255,255,0.58)",
+        borderTop: "1px solid rgba(51,65,85,0.5)",
+        backgroundColor: "#03081e",
       }}
     >
       <div className="mx-auto max-w-7xl">
@@ -90,20 +91,20 @@ export function NotifySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.85, ease: EASING }}
-          /* Card — same style as demo: white bg, ring, overflow-hidden so globe clips */
-          className="relative overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/10 shadow-black/10 min-h-[400px]"
+          className="relative rounded-2xl border border-slate-700 bg-slate-800/30 backdrop-blur-sm shadow-xl"
+          style={{ overflow: "visible" }}
         >
           {/* ── Left: content ── */}
           <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:max-w-[55%]">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">
               Early access
             </p>
 
-            <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight text-balance text-slate-900 sm:text-4xl md:text-5xl">
+            <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight text-balance text-white sm:text-4xl md:text-5xl">
               Join early access.
             </h2>
 
-            <p className="mt-5 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+            <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
               Founders, operators, and engineering leads are running their week
               on Navis. Private beta — limited seats — founding rates locked in.
             </p>
@@ -114,8 +115,8 @@ export function NotifySection() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="mt-10 flex items-center gap-3"
               >
-                <CheckCircle2 className="h-6 w-6 text-emerald-500" />
-                <p className="text-sm font-medium text-slate-700">
+                <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+                <p className="text-sm font-medium text-slate-300">
                   You&apos;re on the list. We&apos;ll reach out soon.
                 </p>
               </motion.div>
@@ -132,14 +133,14 @@ export function NotifySection() {
                   placeholder="you@company.com"
                   disabled={loading}
                   suppressHydrationWarning
-                  className="h-12 flex-1 rounded-full border border-slate-200 bg-white px-5 text-sm text-slate-900 outline-none transition-shadow focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 disabled:opacity-60"
+                  className="h-12 flex-1 rounded-full border border-slate-700 bg-slate-900/50 px-5 text-sm text-white placeholder:text-slate-500 outline-none transition-all focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 disabled:opacity-60"
                 />
 
                 <button
                   type="submit"
                   disabled={loading}
                   suppressHydrationWarning
-                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-[0px_0px_10px_0px_rgba(255,255,255,0.2)_inset] ring ring-white/20 ring-offset-2 ring-offset-slate-900 ring-inset transition-all duration-200 hover:shadow-[0px_0px_20px_0px_rgba(255,255,255,0.4)_inset] hover:ring-white/40 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <>
@@ -160,39 +161,21 @@ export function NotifySection() {
             )}
 
             {error && (
-              <p className="mt-3 text-xs font-medium text-red-500">
+              <p className="mt-3 text-xs font-medium text-red-400">
                 {error}
               </p>
             )}
 
-            <p className="mt-5 text-xs uppercase tracking-[0.22em] text-slate-400">
+            <p className="mt-5 text-xs uppercase tracking-[0.22em] text-slate-500">
               No spam. Just product updates · hello@navislabs.in
             </p>
           </div>
 
           {/* ── Right: Globe ── */}
-          <div className="pointer-events-none absolute bottom-0 right-0 z-0 size-[320px] translate-x-1/3 translate-y-1/3 opacity-60 sm:size-[420px] sm:opacity-90 md:size-[580px] md:translate-x-1/4 md:translate-y-1/4 md:opacity-100">
-            {showGlobe ? (
-              <Globe3D
-                className="h-full w-full"
-                markers={GLOBE_MARKERS}
-                config={{
-                  atmosphereColor: "#4da6ff",
-                  atmosphereIntensity: 20,
-                  bumpScale: 5,
-                  autoRotateSpeed: 0.25,
-                }}
-              />
-            ) : (
-              <div
-                className="h-full w-full rounded-full"
-                style={{
-                  background:
-                    "radial-gradient(circle at 35% 35%, rgba(77,166,255,0.38), rgba(59,130,246,0.18) 35%, rgba(15,23,42,0.08) 62%, transparent 72%)",
-                  filter: "blur(6px)",
-                }}
-              />
-            )}
+          <div className="pointer-events-none absolute right-0 top-[-1/2] z-0 -translate-y-1/2">
+            <div className="relative h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] md:h-[600px] md:w-[600px] lg:h-[700px] lg:w-[700px]">
+              <Earth />
+            </div>
           </div>
         </motion.div>
       </div>

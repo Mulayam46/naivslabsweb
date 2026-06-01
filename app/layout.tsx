@@ -4,8 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { WarningsSuppressor } from "@/components/warning-suppressor";
+import { TawkChat } from "@/components/tawk-chat";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://navislabs.in"),
@@ -106,6 +107,7 @@ export default function RootLayout({
       >
         <WarningsSuppressor />
         {children}
+        <TawkChat />
       </body>
     </html>
   );

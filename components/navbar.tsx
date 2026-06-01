@@ -101,25 +101,25 @@ export function Navbar() {
           <Link
             href={waitlistHref}
           >
-             <Button
-        borderRadius="1.75rem"
-        className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-      >
-        Join waitlist
-      </Button>
+            <Button
+              borderRadius="1.75rem"
+              className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+            >
+              Join waitlist
+            </Button>
           </Link>
-           
+
         </div>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-md transition-colors md:hidden"
-            style={{ color: "var(--muted-strong)" }}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          className="flex h-8 w-8 items-center justify-center rounded-md transition-colors md:hidden"
+          style={{ color: "var(--muted-strong)" }}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </nav>
 
       {/* Mobile menu */}

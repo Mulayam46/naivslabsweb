@@ -3,7 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
+import PhotonBeam from "@/components/ui/photon-beam";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
@@ -11,10 +13,10 @@ const EASING = [0.22, 1, 0.36, 1] as const;
 // ── Product screenshot rendered inside ContainerScroll ──
 function NavisMockup() {
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[#0d1117]">
+    <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[#0d1117]mt-20">
       <Image
         src="/navisai.png"
-        alt="Navis AI product interface"
+        alt="Navis AI Dashboard"
         fill
         className="object-cover object-top"
         priority
@@ -26,66 +28,55 @@ function NavisMockup() {
 // ── Hero title passed to ContainerScroll ──
 function HeroTitle() {
   return (
-    <div className="text-center">
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: EASING }}
-        className="mb-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-blue-600/70 sm:text-xs"
-      >
-        Decision Intelligence · Company Brain
-      </motion.p>
-
+    <div className="relative z-10 text-center">
+      {/* Main Heading */}
       <motion.h1
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.8, ease: EASING }}
-        className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl"
+        className="mx-auto max-w-4xl text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-7xl leading-tight sm:leading-tight md:leading-[1.1]"
       >
-        Your AI Chief of Staff for{" "}
-        <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
-          high-stakes decisions.
+        We build AI that{" "}
+        <span className="inline-flex animate-text-gradient bg-gradient-to-r from-cyan-300 via-violet-400 to-cyan-300 bg-[200%_auto] bg-clip-text font-bold text-transparent drop-shadow-[0_0_25px_rgba(167,139,250,0.3)] pb-2">
+          decides, not summarizes.
         </span>
       </motion.h1>
 
+      {/* Description */}
       <motion.p
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.22, duration: 0.8, ease: EASING }}
-        className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8"
+        className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8"
       >
-        Navis turns scattered company data into ranked decisions, executes them
-        through real connectors, and learns from every outcome — with full
-        audit trace and per-channel action policies.
+        NavisLabs builds decision infrastructure for modern teams — AI that
+        reads your work, ranks what matters, executes with governance, and
+        learns from every outcome.
       </motion.p>
 
+      {/* CTA Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.34, duration: 0.7, ease: EASING }}
-        className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+        className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
       >
-       <Link
-  href="#notify"
-  className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-950 px-7 text-sm font-semibold !text-white shadow-lg transition-all duration-200 hover:bg-slate-800 hover:shadow-xl active:scale-[0.98]"
->
-  <span className="!text-white">
-    See today&apos;s decision
-  </span>
-
-  <ArrowRight className="h-4 w-4 !text-white transition-transform group-hover:translate-x-0.5" />
-</Link>
         <Link
           href="/products/navis-ai"
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-200 px-7 text-sm font-semibold text-slate-600 transition-all duration-200 hover:border-slate-300 hover:text-slate-900 active:scale-[0.98]"
+          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold text-slate-900 shadow-lg transition-all duration-300 hover:bg-slate-100 hover:shadow-xl active:scale-[0.98]"
         >
-          How Navis works
+          <span>See Navis AI</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
+        <RainbowButton asChild variant="outline" className="h-12 px-8 rounded-full text-sm text-white">
+          <Link href="#notify" className="gap-2">
+            Join the waitlist
+            <Zap className="h-4 w-4" />
+          </Link>
+        </RainbowButton>
       </motion.div>
 
-      
-
-      {/* Architecture proof strip */}
+      {/* Company proof strip */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -93,16 +84,16 @@ function HeroTitle() {
         className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400"
       >
         <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          Episodic · Semantic · State · Decision memory
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-          Decision Trace · tamper-evident
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+          Founded 2025 · Bangalore
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-          Auto · Confirm · Approval · Blocked
+          Decision infrastructure · not another chatbot
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-pink-400" />
+          Private beta · limited seats
         </span>
       </motion.div>
     </div>
@@ -111,31 +102,46 @@ function HeroTitle() {
 
 export function Hero2() {
   return (
-    <div
-      className="relative overflow-hidden bg-white"
-    >
-      {/* Background radial glows */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -top-60 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full blur-[96px] opacity-8"
-          style={{
-            background:
-              "radial-gradient(ellipse, rgba(29,78,216,0.5) 0%, rgba(109,40,217,0.3) 50%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute top-1/3 -left-40 h-[400px] w-[400px] rounded-full blur-[72px] opacity-[0.06]"
-          style={{ backgroundColor: "#0ea5e9" }}
-        />
-        <div
-          className="absolute top-1/3 -right-40 h-[400px] w-[400px] rounded-full blur-[72px] opacity-[0.06]"
-          style={{ backgroundColor: "#7c3aed" }}
+    <div className="relative overflow-hidden bg-slate-950">
+      {/* Photon Beam Background */}
+      <div className="absolute inset-0 z-0 w-full">
+        <PhotonBeam
+          colorBg="#020617"
+          colorLine="#1e293b"
+          colorSignal="#06b6d4"
+          colorSignal2="#3b82f6"
+          colorSignal3="#8b5cf6"
+          lineCount={100}
+          spreadHeight={35}
+          signalCount={120}
+          speedGlobal={0.35}
+          trailLength={3.5}
+          bloomStrength={4.5}
+          bloomRadius={0.7}
         />
       </div>
 
-      <ContainerScroll titleComponent={<HeroTitle />}>
-        <NavisMockup />
-      </ContainerScroll>
+      {/* Subtle gradient overlay for depth */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/80" />
+
+      {/* Animated glow orbs */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute -top-40 left-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-[100px] animate-pulse"
+          style={{ animationDuration: "8s" }}
+        />
+        <div
+          className="absolute bottom-40 right-1/4 h-96 w-96 rounded-full bg-violet-500/10 blur-[100px] animate-pulse"
+          style={{ animationDuration: "10s", animationDelay: "2s" }}
+        />
+      </div>
+
+      {/* ContainerScroll wraps both the title and the mockup */}
+      <div className="relative z-10">
+        <ContainerScroll titleComponent={<HeroTitle />}>
+          <NavisMockup />
+        </ContainerScroll>
+      </div>
     </div>
   );
 }

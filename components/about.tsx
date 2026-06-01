@@ -25,7 +25,8 @@ export function About() {
   return (
     <section
       id="company"
-      className="px-4 py-24 md:px-8 bg-white border-t border-slate-100"
+      className="relative px-4 py-24 md:px-8"
+      style={{ backgroundColor: "#03081e", borderTop: "1px solid rgba(51,65,85,0.5)" }}
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
@@ -36,13 +37,10 @@ export function About() {
           transition={{ duration: 0.8, ease: EASING }}
           className="mb-12"
         >
-          <p
-            className="text-xs font-semibold uppercase tracking-[0.28em]"
-            style={{ color: "var(--muted-foreground)" }}
-          >
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">
             Company
           </p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
             NavisLabs builds decision infrastructure.
           </h2>
         </motion.div>
@@ -57,8 +55,7 @@ export function About() {
         >
           {/* Mission — large left card */}
           <li className="list-none md:[grid-area:1/1/3/6]">
-            <div className="relative h-full min-h-64 rounded-2xl border p-2 md:rounded-3xl md:p-3"
-              style={{ borderColor: "var(--border)" }}>
+            <div className="relative h-full min-h-64 rounded-2xl border border-slate-700 p-2 md:rounded-3xl md:p-3">
               <GlowingEffect
                 blur={0}
                 borderWidth={2}
@@ -70,22 +67,19 @@ export function About() {
               />
               <div
                 className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-8"
-                style={{ backgroundColor: "rgba(255,255,255,0.88)" }}
+                style={{ backgroundColor: "rgba(30,41,59,0.4)" }}
               >
-                <div className="w-fit rounded-lg border p-2" style={{ borderColor: "var(--border)" }}>
-                  <Target className="h-4 w-4" style={{ color: "var(--text)" }} />
+                <div className="w-fit rounded-lg border border-slate-600 bg-slate-800/50 p-2">
+                  <Target className="h-4 w-4 text-cyan-400" />
                 </div>
                 <div className="space-y-3">
-                  <p
-                    className="text-xs font-semibold uppercase tracking-[0.24em]"
-                    style={{ color: "var(--muted-foreground)" }}
-                  >
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-400">
                     Mission
                   </p>
-                  <h3 className="text-xl font-semibold tracking-tight leading-snug sm:text-2xl">
+                  <h3 className="text-xl font-semibold tracking-tight leading-snug text-white sm:text-2xl">
                     Build AI that decides — not AI that summarizes.
                   </h3>
-                  <p className="text-sm leading-7" style={{ color: "var(--muted-foreground)" }}>
+                  <p className="text-sm leading-7 text-slate-300">
                     Every Navis product surfaces an action with cited memory
                     behind it. Every external action passes a per-channel
                     policy gate and writes a tamper-evident trace. We build
@@ -107,10 +101,7 @@ export function About() {
             ];
             return (
               <li key={fact.label} className={`list-none ${areas[i]}`}>
-                <div
-                  className="relative h-full min-h-36 rounded-2xl border p-2 md:rounded-3xl md:p-3"
-                  style={{ borderColor: "var(--border)" }}
-                >
+                <div className="relative h-full min-h-36 rounded-2xl border border-slate-700 p-2 md:rounded-3xl md:p-3">
                   <GlowingEffect
                     blur={0}
                     borderWidth={2}
@@ -122,17 +113,14 @@ export function About() {
                   />
                   <div
                     className="relative flex h-full flex-col justify-between gap-4 overflow-hidden rounded-xl p-5"
-                    style={{ backgroundColor: "rgba(255,255,255,0.88)" }}
+                    style={{ backgroundColor: "rgba(30,41,59,0.4)" }}
                   >
-                    <div className="w-fit rounded-lg border p-2" style={{ borderColor: "var(--border)" }}>
-                      <Icon className="h-4 w-4" style={{ color: "var(--text)" }} />
+                    <div className="w-fit rounded-lg border border-slate-600 bg-slate-800/50 p-2">
+                      <Icon className="h-4 w-4 text-purple-400" />
                     </div>
                     <div>
-                      <p className="text-2xl font-semibold tracking-tight">{fact.value}</p>
-                      <p
-                        className="mt-0.5 text-xs uppercase tracking-[0.22em]"
-                        style={{ color: "var(--muted-foreground)" }}
-                      >
+                      <p className="text-2xl font-semibold tracking-tight text-white">{fact.value}</p>
+                      <p className="mt-0.5 text-xs uppercase tracking-[0.22em] text-slate-400">
                         {fact.label}
                       </p>
                     </div>
@@ -155,12 +143,7 @@ export function About() {
             {PRINCIPLES.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border px-3 py-1 text-xs font-medium"
-                style={{
-                  borderColor: "var(--border)",
-                  color: "var(--muted-strong)",
-                  backgroundColor: "rgba(255,255,255,0.72)",
-                }}
+                className="rounded-full border border-slate-700 bg-slate-800/50 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm"
               >
                 {tag}
               </span>
@@ -170,22 +153,10 @@ export function About() {
           <div className="flex shrink-0 gap-3">
             <Link
               href="mailto:hello@navislabs.in"
-              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full px-5 text-sm font-semibold transition-all duration-200 hover:opacity-85 active:scale-95"
-              style={{ backgroundColor: "var(--text)", color: "#f8fafc" }}
+              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 px-5 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl active:scale-95"
             >
               Contact us
             </Link>
-            {/* <Link
-              href="/products"
-              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-5 text-sm font-semibold transition-all duration-200 hover:bg-white active:scale-95"
-              style={{
-                borderColor: "var(--border)",
-                color: "var(--text)",
-                backgroundColor: "rgba(255,255,255,0.7)",
-              }}
-            >
-              View products <ArrowRight className="h-3.5 w-3.5" />
-            </Link> */}
           </div>
         </motion.div>
       </div>

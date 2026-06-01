@@ -4,66 +4,10 @@ import Image from "next/image";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { Mail, Hash, CalendarDays, Video, FileText, Check, Plug, ShieldCheck } from "lucide-react";
+import { AnimatedBeam, Circle, Icons } from '@/components/uilayouts/animated-beam';
+import ElectricBorder from './ElectricBorder';
 
 const EASING = [0.22, 1, 0.36, 1] as const;
-
-const SOURCES = [
-  {
-    icon: Mail,
-    name: "Gmail",
-    color: "#ea4335",
-    bg: "#fff1f0",
-    border: "#fecaca",
-    state: "connected" as const,
-    what: "Reads important threads, reply gaps, customer messages, and follow-ups.",
-    contributed: "Customer commitments, buying intent, investor follow-ups, and reply silence.",
-    caps: ["Read threads", "Draft replies", "Detect silence"],
-  },
-  {
-    icon: Hash,
-    name: "Slack",
-    color: "#4a154b",
-    bg: "#fdf4ff",
-    border: "#e9d5ff",
-    state: "connected" as const,
-    what: "Finds blockers, decisions, team requests, and project drift.",
-    contributed: "Team decisions, ownership gaps, escalations, and unblock patterns.",
-    caps: ["Read channels", "Detect blockers", "Track mentions"],
-  },
-  {
-    icon: CalendarDays,
-    name: "Calendar",
-    color: "#1d4ed8",
-    bg: "#eff6ff",
-    border: "#bfdbfe",
-    state: "connected" as const,
-    what: "Understands deadlines, meeting load, prep windows, and schedule conflicts.",
-    contributed: "Deadlines, prep windows, decision timing, and overloaded days.",
-    caps: ["Read events", "Detect conflicts", "Prep windows"],
-  },
-  {
-    icon: Video,
-    name: "Meetings",
-    color: "#059669",
-    bg: "#f0fdf4",
-    border: "#a7f3d0",
-    state: "available" as const,
-    what: "Will turn calls into memory, action items, and decision evidence.",
-    contributed: "Meeting facts, objections, next steps, and commitments.",
-    caps: ["Import transcripts", "Extract action items", "Store commitments"],
-  },
-  {
-    icon: FileText,
-    name: "Notion",
-    color: "#f59e0b",
-    bg: "#fffbeb",
-    border: "#fde68a",
-    state: "available" as const,
-    what: "Indexes specs, investor materials, and project docs for grounding.",
-    contributed: "Project state, doc updates, written decisions, and structured plans.",
-    caps: ["Read pages", "Track updates", "Extract structure"],
-  },
-];
 
 const PERMISSION_STEPS = [
   { label: "Read", desc: "Navis reads context from connected work tools." },
@@ -81,70 +25,143 @@ const ONBOARDING = [
   "Approve actions",
 ];
 
-function SourceRow({ s, index }: { s: (typeof SOURCES)[0]; index: number }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-30px" });
-  const Icon = s.icon;
+function AnimatedConnections() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const gmailRef = useRef<HTMLDivElement>(null);
+  const slackRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const notionRef = useRef<HTMLDivElement>(null);
+  const meetingsRef = useRef<HTMLDivElement>(null);
+  const brainRef = useRef<HTMLDivElement>(null);
+  const memoryRef = useRef<HTMLDivElement>(null);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.08, duration: 0.6, ease: EASING }}
-      className="group flex flex-col gap-3 rounded-2xl border border-slate-100 bg-white p-5 transition-shadow duration-300 hover:shadow-md"
+    <ElectricBorder
+      color="#06b6d4"
+      speed={1.2}
+      chaos={0.15}
+      thickness={2}
+      style={{ borderRadius: 20 }}
     >
-      {/* Header row */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div
-            className="flex h-9 w-9 items-center justify-center rounded-xl"
-            style={{ backgroundColor: s.bg, border: `1px solid ${s.border}` }}
-          >
-            <Icon className="h-4 w-4" style={{ color: s.color }} />
+      <div
+        className="relative flex w-full items-center justify-center overflow-hidden rounded-[18px] border border-slate-700/50 bg-slate-800/30 p-8 backdrop-blur-sm lg:p-10"
+        ref={containerRef}
+      >
+        <div className="flex h-full w-full flex-col items-stretch justify-between gap-12">
+          {/* Top row - Gmail and Notion */}
+          <div className="flex flex-row items-center justify-between">
+            <Circle ref={gmailRef} className="border-red-500/30 bg-red-500/10 p-4">
+              <Mail className="h-7 w-7 text-red-400" />
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-red-400 whitespace-nowrap">Gmail</span>
+            </Circle>
+            <Circle ref={notionRef} className="border-amber-500/30 bg-amber-500/10 p-4">
+              <FileText className="h-7 w-7 text-amber-400" />
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-amber-400 whitespace-nowrap">Notion</span>
+            </Circle>
           </div>
-          <div>
-            <p className="text-sm font-bold text-slate-900">{s.name}</p>
-            <p className="text-xs text-slate-400">{s.what}</p>
+
+          {/* Middle row - Slack, Brain, Meetings */}
+          <div className="flex flex-row items-center justify-between">
+            <Circle ref={slackRef} className="border-purple-500/30 bg-purple-500/10 p-4">
+              <Hash className="h-7 w-7 text-purple-400" />
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-purple-400 whitespace-nowrap">Slack</span>
+            </Circle>
+            
+            {/* Center - Company Brain */}
+            <Circle ref={brainRef} className="h-32 w-32 border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-violet-500/20 p-5">
+              <div className="flex flex-col items-center gap-2">
+                <div className="h-14 w-14 rounded-full bg-gradient-to-r from-cyan-400 to-violet-400 flex items-center justify-center">
+                  <span className="text-white text-xl font-bold">AI</span>
+                </div>
+                <span className="text-xs font-bold text-cyan-300 whitespace-nowrap">Company Brain</span>
+              </div>
+            </Circle>
+            
+            <Circle ref={meetingsRef} className="border-emerald-500/30 bg-emerald-500/10 p-4">
+              <Video className="h-7 w-7 text-emerald-400" />
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-emerald-400 whitespace-nowrap">Meetings</span>
+            </Circle>
+          </div>
+
+          {/* Bottom row - Calendar and Memory */}
+          <div className="flex flex-row items-center justify-between">
+            <Circle ref={calendarRef} className="border-blue-500/30 bg-blue-500/10 p-4">
+              <CalendarDays className="h-7 w-7 text-blue-400" />
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-blue-400 whitespace-nowrap">Calendar</span>
+            </Circle>
+            <Circle ref={memoryRef} className="border-indigo-500/30 bg-indigo-500/10 p-4">
+              <div className="flex flex-col items-center">
+                <span className="text-lg font-bold text-indigo-300">Mem</span>
+              </div>
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-indigo-400 whitespace-nowrap">Memory</span>
+            </Circle>
           </div>
         </div>
-        {s.state === "connected" ? (
-          <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">
-            <Check className="h-3 w-3" />
-            Connected
-          </span>
-        ) : (
-          <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold text-slate-500">
-            <Plug className="h-3 w-3" />
-            Available
-          </span>
-        )}
-      </div>
 
-      {/* Knowledge contributed */}
-      <div
-        className="rounded-xl border-l-2 bg-slate-50 px-3.5 py-2.5"
-        style={{ borderColor: s.color }}
-      >
-        <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-slate-400">
-          Knowledge contributed
-        </p>
-        <p className="text-xs leading-relaxed text-slate-600">{s.contributed}</p>
+        {/* Animated Beams - Connections flowing to the brain */}
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={gmailRef}
+          toRef={brainRef}
+          curvature={-50}
+          endYOffset={-10}
+          gradientStartColor="#ea4335"
+          gradientStopColor="#38bdf8"
+          dotted
+        />
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={slackRef}
+          toRef={brainRef}
+          curvature={-30}
+          gradientStartColor="#4a154b"
+          gradientStopColor="#a78bfa"
+          dotted
+        />
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={calendarRef}
+          toRef={brainRef}
+          curvature={30}
+          endYOffset={10}
+          gradientStartColor="#1d4ed8"
+          gradientStopColor="#60a5fa"
+          dotted
+        />
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={meetingsRef}
+          toRef={brainRef}
+          curvature={50}
+          endYOffset={-5}
+          gradientStartColor="#059669"
+          gradientStopColor="#34d399"
+          dotted
+        />
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={notionRef}
+          toRef={brainRef}
+          curvature={-40}
+          endYOffset={5}
+          gradientStartColor="#f59e0b"
+          gradientStopColor="#fbbf24"
+          dotted
+        />
+        
+        {/* Memory flow out of brain */}
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={brainRef}
+          toRef={memoryRef}
+          curvature={20}
+          reverse
+          gradientStartColor="#8b5cf6"
+          gradientStopColor="#c084fc"
+          dotted
+        />
       </div>
-
-      {/* Capability pills */}
-      <div className="flex flex-wrap gap-1.5">
-        {s.caps.map((c) => (
-          <span
-            key={c}
-            className="rounded-full px-2.5 py-1 text-[10px] font-semibold"
-            style={{ backgroundColor: s.bg, color: s.color }}
-          >
-            {c}
-          </span>
-        ))}
-      </div>
-    </motion.div>
+    </ElectricBorder>
   );
 }
 
@@ -155,10 +172,10 @@ export function Connections() {
   return (
     <section
       ref={sectionRef}
-      className="border-t border-slate-100 bg-[#fafafa] px-4 py-24 md:px-8 md:py-32"
+      className="relative border-t border-slate-800/50 px-4 py-24 md:px-8 md:py-32"
+      style={{ backgroundColor: "#03081e" }}
     >
       <div className="mx-auto max-w-7xl">
-
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -168,21 +185,21 @@ export function Connections() {
         >
           <div>
             <div className="mb-5 flex items-center gap-3">
-              <div className="h-px w-10 bg-slate-300" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+              <div className="h-px w-10 bg-cyan-400" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400">
                 Connections
               </span>
             </div>
-            <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[0.95]">
+            <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[0.95]">
               Connect the sources
               <br />
-              <span className="text-slate-300">that feed your</span>
+              <span className="text-slate-400">that feed your</span>
               <br />
               Company Brain.
             </h2>
           </div>
           <div className="lg:pl-8">
-            <p className="text-base leading-7 text-slate-500 max-w-md sm:text-lg sm:leading-8">
+            <p className="text-base leading-7 text-slate-300 max-w-md sm:text-lg sm:leading-8">
               Navis reads work knowledge, structures it into memory, ranks the
               next decision, prepares the draft, and asks for approval before
               any external action. Tokens stored encrypted. Revocable any time.
@@ -195,23 +212,23 @@ export function Connections() {
                   <div className="flex items-center gap-1.5">
                     <span
                       className={`flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black ${
-                        i < 3
-                          ? "bg-slate-900 text-white"
-                          : "bg-slate-100 text-slate-400"
+                        i < 4
+                          ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
+                          : "bg-slate-800 text-slate-500"
                       }`}
                     >
                       {i + 1}
                     </span>
                     <span
                       className={`text-xs font-semibold ${
-                        i < 3 ? "text-slate-700" : "text-slate-400"
+                        i < 4 ? "text-slate-200" : "text-slate-500"
                       }`}
                     >
                       {step}
                     </span>
                   </div>
                   {i < ONBOARDING.length - 1 && (
-                    <span className="mx-2 text-slate-200">›</span>
+                    <span className="mx-2 text-slate-600">›</span>
                   )}
                 </div>
               ))}
@@ -219,49 +236,32 @@ export function Connections() {
           </div>
         </motion.div>
 
-        {/* ── Main grid: sources left, screenshot + permission right ── */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px]">
+        {/* ── Main grid: animated beam left, permission right ── */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {/* Left — Animated connections visualization - full width */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9, ease: EASING, delay: 0.1 }}
+            className="w-full"
+          >
+            <AnimatedConnections />
+          </motion.div>
 
-          {/* Left — source rows */}
-          <div className="flex flex-col gap-3">
-            {SOURCES.map((s, i) => (
-              <SourceRow key={s.name} s={s} index={i} />
-            ))}
-          </div>
-
-          {/* Right — screenshot + permission model */}
+          {/* Right — Permission model */}
           <div className="flex flex-col gap-5">
-
-            {/* Screenshot */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.9, ease: EASING, delay: 0.15 }}
-              className="overflow-hidden rounded-2xl shadow-xl shadow-slate-200 ring-1 ring-slate-100"
-            >
-              <Image
-                src="/connection.jpeg"
-                alt="Navis Connections — connect sources to your Company Brain"
-                width={880}
-                height={660}
-                className="w-full object-cover object-top"
-                sizes="(max-width: 1024px) 100vw, 440px"
-              />
-            </motion.div>
-
-            {/* Permission model card */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, ease: EASING, delay: 0.25 }}
-              className="rounded-2xl border border-slate-100 bg-white p-6"
+              className="rounded-2xl border border-slate-700/50 bg-slate-800/30 p-6 backdrop-blur-sm h-full"
             >
               <div className="mb-5 flex items-center gap-2.5">
-                <ShieldCheck className="h-4 w-4 text-emerald-600" />
-                <p className="text-sm font-bold text-slate-900">Permission model</p>
+                <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                <p className="text-sm font-bold text-white">Permission model</p>
               </div>
 
-              <div className="flex flex-col gap-0 divide-y divide-slate-50">
+              <div className="flex flex-col gap-0 divide-y divide-slate-700/50">
                 {PERMISSION_STEPS.map((step, i) => (
                   <motion.div
                     key={step.label}
@@ -270,10 +270,10 @@ export function Connections() {
                     transition={{ delay: 0.3 + i * 0.07, duration: 0.5, ease: EASING }}
                     className="flex gap-4 py-3"
                   >
-                    <span className="w-20 shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 pt-0.5">
+                    <span className="w-20 shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 pt-0.5">
                       {step.label}
                     </span>
-                    <p className="text-xs leading-relaxed text-slate-600">{step.desc}</p>
+                    <p className="text-xs leading-relaxed text-slate-300">{step.desc}</p>
                   </motion.div>
                 ))}
               </div>

@@ -20,8 +20,9 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { Hero2 } from "@/components/hero2";
+
 import Image from "next/image";
+import { Hero3 } from "./hero3";
 
 const EASING = [0.22, 1, 0.36, 1] as const;
 
@@ -34,9 +35,9 @@ const LAYERS = [
     title: "Sources to Memory, in one pass",
     description:
       "Navis plugs into Gmail, Slack, and Calendar. Every signal becomes a structured event with extracted entities, writes to one of four memory types, and can trigger a Decision Skill — automatically.",
-    color: "#1d4ed8",
-    bg: "rgba(29,78,216,0.04)",
-    border: "rgba(29,78,216,0.15)",
+    color: "#06b6d4",
+    bg: "rgba(6,182,212,0.08)",
+    border: "rgba(6,182,212,0.2)",
     icon: Inbox,
     features: [
       {
@@ -52,12 +53,12 @@ const LAYERS = [
       {
         icon: CalendarClock,
         title: "Calendar",
-        body: "Drives the urgency window for skills \u2014 CFO-named deals trigger Deal Recovery; Friday investor sync triggers Investor Prep with prep window mapped.",
+        body: "Drives the urgency window for skills — CFO-named deals trigger Deal Recovery; Friday investor sync triggers Investor Prep with prep window mapped.",
       },
       {
         icon: Zap,
         title: "Structured event types",
-        body: "customer_deal_risk \u00b7 investor_followup \u00b7 team_unblock \u00b7 meeting_prep \u00b7 doc_update \u2014 typed events with entities, memory writes, and skill triggers.",
+        body: "customer_deal_risk · investor_followup · team_unblock · meeting_prep · doc_update — typed events with entities, memory writes, and skill triggers.",
       },
     ],
   },
@@ -67,9 +68,9 @@ const LAYERS = [
     title: "Four memory types · cited per answer",
     description:
       "Episodic, Semantic, State, and Decision memory. Every recommendation lands with the exact memory citations behind it. People are derived from your team roster + active decisions, not editorial.",
-    color: "#7c3aed",
-    bg: "rgba(124,58,237,0.04)",
-    border: "rgba(124,58,237,0.15)",
+    color: "#a78bfa",
+    bg: "rgba(167,139,250,0.08)",
+    border: "rgba(167,139,250,0.2)",
     icon: Brain,
     features: [
       {
@@ -85,7 +86,7 @@ const LAYERS = [
       {
         icon: CheckCircle2,
         title: "Operating rules with provenance",
-        body: "Every State rule traces back to the Decision Memory entry that produced it. \"Direct calls beat email at late stage\" \u2192 learned from outcome dm_001.",
+        body: "Every State rule traces back to the Decision Memory entry that produced it. \"Direct calls beat email at late stage\" → learned from outcome dm_001.",
       },
     ],
   },
@@ -95,9 +96,9 @@ const LAYERS = [
     title: "Decisions, governance, audit trace",
     description:
       "Navis ranks every open decision, gates external actions through per-channel policies, executes through real connectors, and writes a tamper-evident trace to the Audit Log on every step.",
-    color: "#059669",
-    bg: "rgba(5,150,105,0.04)",
-    border: "rgba(5,150,105,0.15)",
+    color: "#34d399",
+    bg: "rgba(52,211,153,0.08)",
+    border: "rgba(52,211,153,0.2)",
     icon: Inbox,
     features: [
       {
@@ -118,7 +119,7 @@ const LAYERS = [
       {
         icon: Users,
         title: "Light team layer",
-        body: "Owner + delegates per decision. Multi-actor traces capture teammate acknowledgements. Delegate via chat \u2014 \"Ask Priya to handle data room\" \u2014 fully audited.",
+        body: "Owner + delegates per decision. Multi-actor traces capture teammate acknowledgements. Delegate via chat — \"Ask Priya to handle data room\" — fully audited.",
       },
     ],
   },
@@ -127,24 +128,24 @@ const LAYERS = [
 const REVERSE_PROMPTS = [
   {
     prompt:
-      "Rank 1 \u00b7 Deal Recovery \u00b7 Call Arjun before the CFO window closes. Close probability moves 34% \u2192 66% with a direct call. Behavior modifier: +12% (your fast-actor pattern).",
-    color: "#dc2626",
-    bg: "rgba(220,38,38,0.05)",
-    border: "rgba(220,38,38,0.15)",
+      "Rank 1 · Deal Recovery · Call Arjun before the CFO window closes. Close probability moves 34% → 66% with a direct call. Behavior modifier: +12% (your fast-actor pattern).",
+    color: "#f87171",
+    bg: "rgba(248,113,113,0.08)",
+    border: "rgba(248,113,113,0.2)",
   },
   {
     prompt:
-      "Rank 2 \u00b7 Investor Prep \u00b7 Prepare Sequoia brief. Friday sync in 24h, 4 data room items unassigned. Owner-assigned data rooms close 41% faster (learned from dm_002).",
-    color: "#d97706",
-    bg: "rgba(217,119,6,0.05)",
-    border: "rgba(217,119,6,0.15)",
+      "Rank 2 · Investor Prep · Prepare Sequoia brief. Friday sync in 24h, 4 data room items unassigned. Owner-assigned data rooms close 41% faster (learned from dm_002).",
+    color: "#fbbf24",
+    bg: "rgba(251,191,36,0.08)",
+    border: "rgba(251,191,36,0.2)",
   },
   {
     prompt:
-      "Rank 3 \u00b7 Team Ops \u00b7 Reply to Priya in #founder-priorities. 4 unanswered messages, 6h silent on your side. Naming owners now unblocks parallel work for 3 teammates.",
-    color: "#7c3aed",
-    bg: "rgba(124,58,237,0.05)",
-    border: "rgba(124,58,237,0.15)",
+      "Rank 3 · Team Ops · Reply to Priya in #founder-priorities. 4 unanswered messages, 6h silent on your side. Naming owners now unblocks parallel work for 3 teammates.",
+    color: "#a78bfa",
+    bg: "rgba(167,139,250,0.08)",
+    border: "rgba(167,139,250,0.2)",
   },
 ];
 
@@ -156,9 +157,9 @@ const PRICING = [
     tag: "Individual",
     features: [
       "Gmail + Slack + Calendar connectors",
-      "Company Brain \u00b7 4 memory types",
-      "Decision Stack \u00b7 top 3 ranked",
-      "Ask Navis chat \u00b7 same engine",
+      "Company Brain · 4 memory types",
+      "Decision Stack · top 3 ranked",
+      "Ask Navis chat · same engine",
     ],
     cta: "Join waitlist",
     href: "#waitlist",
@@ -171,9 +172,9 @@ const PRICING = [
     tag: "Power user",
     features: [
       "Everything in Starter",
-      "Decision Skills \u00b7 versioned + evolving",
-      "Behavior model \u00b7 personalised modifiers",
-      "Decision Trace \u00b7 audit chain per decision",
+      "Decision Skills · versioned + evolving",
+      "Behavior model · personalised modifiers",
+      "Decision Trace · audit chain per decision",
       "Per-channel action policies",
     ],
     cta: "Join waitlist",
@@ -187,10 +188,10 @@ const PRICING = [
     tag: "Per workspace",
     features: [
       "Everything in Power",
-      "Light team layer \u00b7 owner + delegates",
+      "Light team layer · owner + delegates",
       "Multi-actor traces + delegate-via-chat",
-      "Audit Log \u00b7 tamper-evident, exportable",
-      "Decision API \u00b7 v1 endpoints",
+      "Audit Log · tamper-evident, exportable",
+      "Decision API · v1 endpoints",
     ],
     cta: "Contact us",
     href: "mailto:hello@navislabs.in",
@@ -199,12 +200,12 @@ const PRICING = [
 ];
 
 const HOW_IT_WORKS = [
-  { step: "01", title: "Connect your work", body: "Gmail, Slack, and Google Calendar connect in minutes. Navis starts reading immediately — no manual setup, no tagging.", color: "#1d4ed8" },
-  { step: "02", title: "Build the Company Brain", body: "Every signal becomes a typed event with extracted entities, written to one of four memory types — Episodic, Semantic, State, Decision.", color: "#7c3aed" },
-  { step: "03", title: "Trigger Decision Skills", body: "When a pattern matches a skill — Deal Recovery, Investor Prep, Onboarding Risk — Navis surfaces the next decision with cited memory.", color: "#059669" },
-  { step: "04", title: "Rank the stack", body: "Multi-decision priority engine scores every open decision by impact, behavior modifier, downstream effects, and conflicts.", color: "#d97706" },
-  { step: "05", title: "Execute with governance", body: "Per-channel action policies (auto / confirm / approval / blocked) gate every external action. You see one screen, one next move.", color: "#dc2626" },
-  { step: "06", title: "Audit, learn, evolve", body: "Every action emits a tamper-evident trace. Outcomes feed Decision Memory, update behavior model, and produce operating rules.", color: "#0891b2" },
+  { step: "01", title: "Connect your work", body: "Gmail, Slack, and Google Calendar connect in minutes. Navis starts reading immediately — no manual setup, no tagging.", color: "#06b6d4" },
+  { step: "02", title: "Build the Company Brain", body: "Every signal becomes a typed event with extracted entities, written to one of four memory types — Episodic, Semantic, State, Decision.", color: "#a78bfa" },
+  { step: "03", title: "Trigger Decision Skills", body: "When a pattern matches a skill — Deal Recovery, Investor Prep, Onboarding Risk — Navis surfaces the next decision with cited memory.", color: "#34d399" },
+  { step: "04", title: "Rank the stack", body: "Multi-decision priority engine scores every open decision by impact, behavior modifier, downstream effects, and conflicts.", color: "#fbbf24" },
+  { step: "05", title: "Execute with governance", body: "Per-channel action policies (auto / confirm / approval / blocked) gate every external action. You see one screen, one next move.", color: "#f87171" },
+  { step: "06", title: "Audit, learn, evolve", body: "Every action emits a tamper-evident trace. Outcomes feed Decision Memory, update behavior model, and produce operating rules.", color: "#2dd4bf" },
 ];
 
 // ─── Reusable fade-up wrapper ─────────────────────────────────────────────────
@@ -225,25 +226,25 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 export default function NavisAIPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-white">
+    <main className="flex min-h-screen flex-col" style={{ backgroundColor: "#03081e" }}>
       <Navbar />
 
       {/* ── Hero ── */}
-      <Hero2 />
+      <Hero3 />
 
       {/* ── Three Layers ── */}
-      <section className="px-4 py-20 md:px-8 border-t border-slate-100">
+      <section className="px-4 py-20 md:px-8 border-t border-slate-800">
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-14 max-w-2xl">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 mb-3">
                 Three layers. One decision system.
               </p>
-              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
                 Not a chatbot.{" "}
-                <span className="text-slate-400">Not a dashboard. Not a productivity tool.</span>
+                <span className="text-slate-500">Not a dashboard. Not a productivity tool.</span>
               </h2>
-              <p className="mt-5 text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              <p className="mt-5 text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                 Navis is the decision infrastructure layer for modern teams.
                 It reads your work, structures it into a Company Brain, ranks
                 every open decision by impact, and executes with per-channel
@@ -258,14 +259,14 @@ export default function NavisAIPage() {
               return (
                 <FadeUp key={layer.number} delay={i * 0.08}>
                   <div
-                    className="rounded-2xl border p-8 md:p-10"
+                    className="rounded-2xl border p-8 md:p-10 backdrop-blur-sm"
                     style={{ borderColor: layer.border, backgroundColor: layer.bg }}
                   >
                     <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-8">
                       <div className="shrink-0">
                         <div
                           className="flex h-14 w-14 items-center justify-center rounded-2xl border"
-                          style={{ borderColor: layer.border, backgroundColor: `${layer.color}12` }}
+                          style={{ borderColor: layer.border, backgroundColor: `${layer.color}15` }}
                         >
                           <LayerIcon className="h-6 w-6" style={{ color: layer.color }} />
                         </div>
@@ -279,8 +280,8 @@ export default function NavisAIPage() {
                             {layer.tag}
                           </span>
                         </div>
-                        <h3 className="text-2xl font-semibold tracking-tight text-slate-900">{layer.title}</h3>
-                        <p className="mt-2 text-base leading-7 text-slate-500">{layer.description}</p>
+                        <h3 className="text-2xl font-semibold tracking-tight text-white">{layer.title}</h3>
+                        <p className="mt-2 text-base leading-7 text-slate-300">{layer.description}</p>
                       </div>
                     </div>
 
@@ -290,16 +291,16 @@ export default function NavisAIPage() {
                         return (
                           <div
                             key={feat.title}
-                            className="rounded-xl border border-slate-200 bg-white p-5"
+                            className="rounded-xl border border-slate-700 bg-slate-800/50 p-5 backdrop-blur-sm"
                           >
                             <div
                               className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg"
-                              style={{ backgroundColor: `${layer.color}12` }}
+                              style={{ backgroundColor: `${layer.color}15` }}
                             >
                               <FeatIcon className="h-4 w-4" style={{ color: layer.color }} />
                             </div>
-                            <h4 className="text-sm font-semibold text-slate-800 mb-1.5">{feat.title}</h4>
-                            <p className="text-xs leading-5 text-slate-500">{feat.body}</p>
+                            <h4 className="text-sm font-semibold text-white mb-1.5">{feat.title}</h4>
+                            <p className="text-xs leading-5 text-slate-400">{feat.body}</p>
                           </div>
                         );
                       })}
@@ -312,18 +313,18 @@ export default function NavisAIPage() {
         </div>
       </section>
 
-            {/* ── Integration Showcase ── */}
-      <section className="px-4 py-20 md:px-8 border-t border-slate-100 bg-slate-50/60">
+      {/* ── Integration Showcase ── */}
+      <section className="px-4 py-20 md:px-8 border-t border-slate-800 bg-slate-900/20">
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-12 text-center">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 mb-3">
                 Works with your stack
               </p>
-              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
                 Reads where work happens
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                 Sources connect in minutes. No migration, no new inbox, no manual tagging.
               </p>
             </div>
@@ -331,51 +332,50 @@ export default function NavisAIPage() {
 
           <FadeUp delay={0.1}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {
-             [
-  {
-    name: "Gmail",
-    logo: "https://cdn.simpleicons.org/gmail"
-  },
- {
-    name: "Slack",
-    logo: "https://dl.svgcdn.com/svg/logos/slack.svg"
-  },
-  {
-    name: "Google Calendar",
-    logo: "https://cdn.simpleicons.org/googlecalendar"
-  },
-  {
-    name: "Zoom",
-    logo: "https://cdn.simpleicons.org/zoom"
-  },
-  {
-    name: "Google Meet",
-    logo: "https://cdn.simpleicons.org/googlemeet"
-  },
-    {
-    name: "Microsoft Teams",
-    logo: "https://cdn.worldvectorlogo.com/logos/microsoft-teams-1.svg"
-  },
-  {
-    name: "Notion",
-    logo: "https://cdn.simpleicons.org/notion"
-  },
-  {
-    name: "Linear",
-    logo: "https://cdn.simpleicons.org/linear"
-  }
-].map((integration) => (
+              {[
+                {
+                  name: "Gmail",
+                  logo: "https://cdn.simpleicons.org/gmail"
+                },
+                {
+                  name: "Slack",
+                  logo: "https://dl.svgcdn.com/svg/logos/slack.svg"
+                },
+                {
+                  name: "Google Calendar",
+                  logo: "https://cdn.simpleicons.org/googlecalendar"
+                },
+                {
+                  name: "Zoom",
+                  logo: "https://cdn.simpleicons.org/zoom"
+                },
+                {
+                  name: "Google Meet",
+                  logo: "https://cdn.simpleicons.org/googlemeet"
+                },
+                {
+                  name: "Microsoft Teams",
+                  logo: "https://cdn.worldvectorlogo.com/logos/microsoft-teams-1.svg"
+                },
+                {
+                  name: "Notion",
+                  logo: "https://cdn.simpleicons.org/notion"
+                },
+                {
+                  name: "Linear",
+                  logo: "https://cdn.simpleicons.org/linear"
+                }
+              ].map((integration) => (
                 <div
                   key={integration.name}
-                  className="flex items-center justify-center p-8 rounded-xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-md transition-all duration-200"
+                  className="flex items-center justify-center p-8 rounded-xl bg-slate-800/50 border border-slate-700 hover:border-cyan-500/50 hover:shadow-lg transition-all duration-200 backdrop-blur-sm"
                 >
                   <Image
                     src={integration.logo}
                     alt={`${integration.name} integration`}
                     width={120}
                     height={40}
-                    className="h-8 w-auto"
+                    className="h-8 w-auto brightness-100 invert-0"
                   />
                 </div>
               ))}
@@ -385,19 +385,19 @@ export default function NavisAIPage() {
       </section>
 
       {/* ── Reverse Prompting ── */}
-      <section className="px-4 py-20 md:px-8 border-t border-slate-100 bg-slate-50/60">
+      <section className="px-4 py-20 md:px-8 border-t border-slate-800 bg-slate-900/20">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
             <FadeUp>
               <div>
-                <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600/80 mb-3">
+                <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-emerald-400 mb-3">
                   Decision Stack
                 </p>
-                <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
                   The AI that decides{" "}
-                  <span className="text-emerald-600">what matters now</span>.
+                  <span className="text-emerald-400">what matters now</span>.
                 </h2>
-                <p className="mt-5 text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+                <p className="mt-5 text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                   Most AI tools wait for you to ask. Navis ranks the top open
                   decisions across your company — by impact, urgency window,
                   behavior modifier, downstream effects, and conflict — and
@@ -416,7 +416,7 @@ export default function NavisAIPage() {
                 {REVERSE_PROMPTS.map((item, i) => (
                   <div
                     key={i}
-                    className="rounded-2xl border p-6"
+                    className="rounded-2xl border p-6 backdrop-blur-sm"
                     style={{ borderColor: item.border, backgroundColor: item.bg }}
                   >
                     <div className="flex items-start gap-4">
@@ -430,7 +430,7 @@ export default function NavisAIPage() {
                         <p className="text-[10px] font-semibold uppercase tracking-[0.22em] mb-2" style={{ color: item.color }}>
                           Navis is ranking
                         </p>
-                        <p className="text-sm leading-6 text-slate-700">{item.prompt}</p>
+                        <p className="text-sm leading-6 text-slate-300">{item.prompt}</p>
                       </div>
                     </div>
                   </div>
@@ -442,15 +442,15 @@ export default function NavisAIPage() {
       </section>
 
       {/* ── How it works ── */}
-      <section className="px-4 py-20 md:px-8 border-t border-slate-100">
+      <section className="px-4 py-20 md:px-8 border-t border-slate-800">
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-12 text-center">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">How it works</p>
-              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 mb-3">How it works</p>
+              <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
                 From signals to decisions.
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                 Sources → Ingestion → Memory → Context → Decision → Action → Outcome → Learning. The canonical pipeline, fully traced and governed.
               </p>
             </div>
@@ -459,12 +459,12 @@ export default function NavisAIPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {HOW_IT_WORKS.map((item, i) => (
               <FadeUp key={item.step} delay={i * 0.06}>
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 h-full">
+                <div className="rounded-2xl border border-slate-700 bg-slate-800/30 p-6 h-full backdrop-blur-sm">
                   <span className="text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: item.color }}>
                     {item.step}
                   </span>
-                  <h3 className="mt-2 text-lg font-semibold text-slate-900">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-500">{item.body}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-400">{item.body}</p>
                 </div>
               </FadeUp>
             ))}
@@ -472,20 +472,16 @@ export default function NavisAIPage() {
         </div>
       </section>
       
-
-      
-      
-
       {/* ── Pricing ── */}
-      <section className="px-4 py-20 md:px-8 border-t border-slate-100 bg-slate-50/60">
+      <section className="px-4 py-20 md:px-8 border-t border-slate-800 bg-slate-900/20">
         <div className="mx-auto max-w-7xl">
           <FadeUp>
             <div className="mb-12 text-center">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-3">Pricing</p>
-              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 mb-3">Pricing</p>
+              <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
                 Individual · Team · Enterprise
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                 Private beta. Pricing finalised at public launch — early-access users get founding rates.
               </p>
             </div>
@@ -495,22 +491,22 @@ export default function NavisAIPage() {
             {PRICING.map((plan, i) => (
               <FadeUp key={plan.name} delay={i * 0.08}>
                 <div
-                  className="relative flex flex-col rounded-2xl border p-8 h-full"
+                  className="relative flex flex-col rounded-2xl border p-8 h-full backdrop-blur-sm"
                   style={{
-                    borderColor: plan.highlight ? "rgba(124,58,237,0.4)" : "rgba(15,23,42,0.1)",
-                    backgroundColor: plan.highlight ? "rgba(124,58,237,0.04)" : "#fff",
+                    borderColor: plan.highlight ? "rgba(167,139,250,0.4)" : "rgba(51,65,85,0.5)",
+                    backgroundColor: plan.highlight ? "rgba(167,139,250,0.1)" : "rgba(30,41,59,0.3)",
                   }}
                 >
                   {plan.highlight && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-violet-600 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-purple-600 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                       Most popular
                     </span>
                   )}
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">{plan.tag}</p>
-                    <h3 className="mt-2 text-2xl font-bold text-slate-900">{plan.name}</h3>
+                    <h3 className="mt-2 text-2xl font-bold text-white">{plan.name}</h3>
                     <div className="mt-3 flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
+                      <span className="text-4xl font-bold text-white">{plan.price}</span>
                       <span className="text-sm text-slate-400">{plan.period}</span>
                     </div>
                   </div>
@@ -518,8 +514,8 @@ export default function NavisAIPage() {
                   <ul className="mt-8 flex-1 space-y-3">
                     {plan.features.map((feat) => (
                       <li key={feat} className="flex items-start gap-3">
-                        <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-violet-500" />
-                        <span className="text-sm text-slate-600">{feat}</span>
+                        <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-purple-400" />
+                        <span className="text-sm text-slate-300">{feat}</span>
                       </li>
                     ))}
                   </ul>
@@ -528,8 +524,8 @@ export default function NavisAIPage() {
                     href={plan.href}
                     className="mt-8 inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 active:scale-[0.98]"
                     style={{
-                      backgroundColor: plan.highlight ? "#7c3aed" : "rgba(15,23,42,0.06)",
-                      color: plan.highlight ? "#fff" : "#0f172a",
+                      backgroundColor: plan.highlight ? "#a78bfa" : "rgba(51,65,85,0.5)",
+                      color: plan.highlight ? "#03081e" : "#e2e8f0",
                     }}
                   >
                     {plan.cta}
@@ -542,17 +538,17 @@ export default function NavisAIPage() {
       </section>
 
       {/* ── Vision ── */}
-      <section className="px-4 py-20 md:px-8 border-t border-slate-100">
+      <section className="px-4 py-20 md:px-8 border-t border-slate-800">
         <FadeUp>
           <div className="mx-auto max-w-4xl text-center">
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-6">The vision</p>
-            <blockquote className="text-2xl font-semibold leading-snug tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-5xl">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 mb-6">The vision</p>
+            <blockquote className="text-2xl font-semibold leading-snug tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
               Navis doesn&apos;t summarize your work.{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600">
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 It decides what matters — and executes.
               </span>
             </blockquote>
-            <p className="mx-auto mt-8 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+            <p className="mx-auto mt-8 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
               Every company is building AI that does the work. Navis builds the
               AI that decides which work matters — cited, traced, and sharper
               with every outcome. The moat is Decision Memory: every approve
@@ -568,30 +564,29 @@ export default function NavisAIPage() {
       {/* ── Waitlist ── */}
       <section
         id="waitlist"
-        className="px-4 py-20 md:px-8 border-t border-slate-100 bg-slate-50/60"
+        className="px-4 py-20 md:px-8 border-t border-slate-800 bg-slate-900/20"
       >
         <FadeUp>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-blue-600/70 mb-4">Early access</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 mb-4">Early access</p>
+            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
               Join early access.
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
+            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
               Onboarding founders, operators, and engineering leads who want a
               decision system — not another inbox. Private beta · limited seats.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href="mailto:hello@navislabs.in"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-slate-900 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-slate-800 active:scale-[0.98]"
-                style={{ color: "#ffffff" }}
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 px-7 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl active:scale-[0.98]"
               >
                 Join via email
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
                 href="/"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-200 px-7 text-sm font-semibold text-slate-600 transition-all duration-200 hover:border-slate-300 hover:text-slate-900"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-700 bg-slate-800/50 px-7 text-sm font-semibold text-slate-300 transition-all duration-200 hover:bg-slate-700/50 hover:text-white"
               >
                 Back to home
               </Link>
@@ -607,21 +602,3 @@ export default function NavisAIPage() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
