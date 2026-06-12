@@ -24,7 +24,10 @@ function CountUp({ to }: { to: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [v, setV] = useState(0);
   useEffect(() => {
-    if (reduce) { setV(to); return; }
+    if (reduce) {
+      const raf0 = requestAnimationFrame(() => setV(to));
+      return () => cancelAnimationFrame(raf0);
+    }
     const node = ref.current;
     if (!node) return;
     let raf = 0;
