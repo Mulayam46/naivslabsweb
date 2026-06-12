@@ -37,46 +37,6 @@ function confirmationHtml(p: {
   contextTool: string;
   whatSlipped: string;
   ts: string;
-}) {
-  const row = (k: string, v: string) => `
-    <tr><td style="padding:14px 0;border-bottom:1px solid #E2E8F0;">
-      <p style="margin:0;font-family:${MONO};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#475569;">${k}</p>
-      <p style="margin:6px 0 0;font-family:${SANS};font-size:15px;line-height:1.6;color:#0F172A;">${v}</p>
-    </td></tr>`;
-  return `
-<div style="background:#FAFBFC;padding:48px 16px;">
-  <div style="max-width:560px;margin:0 auto;">
-    <p style="margin:0 0 20px;font-family:${MONO};font-size:12px;letter-spacing:0.24em;color:#475569;">NAVISLABS</p>
-    <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:40px;">
-      <h1 style="margin:0;font-family:${SANS};font-size:22px;font-weight:600;letter-spacing:-0.01em;color:#0F172A;">Request received.</h1>
-      <p style="margin:8px 0 0;font-family:${MONO};font-size:12px;color:#475569;">${p.ts} IST</p>
-      <p style="margin:28px 0 0;font-family:${SANS};font-size:15px;line-height:1.7;color:#475569;">
-        Your request is in the queue. We review every access request personally.
-        If Navis is a fit for where you are right now, you&rsquo;ll hear from us within 48 hours.
-      </p>
-      <p style="margin:40px 0 4px;font-family:${MONO};font-size:11px;letter-spacing:0.12em;color:#475569;">WHAT YOU SUBMITTED</p>
-      <table style="width:100%;border-collapse:collapse;">
-        ${row("Full name", p.name)}
-        ${row("Company", p.company)}
-        ${row("Team size", p.teamSize)}
-        ${row("Context lost in", p.contextTool)}
-        ${row("What slipped", `&ldquo;${p.whatSlipped}&rdquo;`)}
-      </table>
-      <p style="margin:40px 0 12px;font-family:${MONO};font-size:11px;letter-spacing:0.12em;color:#475569;">WHAT HAPPENS NEXT</p>
-      <ol style="margin:0;padding-left:18px;font-family:${SANS};font-size:15px;line-height:2.1;color:#0F172A;">
-        <li>We read your submission personally.</li>
-        <li>We evaluate fit.</li>
-        <li>If there&rsquo;s alignment, we&rsquo;ll reach out directly.</li>
-      </ol>
-      <hr style="border:none;border-top:1px solid #E2E8F0;margin:40px 0 28px;" />
-      <p style="margin:0;font-family:${SANS};font-size:14px;line-height:1.7;color:#0F172A;">Questions?</p>
-      <p style="margin:4px 0 0;font-family:${SANS};font-size:14px;line-height:1.7;color:#475569;">Reply to this email. We read everything.</p>
-    </div>
-    <p style="margin:24px 0 0;font-family:${MONO};font-size:11px;letter-spacing:0.12em;line-height:2;color:#475569;">
-      NAVISLABS<br/>Bangalore<br/><a href="mailto:hello@navislabs.in" style="color:#5B8CFF;text-decoration:none;">hello@navislabs.in</a>
-    </p>
-  </div>
-</div>`;
 }
 
 export async function POST(request: Request) {
@@ -118,7 +78,7 @@ export async function POST(request: Request) {
 
   try {
     const c = await resend.emails.send({
-      from: "Navis <hello@navislabs.in>",
+      from: "NavisLabs <hello@navislabs.in>",
       to: email,
       subject: `Your Navis access request — ${firstName}`,
       html: confirmationHtml({ name, company, teamSize, contextTool, whatSlipped, ts }),
@@ -126,7 +86,7 @@ export async function POST(request: Request) {
     if (c.error) throw new Error(c.error.message);
 
     const n = await resend.emails.send({
-      from: "Navis System <hello@navislabs.in>",
+      from: "NavisLabs <hello@navislabs.in>",
       to: TARGET,
       replyTo: email,
       subject: `New request — ${company} · ${teamSize}`,
