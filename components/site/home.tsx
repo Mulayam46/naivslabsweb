@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -14,6 +14,32 @@ import { EASE, SystemBar, Footer } from "./chrome";
 const span = (a: number, b: number): number[] => [0, a, b, 1];
 /* Window: fade in at [a,b], out at [c,d]. */
 const win = (a: number, b: number, c: number, d: number): number[] => [0, a, b, c, d, 1];
+
+
+/* Count-up on first viewport entry — IO + rAF, no library. */
+function CountUp({ to }: { to: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setV(to); return; }
+    const io = new IntersectionObserver((es) => {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const k = Math.min(1, (t - t0) / 1500);
+        setV(Math.round(to * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [to]);
+  return <span ref={ref}>{v}</span>;
+}
 
 /* ════════ SCENE 1 · THE DARK ════════ */
 
@@ -244,7 +270,7 @@ function TheObject({ p }: { p: MotionValue<number> }) {
         <Beat p={p} at={[0.84, 0.9]}>
           <div className="rounded-b-[20px] border-t border-white/[0.05] px-7 py-4 md:px-9">
             <p className="font-mono text-[11px] tracking-[0.08em] text-ink-3">
-              214 SIGNALS REVIEWED ·{" "}
+              <CountUp to={214} /> SIGNALS REVIEWED ·{" "}
               <span className="font-semibold text-ink">ONLY 3 NEEDED YOU</span>
             </p>
           </div>

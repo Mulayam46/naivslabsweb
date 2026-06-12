@@ -40,7 +40,7 @@ export default function HowItWorksPage() {
           <div className="mx-auto mt-16 max-w-[860px]">
             {LAYERS.map(([id, name, body], i) => (
               <Fade key={id} delay={Math.min(i * 0.05, 0.3)}>
-                <div className="relative grid grid-cols-[3.4rem_1fr] gap-5 pb-10 md:gap-8">
+                <div className="group relative -mx-3 grid grid-cols-[3.4rem_1fr] gap-5 rounded-lg px-3 pb-10 pt-2 transition-colors duration-300 hover:bg-white/[0.02] md:gap-8">
                   {/* rail */}
                   {i < LAYERS.length - 1 && (
                     <span className="absolute left-[1.05rem] top-8 bottom-0 w-px bg-line" />
@@ -64,7 +64,7 @@ export default function HowItWorksPage() {
                     >
                       {name}
                     </h2>
-                    <p className="mt-2 max-w-[560px] text-[15px] leading-[1.7] text-ink-2">
+                    <p className="mt-2 max-w-[560px] text-[15px] leading-[1.7] text-ink-2 transition-colors duration-300 group-hover:text-ink">
                       {body}
                     </p>
                   </div>
@@ -93,19 +93,27 @@ export default function HowItWorksPage() {
                 doesn&apos;t get built.
               </p>
             </div>
-            <div className="self-center">
+            <div className="grid gap-4 self-center sm:grid-cols-2">
               {PRINCIPLES.map(([k, v], i) => (
                 <Fade key={k} delay={i * 0.06}>
-                  <div className="grid grid-cols-[10rem_1fr] items-baseline gap-5 border-t border-line py-6 last:border-b sm:grid-cols-[13rem_1fr]">
+                  <div className="h-full rounded-lg bg-white/[0.02] p-6 ring-1 ring-white/[0.07] transition-shadow duration-300 hover:ring-white/[0.14]">
                     <span className="font-mono text-[10.5px] font-semibold tracking-[0.16em] text-ink-3">
                       {k}
                     </span>
-                    <span className="text-[15px] leading-[1.7] text-ink-2">{v}</span>
+                    <p className="mt-3 text-[14.5px] leading-[1.7] text-ink-2">{v}</p>
                   </div>
                 </Fade>
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line px-6 py-16">
+        <div className="mx-auto max-w-[1280px]">
+          <a href="/vision" className="group font-heading text-[1.4rem] font-semibold tracking-[-0.02em] text-ink transition-colors hover:text-accent-ink sm:text-[1.7rem]">
+            See the full thesis <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+          </a>
         </div>
       </section>
     </PageShell>

@@ -51,7 +51,7 @@ export default function VisionPage() {
               <ul className="mt-6">
                 {NOT.map((n, i) => (
                   <Fade key={n} delay={i * 0.04}>
-                    <li className="border-t border-line py-4 text-[17px] text-ink-3 last:border-b sm:text-[19px]">
+                    <li className="border-t border-line py-4 text-[17px] text-ink-3/70 line-through decoration-ink-3/40 decoration-1 last:border-b sm:text-[19px]">
                       {n}
                     </li>
                   </Fade>
@@ -63,10 +63,13 @@ export default function VisionPage() {
               <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.16em] text-accent">
                 Navis is
               </p>
-              <p className="mt-6 font-heading text-[2rem] font-semibold leading-[1.15] tracking-[-0.025em] text-ink sm:text-[2.6rem]">
-                Infrastructure — the layer that turns information into
-                understanding, understanding into decisions, and decisions into
-                organizational intelligence.
+              <p className="mt-6 font-heading text-[3.4rem] font-semibold leading-[1.0] tracking-[-0.035em] text-ink sm:text-[4.6rem]">
+                Infrastructure
+              </p>
+              <p className="mt-5 max-w-[440px] font-heading text-[1.3rem] font-medium leading-[1.45] tracking-[-0.015em] text-ink-2 sm:text-[1.5rem]">
+                — the layer that turns information into understanding,
+                understanding into decisions, and decisions into organizational
+                intelligence.
               </p>
             </div>
           </div>
@@ -90,14 +93,14 @@ export default function VisionPage() {
                 happening — not a report about what happened.
               </p>
             </div>
-            <div className="self-center">
+            <div className="grid gap-4 self-center sm:grid-cols-2 lg:grid-cols-2">
               {STATE.map(([k, v], i) => (
                 <Fade key={k} delay={i * 0.04}>
-                  <div className="grid grid-cols-[9rem_1fr] items-baseline gap-5 border-t border-line py-5 last:border-b sm:grid-cols-[11rem_1fr]">
+                  <div className="h-full rounded-lg bg-white/[0.02] p-5 ring-1 ring-white/[0.07] transition-shadow duration-300 hover:ring-accent/40">
                     <span className="font-mono text-[10.5px] font-semibold tracking-[0.16em] text-ink-3">
                       {k}
                     </span>
-                    <span className="text-[15px] leading-[1.65] text-ink-2">{v}</span>
+                    <p className="mt-2.5 text-[13.5px] leading-[1.65] text-ink-2">{v}</p>
                   </div>
                 </Fade>
               ))}
@@ -121,8 +124,12 @@ export default function VisionPage() {
                 <span className="flex items-center gap-3">
                   <span
                     className={
-                      "font-heading text-[17px] font-medium tracking-[-0.01em] sm:text-[20px] " +
-                      (i >= ARC.length - 2 ? "text-accent" : "text-ink")
+                      "whitespace-nowrap rounded-full px-4 py-1.5 font-heading text-[14px] font-medium tracking-[-0.01em] ring-1 sm:text-[16px] " +
+                      (s === "Organizational State"
+                        ? "bg-accent-soft text-accent ring-accent/50"
+                        : i >= ARC.length - 2
+                          ? "text-accent ring-accent/30"
+                          : "bg-white/[0.02] text-ink ring-white/[0.08]")
                     }
                   >
                     {s}
