@@ -181,17 +181,125 @@ function Caption({
   );
 }
 
-const EVIDENCE = [
-  ["EMAIL", "you → your lead investor · “sending the updated deck this week” · 6d ago"],
-  ["CALENDAR", "Partner meeting · Thursday 11:00"],
-  ["PATTERN", "threads quiet >7 days before a partner meeting rarely recover"],
+type BriefItem = {
+  badge: string;
+  badgeColor: string;
+  title: string;
+  lines: string[];          // pain → consequence, human language
+  action: string;
+};
+
+const ITEMS: BriefItem[] = [
+  {
+    badge: "SLIPPING",
+    badgeColor: "var(--critical)",
+    title: "Your investor follow-up is slipping.",
+    lines: [
+      "You promised an updated deck. The partner meeting is Thursday.",
+      "No follow-up happened.",
+    ],
+    action: "Send the update today.",
+  },
+  {
+    badge: "BLOCKED",
+    badgeColor: "var(--risk)",
+    title: "Backend hiring is blocked on you.",
+    lines: ["Two candidates are waiting on your review.", "Last action: 12 days ago."],
+    action: "Resume review: 8 minutes.",
+  },
+  {
+    badge: "AT RISK",
+    badgeColor: "var(--accent)",
+    title: "Acme\u2019s renewal is going quiet.",
+    lines: ["No reply in 18 days.", "Renewal is in 34 days."],
+    action: "Check in today.",
+  },
 ];
+
+/* Layer B — reasoning in human verbs, item 1 only */
+const WHY: [string, string][] = [
+  ["SAW", "Email promise: \u201cSending the deck Friday\u201d"],
+  ["NOTICED", "No reply for 9 days"],
+  ["UNDERSTOOD", "Partner meeting is Thursday"],
+  ["INFERRED", "These relationships go cold fast"],
+  ["DECISION", "High priority"],
+];
+
+/* Layer C — the quiet system trace, discovered last */
+const TRACE: [string, string][] = [
+  ["L1 SIGNALS", "214 events ingested"],
+  ["L2 MEMORY", "847 entities updated"],
+  ["L3 REASONING", "Priority analysis complete"],
+  ["L4 DECISION", "3 actions surfaced"],
+];
+
+function ItemBlock({ item }: { item: BriefItem }) {
+  return (
+    <div className="border-t border-white/[0.05] py-4 first:border-t-0">
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="font-heading text-[16px] font-medium leading-snug tracking-[-0.01em] text-ink sm:text-[18px]">
+          {item.title}
+        </p>
+        <span
+          className="shrink-0 font-mono text-[8.5px] font-semibold tracking-[0.14em]"
+          style={{ color: item.badgeColor }}
+        >
+          {item.badge}
+        </span>
+      </div>
+      {item.lines.map((l) => (
+        <p key={l} className="mt-1 text-[12.5px] leading-[1.6] text-ink-2 sm:text-[13px]">
+          {l}
+        </p>
+      ))}
+      <p className="mt-2 text-[13px] font-medium text-accent-ink sm:text-[13.5px]">
+        → {item.action}
+      </p>
+    </div>
+  );
+}
+
+function WhyBlock() {
+  return (
+    <div className="mt-3 rounded-md bg-white/[0.02] px-4 py-3">
+      <p className="font-mono text-[8.5px] tracking-[0.16em] text-ink-3/70">
+        WHY NAVIS SURFACED THIS
+      </p>
+      <div className="mt-2">
+        {WHY.map(([k, v]) => (
+          <div key={k} className="grid grid-cols-[5.4rem_1fr] items-baseline gap-3 py-[2.5px]">
+            <span className="font-mono text-[9px] font-semibold tracking-[0.1em] text-ink-2/75">
+              {k}
+            </span>
+            <span className="text-[11.5px] leading-[1.55] text-ink-3">{v}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TraceBlock() {
+  return (
+    <div className="mx-6 mb-3 rounded-md bg-white/[0.015] px-4 py-2.5 ring-1 ring-white/[0.04] md:mx-8">
+      <p className="font-mono text-[8px] tracking-[0.18em] text-ink-3/50">SIGNAL TRACE</p>
+      <div className="mt-1.5 grid grid-cols-2 gap-x-6 gap-y-[3px] sm:grid-cols-4">
+        {TRACE.map(([k, v]) => (
+          <div key={k}>
+            <p className="font-mono text-[8px] font-semibold tracking-[0.08em] text-ink-3/60">{k}</p>
+            <p className="mt-[1px] font-mono text-[9px] leading-[1.4] text-ink-3/80">{v}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function TheObject({ p }: { p: MotionValue<number> }) {
   const opacity = useTransform(p, span(0.06, 0.13), [0, 0, 1, 1]);
   const y = useTransform(p, span(0.06, 0.13), [90, 90, 0, 0]);
   const rotate = useTransform(p, span(0.06, 0.16), [2.5, 2.5, 0, 0]);
-  const halo = useTransform(p, span(0.55, 0.78), [0.12, 0.12, 0.55, 0.55]);
+  const halo = useTransform(p, span(0.4, 0.75), [0.12, 0.12, 0.55, 0.55]);
   const backPlane = useTransform(p, span(0.06, 0.16), [26, 26, 14, 14]);
 
   return (
@@ -208,75 +316,52 @@ function TheObject({ p }: { p: MotionValue<number> }) {
         style={{ y: backPlane }}
         className="absolute inset-x-5 top-0 h-full rounded-[22px] bg-[rgba(16,24,40,0.38)] ring-1 ring-white/[0.04]"
       />
-      <div className="relative rounded-[20px] bg-[rgba(13,20,36,0.78)] shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_50px_120px_-40px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.09] backdrop-blur-md">
-        <div className="flex items-center justify-between px-7 pt-5 font-mono text-[10px] tracking-[0.14em] text-ink-3 md:px-9">
+      <div className="relative rounded-[20px] bg-[rgba(13,20,36,0.82)] shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_50px_120px_-40px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.09] backdrop-blur-md">
+        <div className="flex items-center justify-between px-6 pt-4 font-mono text-[9.5px] tracking-[0.14em] text-ink-3 md:px-8">
           <span>FOUNDER DAILY BRIEF</span>
           <span>07:14</span>
         </div>
 
-        <div className="px-7 pb-3 pt-7 md:px-9">
-          <Beat p={p} at={[0.16, 0.21]}>
-            <p className="text-[13.5px] text-ink-3">Good morning, Abhishek.</p>
+        {/* LAYER A — 3-second understanding */}
+        <div className="px-6 pb-1 pt-4 md:px-8">
+          <Beat p={p} at={[0.15, 0.19]}>
+            <p className="text-[12.5px] text-ink-3">Good morning, Abhishek.</p>
           </Beat>
-          <Beat p={p} at={[0.22, 0.27]}>
-            <p className="mt-1.5 font-heading text-[23px] font-semibold tracking-[-0.02em] text-ink sm:text-[27px]">
+          <Beat p={p} at={[0.19, 0.23]}>
+            <p className="mt-0.5 font-heading text-[19px] font-semibold tracking-[-0.02em] text-ink sm:text-[21px]">
               Three things need you today.
             </p>
           </Beat>
         </div>
 
-        <div className="px-7 pb-2 md:px-9">
-          <Beat p={p} at={[0.3, 0.36]}>
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="font-heading text-[18px] font-medium tracking-[-0.015em] text-ink sm:text-[21px]">
-                Your investor follow-up is slipping.
-              </p>
-              <span className="shrink-0 font-mono text-[9.5px] font-semibold tracking-[0.14em] text-critical">
-                SLIPPING
-              </span>
-            </div>
+        <div className="px-6 pb-2 pt-2 md:px-8">
+          <Beat p={p} at={[0.26, 0.32]}>
+            <ItemBlock item={ITEMS[0]} />
           </Beat>
 
-          <div className="mt-5 space-y-2.5">
-            {EVIDENCE.map(([k, v], i) => {
-              const at: [number, number] = [0.4 + i * 0.06, 0.45 + i * 0.06];
-              return (
-                <Beat key={k} p={p} at={at}>
-                  <div className="flex items-baseline gap-4 rounded-md bg-white/[0.025] px-4 py-2.5">
-                    <span className="w-[4.4rem] shrink-0 font-mono text-[9px] font-semibold tracking-[0.14em] text-accent/80">
-                      {k}
-                    </span>
-                    <span className="font-mono text-[11px] leading-[1.65] text-ink-2">
-                      {v}
-                    </span>
-                  </div>
-                </Beat>
-              );
-            })}
+          {/* LAYER B — 10-second understanding */}
+          <Beat p={p} at={[0.39, 0.46]}>
+            <WhyBlock />
+          </Beat>
+
+          <div className="mt-2">
+            <Beat p={p} at={[0.53, 0.59]}>
+              <ItemBlock item={ITEMS[1]} />
+            </Beat>
+            <Beat p={p} at={[0.64, 0.7]}>
+              <ItemBlock item={ITEMS[2]} />
+            </Beat>
           </div>
-
-          <Beat p={p} at={[0.6, 0.66]}>
-            <p className="mt-5 text-[14.5px] font-medium text-accent-ink">
-              → Send the update today. Navis has the draft ready.
-            </p>
-          </Beat>
         </div>
 
-        <div className="px-7 pb-6 pt-5 md:px-9">
-          {["Hiring is blocked on you.", "Acme's renewal risk is increasing."].map(
-            (t, i) => (
-              <Beat key={t} p={p} at={[0.7 + i * 0.05, 0.75 + i * 0.05]}>
-                <p className="border-t border-white/[0.05] py-3 text-[14.5px] text-ink-2">
-                  {t}
-                </p>
-              </Beat>
-            ),
-          )}
-        </div>
+        {/* LAYER C — 30-second conviction */}
+        <Beat p={p} at={[0.77, 0.83]}>
+          <TraceBlock />
+        </Beat>
 
-        <Beat p={p} at={[0.84, 0.9]}>
-          <div className="rounded-b-[20px] border-t border-white/[0.05] px-7 py-4 md:px-9">
-            <p className="font-mono text-[11px] tracking-[0.08em] text-ink-3">
+        <Beat p={p} at={[0.88, 0.93]}>
+          <div className="rounded-b-[20px] border-t border-white/[0.05] px-6 py-3.5 md:px-8">
+            <p className="font-mono text-[10.5px] tracking-[0.08em] text-ink-3">
               <CountUp to={214} /> SIGNALS REVIEWED ·{" "}
               <span className="font-semibold text-ink">ONLY 3 NEEDED YOU</span>
             </p>
@@ -308,10 +393,10 @@ function SceneFirstLight() {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 pt-10">
         <div className="mx-auto grid w-full max-w-[1280px] items-center gap-10 lg:grid-cols-[0.62fr_1.38fr]">
           <div className="relative hidden h-40 lg:block">
-            <Caption p={p} at={[0.14, 0.19, 0.27, 0.32]} text="It noticed." />
-            <Caption p={p} at={[0.37, 0.42, 0.54, 0.59]} text="It checked." />
-            <Caption p={p} at={[0.6, 0.65, 0.78, 0.83]} text="It knows why." />
-            <Caption p={p} at={[0.84, 0.89, 0.97, 1]} text="Quietly." />
+            <Caption p={p} at={[0.26, 0.31, 0.35, 0.39]} text="It noticed." />
+            <Caption p={p} at={[0.4, 0.45, 0.49, 0.53]} text="It knows why." />
+            <Caption p={p} at={[0.55, 0.6, 0.7, 0.74]} text="It checked." />
+            <Caption p={p} at={[0.78, 0.83, 0.96, 1]} text="Quietly." />
           </div>
           <div className="flex flex-col items-center lg:items-start">
             <Beat p={p} at={[0.1, 0.15]} className="mb-5">
@@ -329,21 +414,21 @@ function SceneFirstLight() {
 
 function StaticObject() {
   return (
-    <div className="w-full max-w-[620px] rounded-[20px] bg-[rgba(13,20,36,0.78)] p-8 ring-1 ring-white/[0.09]">
+    <div className="w-full max-w-[620px] rounded-[20px] bg-[rgba(13,20,36,0.78)] p-7 ring-1 ring-white/[0.09]">
       <p className="font-mono text-[10px] tracking-[0.14em] text-ink-3">FOUNDER DAILY BRIEF · 07:14</p>
-      <p className="mt-5 text-[13.5px] text-ink-3">Good morning, Abhishek.</p>
-      <p className="mt-1.5 font-heading text-[23px] font-semibold text-ink">Three things need you today.</p>
-      <p className="mt-5 font-heading text-[18px] font-medium text-ink">Your investor follow-up is slipping.</p>
-      <div className="mt-4 space-y-2">
-        {EVIDENCE.map(([k, v]) => (
-          <p key={k} className="font-mono text-[11px] text-ink-2">
-            <span className="text-accent/80">{k}</span> · {v}
-          </p>
-        ))}
+      <p className="mt-4 text-[12.5px] text-ink-3">Good morning, Abhishek.</p>
+      <p className="mt-0.5 font-heading text-[19px] font-semibold text-ink">Three things need you today.</p>
+      <div className="mt-3">
+        <ItemBlock item={ITEMS[0]} />
+        <WhyBlock />
+        <div className="mt-2">
+          <ItemBlock item={ITEMS[1]} />
+          <ItemBlock item={ITEMS[2]} />
+        </div>
       </div>
-      <p className="mt-4 text-[14.5px] font-medium text-accent-ink">→ Send the update today.</p>
-      <p className="mt-6 font-mono text-[11px] text-ink-3">
-        214 SIGNALS REVIEWED · <span className="text-ink">ONLY 3 NEEDED YOU</span>
+      <div className="-mx-3 mt-4"><TraceBlock /></div>
+      <p className="mt-4 border-t border-white/[0.05] pt-3.5 font-mono text-[10.5px] text-ink-3">
+        214 SIGNALS REVIEWED · <span className="font-semibold text-ink">ONLY 3 NEEDED YOU</span>
       </p>
     </div>
   );
