@@ -41,6 +41,31 @@ function CountUp({ to }: { to: number }) {
   return <span ref={ref}>{v}</span>;
 }
 
+
+function CountUp({ to }: { to: number }) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const [v, setV] = useState(reduce ? to : 0);
+  useState(() => {
+    if (typeof window === "undefined" || reduce) return;
+    const el = { started: false };
+    const io = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting || el.started) return;
+      el.started = true;
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const k = Math.min(1, (t - t0) / 1500);
+        setV(Math.round(to * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      io.disconnect();
+    });
+    queueMicrotask(() => ref.current && io.observe(ref.current));
+  });
+  return <span ref={ref}>{v}</span>;
+}
+
 /* ════════ SCENE 1 · THE DARK ════════ */
 
 function SceneDark() {
