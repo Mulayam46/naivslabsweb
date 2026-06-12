@@ -17,52 +17,31 @@ const win = (a: number, b: number, c: number, d: number): number[] => [0, a, b, 
 
 
 /* Count-up on first viewport entry — IO + rAF, no library. */
-function CountUp({ to }: { to: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [v, setV] = useState(0);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setV(to); return; }
-    const io = new IntersectionObserver((es) => {
-      if (!es[0].isIntersecting) return;
-      io.disconnect();
-      const t0 = performance.now();
-      const tick = (t: number) => {
-        const k = Math.min(1, (t - t0) / 1500);
-        setV(Math.round(to * (1 - Math.pow(1 - k, 3))));
-        if (k < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }, { threshold: 0.4 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [to]);
-  return <span ref={ref}>{v}</span>;
-}
 
 
 function CountUp({ to }: { to: number }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
-  const [v, setV] = useState(reduce ? to : 0);
-  useState(() => {
-    if (typeof window === "undefined" || reduce) return;
-    const el = { started: false };
-    const io = new IntersectionObserver((entries) => {
-      if (!entries[0].isIntersecting || el.started) return;
-      el.started = true;
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (reduce) { setV(to); return; }
+    const node = ref.current;
+    if (!node) return;
+    let raf = 0;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
       const t0 = performance.now();
       const tick = (t: number) => {
         const k = Math.min(1, (t - t0) / 1500);
         setV(Math.round(to * (1 - Math.pow(1 - k, 3))));
-        if (k < 1) requestAnimationFrame(tick);
+        if (k < 1) raf = requestAnimationFrame(tick);
       };
-      requestAnimationFrame(tick);
-      io.disconnect();
+      raf = requestAnimationFrame(tick);
     });
-    queueMicrotask(() => ref.current && io.observe(ref.current));
-  });
+    io.observe(node);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+  }, [to, reduce]);
   return <span ref={ref}>{v}</span>;
 }
 
