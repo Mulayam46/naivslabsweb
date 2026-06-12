@@ -191,3 +191,17 @@ a {
     @apply border-border outline-ring/50;
   }
 }
+
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee-x 50s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91,140,255,0.35); }
+  50% { box-shadow: 0 0 0 7px rgba(91,140,255,0); }
+}
+.cta-pulse { animation: cta-pulse 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .marquee-track, .cta-pulse { animation: none; } }

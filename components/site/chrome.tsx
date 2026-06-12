@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
@@ -48,6 +49,7 @@ const NAV = [
 ];
 
 export function SystemBar() {
+  const pathname = usePathname();
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-sm">
       <div className="mx-auto flex h-12 max-w-[1280px] items-center justify-between px-6 font-mono text-[11px] tracking-[0.08em]">
@@ -60,9 +62,17 @@ export function SystemBar() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-ink-3 transition-colors duration-200 hover:text-ink"
+                className={
+                  (pathname === l.href.replace("/#product", "/")
+                    ? "text-ink "
+                    : "text-ink-3 ") +
+                  "relative transition-colors duration-200 hover:text-ink"
+                }
               >
                 {l.label}
+                {pathname === l.href && (
+                  <span className="absolute -bottom-1.5 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-accent" />
+                )}
               </Link>
             ))}
           </nav>

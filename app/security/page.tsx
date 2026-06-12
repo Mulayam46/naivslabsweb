@@ -42,21 +42,19 @@ export default function SecurityPage() {
       <section className="border-t border-line bg-bg-2 px-6 py-24 md:py-32">
         <div className="mx-auto max-w-[1280px]">
           <ModuleLabel n="01" title="Operating constraints" />
-          <div className="mx-auto mt-16 max-w-[920px]">
+          <div className="mt-16 grid gap-5 sm:grid-cols-2">
             {CONSTRAINTS.map(([k, title, body], i) => (
               <Fade key={k} delay={i * 0.05}>
-                <div className="grid gap-3 border-t border-line py-9 last:border-b md:grid-cols-[12rem_1fr] md:gap-8">
+                <div className="h-full rounded-lg bg-white/[0.02] p-7 ring-1 ring-white/[0.07] transition-shadow duration-300 hover:ring-white/[0.14]">
                   <span className="font-mono text-[10.5px] font-semibold tracking-[0.16em] text-ink-3">
                     {k}
                   </span>
-                  <div>
-                    <h2 className="font-heading text-[21px] font-semibold tracking-[-0.015em] text-ink sm:text-[24px]">
-                      {title}
-                    </h2>
-                    <p className="mt-2.5 max-w-[560px] text-[15px] leading-[1.75] text-ink-2">
-                      {body}
-                    </p>
-                  </div>
+                  <h2 className="mt-4 font-heading text-[20px] font-semibold tracking-[-0.015em] text-ink">
+                    {title}
+                  </h2>
+                  <p className="mt-2.5 text-[14.5px] leading-[1.75] text-ink-2">
+                    {body}
+                  </p>
                 </div>
               </Fade>
             ))}

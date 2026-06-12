@@ -82,6 +82,23 @@ function SceneDark() {
               Scroll to listen · Built by NavisLabs
             </span>
           </motion.div>
+          <motion.div
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 1.5 }}
+            className="mt-14 lg:ml-[2%]"
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-3">
+              Connects to
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2.5">
+              {["Gmail", "Google Calendar", "Google Meet", "Google Docs", "Google Drive", "Slack"].map((t) => (
+                <span key={t} className="rounded-md bg-white/[0.03] px-3.5 py-1.5 font-mono text-[11px] tracking-[0.04em] text-ink-2 ring-1 ring-white/[0.08]">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -532,6 +549,37 @@ function SceneSpread() {
   );
 }
 
+
+/* ════════ QUESTIONS MARQUEE ════════ */
+
+const QUESTIONS = [
+  "What's the status of this investor conversation?",
+  "Which hiring process has been stalled the longest?",
+  "What commitments are overdue this week?",
+  "What did we decide about pricing in the last meeting?",
+  "Which customer relationship is quietly deteriorating?",
+  "What requires the founder's attention today?",
+  "What context did we lose when that person left?",
+  "What was the last thing we promised this customer?",
+];
+
+function QuestionsMarquee() {
+  return (
+    <section className="overflow-hidden border-y border-line py-14">
+      <p className="px-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-ink-3">
+        Questions founders won&apos;t have to ask
+      </p>
+      <div className="marquee-track mt-7 flex w-max gap-4">
+        {[...QUESTIONS, ...QUESTIONS].map((q, i) => (
+          <span key={i} className="whitespace-nowrap rounded-md bg-white/[0.03] px-5 py-2.5 font-mono text-[12px] text-ink-2 ring-1 ring-white/[0.07]">
+            {q}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ════════ SCENE 5 · INVITATION ════════ */
 
 function SceneInvitation() {
@@ -547,7 +595,7 @@ function SceneInvitation() {
           <div className="mt-12 flex flex-col gap-5 sm:flex-row sm:items-center">
             <a
               href="/request-access"
-              className="inline-flex h-12 cursor-pointer items-center justify-center rounded-md bg-accent px-7 text-[14px] font-medium text-[#04060f] transition-colors hover:bg-accent-ink"
+              className="cta-pulse inline-flex h-12 cursor-pointer items-center justify-center rounded-md bg-accent px-7 text-[14px] font-medium text-[#04060f] transition-colors hover:bg-accent-ink"
             >
               Request access →
             </a>
@@ -580,6 +628,7 @@ export function Home() {
       <SceneSlips />
       <SceneDifference />
       <SceneSpread />
+      <QuestionsMarquee />
       <SceneInvitation />
       <Footer />
     </main>
