@@ -115,6 +115,7 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   background: var(--bg);
+  overflow-x: hidden;
 }
 
 body {
@@ -126,6 +127,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 ::selection {

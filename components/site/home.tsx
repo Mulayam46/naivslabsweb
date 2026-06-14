@@ -53,7 +53,7 @@ function CountUp({ to }: { to: number }) {
 function SceneDark() {
   const reduce = useReducedMotion();
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden px-6">
+    <section className="relative flex min-h-screen items-center px-4 sm:px-6">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -85,13 +85,13 @@ function SceneDark() {
         ))}
       </svg>
 
-      <div className="relative mx-auto w-full max-w-[1280px]">
+      <div className="relative mx-auto w-full max-w-[1280px] overflow-hidden">
         <div className="max-w-[1020px] lg:ml-[4%]">
           <motion.h1
             initial={reduce ? false : { opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}
-            className="font-heading text-[3.2rem] font-semibold leading-[0.97] tracking-[-0.045em] text-ink sm:text-[5.2rem] md:text-[6.8rem] lg:text-[8.2rem]"
+            className="font-heading text-[2.4rem] font-semibold leading-[0.97] tracking-[-0.04em] text-ink min-[380px]:text-[2.9rem] sm:text-[4.4rem] md:text-[6.0rem] lg:text-[7.4rem] xl:text-[8.2rem]"
           >
             Your company
             <br />
@@ -103,15 +103,15 @@ function SceneDark() {
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 1.1 }}
-            className="mt-12 flex flex-col gap-8 sm:flex-row sm:items-center lg:ml-[2%]"
+            className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center lg:ml-[2%]"
           >
-            <p className="max-w-[440px] text-[15.5px] leading-[1.7] text-ink-2">
+            <p className="max-w-[440px] text-[14.5px] leading-[1.7] text-ink-2 sm:text-[15.5px]">
               Navis turns fragmented signals across email, meetings, Slack,
               and calendars into organizational understanding — so important
               work doesn&apos;t quietly slip.
             </p>
-            <span className="hidden h-px w-16 bg-line-strong sm:block" />
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-3">
+            <span className="hidden h-px w-12 shrink-0 bg-line-strong sm:block" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 sm:text-[10.5px] sm:tracking-[0.22em]">
               Scroll to listen · Built by NavisLabs
             </span>
           </motion.div>
@@ -303,7 +303,7 @@ function TheObject({ p }: { p: MotionValue<number> }) {
   const backPlane = useTransform(p, span(0.06, 0.16), [26, 26, 14, 14]);
 
   return (
-    <motion.div style={{ opacity, y, rotate }} className="relative w-full max-w-[620px]">
+    <motion.div style={{ opacity, y, rotate }} className="relative w-full max-w-full sm:max-w-[560px] md:max-w-[620px]">
       <motion.div
         className="pointer-events-none absolute -inset-16"
         style={{
@@ -390,17 +390,17 @@ function SceneFirstLight() {
 
   return (
     <section id="product" ref={ref} className="relative h-[460vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 pt-10">
-        <div className="mx-auto grid w-full max-w-[1280px] items-center gap-10 lg:grid-cols-[0.62fr_1.38fr]">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden px-4 pt-10 sm:px-6">
+        <div className="mx-auto grid w-full max-w-[1280px] items-center gap-6 lg:gap-10 lg:grid-cols-[0.62fr_1.38fr]">
           <div className="relative hidden h-40 lg:block">
             <Caption p={p} at={[0.26, 0.31, 0.35, 0.39]} text="It noticed." />
             <Caption p={p} at={[0.4, 0.45, 0.49, 0.53]} text="It knows why." />
             <Caption p={p} at={[0.55, 0.6, 0.7, 0.74]} text="It checked." />
             <Caption p={p} at={[0.78, 0.83, 0.96, 1]} text="Quietly." />
           </div>
-          <div className="flex flex-col items-center lg:items-start">
-            <Beat p={p} at={[0.1, 0.15]} className="mb-5">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-3">
+          <div className="flex w-full flex-col items-center lg:items-start">
+            <Beat p={p} at={[0.1, 0.15]} className="mb-4 sm:mb-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 sm:text-[11px] sm:tracking-[0.2em]">
                 What matters today?
               </p>
             </Beat>
@@ -634,7 +634,7 @@ function SceneSpread() {
 
         <div className="relative mx-auto w-full max-w-[1100px] flex-1">
           <motion.div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[560px] -translate-x-1/2 -translate-y-1/2"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-full max-w-[560px] -translate-x-1/2 -translate-y-1/2 sm:h-[420px]"
             style={{
               opacity: coreHalo,
               background:
