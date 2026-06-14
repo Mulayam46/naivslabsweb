@@ -80,7 +80,7 @@ export function SystemBar() {
         <div className="flex items-center gap-5">
           <Link
             href="/request-access"
-            className="cursor-pointer border border-line-strong px-3 py-1 text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-bg"
+            className="cursor-pointer border border-line-strong px-3 py-1 text-ink transition-colors duration-200 hover:border-ink hover:text-ink "
           >
             REQUEST ACCESS
           </Link>
