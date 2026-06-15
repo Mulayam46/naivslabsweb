@@ -115,7 +115,9 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   background: var(--bg);
-  overflow-x: hidden;
+  /* clip (not hidden) — hidden makes html a scroll container and breaks
+     position: sticky, which the pinned scroll scenes depend on. */
+  overflow-x: clip;
 }
 
 body {
@@ -127,7 +129,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {

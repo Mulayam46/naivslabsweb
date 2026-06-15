@@ -380,35 +380,45 @@ function SceneFirstLight() {
     offset: ["start start", "end end"],
   });
 
-  if (reduce) {
-    return (
-      <section className="flex justify-center px-6 py-24">
-        <StaticObject />
-      </section>
-    );
-  }
+  /* Phones & tablets: a calm, fully-readable static brief — no downscaled
+     drama, no card overflow on short viewports. Same copy, every line. */
+  const staticView = (
+    <section className="flex flex-col items-center px-5 py-20 sm:px-6 sm:py-24">
+      <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 sm:text-[11px] sm:tracking-[0.2em]">
+        What matters today?
+      </p>
+      <StaticObject />
+    </section>
+  );
+
+  if (reduce) return <div id="product">{staticView}</div>;
 
   return (
-    <section id="product" ref={ref} className="relative h-[460vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden px-4 pt-10 sm:px-6">
-        <div className="mx-auto grid w-full max-w-[1280px] items-center gap-6 lg:gap-10 lg:grid-cols-[0.62fr_1.38fr]">
-          <div className="relative hidden h-40 lg:block">
-            <Caption p={p} at={[0.26, 0.31, 0.35, 0.39]} text="It noticed." />
-            <Caption p={p} at={[0.4, 0.45, 0.49, 0.53]} text="It knows why." />
-            <Caption p={p} at={[0.55, 0.6, 0.7, 0.74]} text="It checked." />
-            <Caption p={p} at={[0.78, 0.83, 0.96, 1]} text="Quietly." />
-          </div>
-          <div className="flex w-full flex-col items-center lg:items-start">
-            <Beat p={p} at={[0.1, 0.15]} className="mb-4 sm:mb-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 sm:text-[11px] sm:tracking-[0.2em]">
-                What matters today?
-              </p>
-            </Beat>
-            <TheObject p={p} />
+    <div id="product">
+      {/* < lg: clarity over choreography */}
+      <div className="lg:hidden">{staticView}</div>
+      {/* lg+: the pinned cinematic assembly */}
+      <section ref={ref} className="relative hidden h-[460vh] lg:block">
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 pt-10">
+          <div className="mx-auto grid w-full max-w-[1280px] items-center gap-10 lg:grid-cols-[0.62fr_1.38fr]">
+            <div className="relative hidden h-40 lg:block">
+              <Caption p={p} at={[0.26, 0.31, 0.35, 0.39]} text="It noticed." />
+              <Caption p={p} at={[0.4, 0.45, 0.49, 0.53]} text="It knows why." />
+              <Caption p={p} at={[0.55, 0.6, 0.7, 0.74]} text="It checked." />
+              <Caption p={p} at={[0.78, 0.83, 0.96, 1]} text="Quietly." />
+            </div>
+            <div className="flex w-full flex-col items-center lg:items-start">
+              <Beat p={p} at={[0.1, 0.15]} className="mb-5">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-3">
+                  What matters today?
+                </p>
+              </Beat>
+              <TheObject p={p} />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -595,6 +605,48 @@ function Node({
   );
 }
 
+/* Phones & tablets: the trajectory as a readable flow of pills — the
+   constellation SVG is unreadable when scaled below ~lg, so we don't scale it. */
+function StaticSpread() {
+  return (
+    <section className="px-5 py-24 sm:px-6 sm:py-32">
+      <div className="mx-auto max-w-[1280px]">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-ink-3">
+          The trajectory
+        </p>
+        <h2 className="mt-5 font-heading text-[1.9rem] font-semibold leading-[1.12] tracking-[-0.025em] text-ink sm:text-[2.4rem]">
+          Today, a brief.{" "}
+          <span className="text-ink-3">Tomorrow, the intelligence layer.</span>
+        </h2>
+        <div className="mt-9 flex flex-wrap items-center gap-x-2 gap-y-2.5">
+          {NODES.map((n, i) => (
+            <span key={n.label} className="flex items-center gap-2">
+              <span
+                className={
+                  "rounded-full px-3 py-1 font-heading text-[12.5px] font-medium ring-1 " +
+                  (i >= NODES.length - 2
+                    ? "text-accent ring-accent/40"
+                    : "bg-white/[0.02] text-ink ring-white/[0.08]")
+                }
+              >
+                {n.label}
+              </span>
+              {i < NODES.length - 1 && (
+                <span className="text-[11px] text-ink-3" aria-hidden>
+                  →
+                </span>
+              )}
+            </span>
+          ))}
+        </div>
+        <p className="mt-8 font-mono text-[10px] tracking-[0.14em] text-ink-3">
+          EVERY CYCLE MAKES THE MODEL SHARPER
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function SceneSpread() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
@@ -603,67 +655,65 @@ function SceneSpread() {
   const coreHalo = useTransform(p, [0, 1], [0.15, 0.6]);
   const titleOp = useTransform(p, span(0.02, 0.08), [0, 0, 1, 1]);
 
-  if (reduce) {
-    return (
-      <section className="px-6 py-32">
-        <div className="mx-auto max-w-[1280px]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">The trajectory</p>
-          <h2 className="mt-6 font-heading text-[2.4rem] font-semibold text-ink">
-            Today, a brief. <span className="text-ink-3">Tomorrow, organizational intelligence.</span>
-          </h2>
-          <p className="mt-8 max-w-[700px] text-[17px] leading-[1.8] text-ink-2">
-            {NODES.map((n) => n.label).join(" → ")}
-          </p>
-        </div>
-      </section>
-    );
-  }
+  if (reduce) return <StaticSpread />;
 
   return (
-    <section ref={ref} className="relative h-[520vh]">
-      <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
-        <motion.div style={{ opacity: titleOp }} className="px-6 pt-24 text-center md:pt-28">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-3">
-            The trajectory
-          </p>
-          <h2 className="mx-auto mt-4 max-w-[800px] font-heading text-[1.9rem] font-semibold leading-[1.1] tracking-[-0.025em] text-ink sm:text-[2.5rem]">
-            Today, a brief.{" "}
-            <span className="text-ink-3">Tomorrow, the intelligence layer.</span>
-          </h2>
-        </motion.div>
-
-        <div className="relative mx-auto w-full max-w-[1100px] flex-1">
-          <motion.div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-full max-w-[560px] -translate-x-1/2 -translate-y-1/2 sm:h-[420px]"
-            style={{
-              opacity: coreHalo,
-              background:
-                "radial-gradient(ellipse 50% 45% at 50% 50%, rgba(91,140,255,0.18), transparent 70%)",
-            }}
-          />
-          <svg viewBox="0 0 1000 600" className="h-full w-full" role="img">
-            <circle cx="500" cy="300" r="6" fill="#5b8cff" />
-            {NODES.map((n, i) =>
-              i === 0 ? null : <Node key={n.label} p={p} i={i} total={NODES.length} node={n} />,
-            )}
-          </svg>
-        </div>
-
-        <div className="px-6 pb-12">
-          <div className="mx-auto flex max-w-[1280px] items-end justify-between font-mono text-[10.5px] tracking-[0.14em] text-ink-3">
-            <p>
-              ORG-INTELLIGENCE INDEX{" "}
-              <motion.span className="ml-2 text-[22px] font-semibold tracking-[0.04em] text-ink">
-                {index}
-              </motion.span>
+    <>
+      {/* < lg: readable trajectory */}
+      <div className="lg:hidden">
+        <StaticSpread />
+      </div>
+      {/* lg+: the pinned constellation */}
+      <section ref={ref} className="relative hidden h-[520vh] lg:block">
+        <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
+          <motion.div style={{ opacity: titleOp }} className="px-6 pt-24 text-center md:pt-28">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-3">
+              The trajectory
             </p>
-            <p className="hidden text-right sm:block">
-              EVERY CYCLE MAKES THE MODEL SHARPER
-            </p>
+            <h2 className="mx-auto mt-4 max-w-[800px] font-heading text-[1.9rem] font-semibold leading-[1.1] tracking-[-0.025em] text-ink sm:text-[2.5rem]">
+              Today, a brief.{" "}
+              <span className="text-ink-3">Tomorrow, the intelligence layer.</span>
+            </h2>
+          </motion.div>
+
+          <div className="relative mx-auto w-full max-w-[1100px] flex-1">
+            <motion.div
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-full max-w-[560px] -translate-x-1/2 -translate-y-1/2"
+              style={{
+                opacity: coreHalo,
+                background:
+                  "radial-gradient(ellipse 50% 45% at 50% 50%, rgba(91,140,255,0.18), transparent 70%)",
+              }}
+            />
+            <svg
+              viewBox="0 0 1000 600"
+              className="h-full w-full"
+              role="img"
+              aria-label="Navis trajectory: signals become organizational state, understanding, reasoning, decisions, learning, intelligence, an adaptive organization"
+            >
+              <circle cx="500" cy="300" r="6" fill="#5b8cff" />
+              {NODES.map((n, i) =>
+                i === 0 ? null : <Node key={n.label} p={p} i={i} total={NODES.length} node={n} />,
+              )}
+            </svg>
+          </div>
+
+          <div className="px-6 pb-12">
+            <div className="mx-auto flex max-w-[1280px] items-end justify-between font-mono text-[10.5px] tracking-[0.14em] text-ink-3">
+              <p>
+                ORG-INTELLIGENCE INDEX{" "}
+                <motion.span className="ml-2 text-[22px] font-semibold tracking-[0.04em] text-ink">
+                  {index}
+                </motion.span>
+              </p>
+              <p className="hidden text-right sm:block">
+                EVERY CYCLE MAKES THE MODEL SHARPER
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
