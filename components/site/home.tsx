@@ -296,11 +296,11 @@ function TraceBlock() {
 }
 
 function TheObject({ p }: { p: MotionValue<number> }) {
-  const opacity = useTransform(p, span(0.06, 0.13), [0, 0, 1, 1]);
-  const y = useTransform(p, span(0.06, 0.13), [90, 90, 0, 0]);
-  const rotate = useTransform(p, span(0.06, 0.16), [2.5, 2.5, 0, 0]);
-  const halo = useTransform(p, span(0.4, 0.75), [0.12, 0.12, 0.55, 0.55]);
-  const backPlane = useTransform(p, span(0.06, 0.16), [26, 26, 14, 14]);
+  const opacity = useTransform(p, span(0.03, 0.09), [0, 0, 1, 1]);
+  const y = useTransform(p, span(0.03, 0.09), [90, 90, 0, 0]);
+  const rotate = useTransform(p, span(0.03, 0.11), [2.5, 2.5, 0, 0]);
+  const halo = useTransform(p, span(0.5, 0.72), [0.12, 0.12, 0.55, 0.55]);
+  const backPlane = useTransform(p, span(0.03, 0.11), [26, 26, 14, 14]);
 
   return (
     <motion.div style={{ opacity, y, rotate }} className="relative w-full max-w-full sm:max-w-[560px] md:max-w-[620px]">
@@ -324,10 +324,10 @@ function TheObject({ p }: { p: MotionValue<number> }) {
 
         {/* LAYER A — 3-second understanding */}
         <div className="px-6 pb-1 pt-4 md:px-8">
-          <Beat p={p} at={[0.15, 0.19]}>
+          <Beat p={p} at={[0.09, 0.13]}>
             <p className="text-[12.5px] text-ink-3">Good morning, Abhishek.</p>
           </Beat>
-          <Beat p={p} at={[0.19, 0.23]}>
+          <Beat p={p} at={[0.13, 0.17]}>
             <p className="mt-0.5 font-heading text-[19px] font-semibold tracking-[-0.02em] text-ink sm:text-[21px]">
               Three things need you today.
             </p>
@@ -335,31 +335,31 @@ function TheObject({ p }: { p: MotionValue<number> }) {
         </div>
 
         <div className="px-6 pb-2 pt-2 md:px-8">
-          <Beat p={p} at={[0.26, 0.32]}>
+          <Beat p={p} at={[0.18, 0.24]}>
             <ItemBlock item={ITEMS[0]} />
           </Beat>
 
           {/* LAYER B — 10-second understanding */}
-          <Beat p={p} at={[0.39, 0.46]}>
+          <Beat p={p} at={[0.27, 0.33]}>
             <WhyBlock />
           </Beat>
 
           <div className="mt-2">
-            <Beat p={p} at={[0.53, 0.59]}>
+            <Beat p={p} at={[0.36, 0.42]}>
               <ItemBlock item={ITEMS[1]} />
             </Beat>
-            <Beat p={p} at={[0.64, 0.7]}>
+            <Beat p={p} at={[0.45, 0.51]}>
               <ItemBlock item={ITEMS[2]} />
             </Beat>
           </div>
         </div>
 
         {/* LAYER C — 30-second conviction */}
-        <Beat p={p} at={[0.77, 0.83]}>
+        <Beat p={p} at={[0.53, 0.59]}>
           <TraceBlock />
         </Beat>
 
-        <Beat p={p} at={[0.88, 0.93]}>
+        <Beat p={p} at={[0.61, 0.66]}>
           <div className="rounded-b-[20px] border-t border-white/[0.05] px-6 py-3.5 md:px-8">
             <p className="font-mono text-[10.5px] tracking-[0.08em] text-ink-3">
               <CountUp to={214} /> SIGNALS REVIEWED ·{" "}
@@ -398,17 +398,17 @@ function SceneFirstLight() {
       {/* < lg: clarity over choreography */}
       <div className="lg:hidden">{staticView}</div>
       {/* lg+: the pinned cinematic assembly */}
-      <section ref={ref} className="relative hidden h-[460vh] lg:block">
+      <section ref={ref} className="relative hidden h-[320vh] lg:block">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 pt-10">
           <div className="mx-auto grid w-full max-w-[1280px] items-center gap-10 lg:grid-cols-[0.62fr_1.38fr]">
             <div className="relative hidden h-40 lg:block">
-              <Caption p={p} at={[0.26, 0.31, 0.35, 0.39]} text="It noticed." />
-              <Caption p={p} at={[0.4, 0.45, 0.49, 0.53]} text="It knows why." />
-              <Caption p={p} at={[0.55, 0.6, 0.7, 0.74]} text="It checked." />
-              <Caption p={p} at={[0.78, 0.83, 0.96, 1]} text="Quietly." />
+              <Caption p={p} at={[0.18, 0.22, 0.30, 0.34]} text="It noticed." />
+              <Caption p={p} at={[0.32, 0.36, 0.43, 0.47]} text="It knows why." />
+              <Caption p={p} at={[0.47, 0.51, 0.58, 0.62]} text="It checked." />
+              <Caption p={p} at={[0.62, 0.66, 0.92, 1]} text="Quietly." />
             </div>
             <div className="flex w-full flex-col items-center lg:items-start">
-              <Beat p={p} at={[0.1, 0.15]} className="mb-5">
+              <Beat p={p} at={[0.05, 0.09]} className="mb-5">
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-3">
                   What matters today?
                 </p>
@@ -565,8 +565,8 @@ function Node({
   total: number;
   node: (typeof NODES)[number];
 }) {
-  const w = 0.78 / total;
-  const a = 0.12 + i * w;
+  const w = 0.5 / total;
+  const a = 0.08 + i * w;
   const opacity = useTransform(p, span(a, a + w), [0, 0, 1, 1]);
   const accent = i >= total - 2;
   return (
@@ -653,7 +653,7 @@ function SceneSpread() {
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const index = useTransform(p, (v) => String(Math.min(100, Math.round(v * 100))).padStart(3, "0"));
   const coreHalo = useTransform(p, [0, 1], [0.15, 0.6]);
-  const titleOp = useTransform(p, span(0.02, 0.08), [0, 0, 1, 1]);
+  const titleOp = useTransform(p, span(0.01, 0.05), [0, 0, 1, 1]);
 
   if (reduce) return <StaticSpread />;
 
@@ -664,7 +664,7 @@ function SceneSpread() {
         <StaticSpread />
       </div>
       {/* lg+: the pinned constellation */}
-      <section ref={ref} className="relative hidden h-[520vh] lg:block">
+      <section ref={ref} className="relative hidden h-[340vh] lg:block">
         <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
           <motion.div style={{ opacity: titleOp }} className="px-6 pt-24 text-center md:pt-28">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-3">
