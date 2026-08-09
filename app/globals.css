@@ -8,56 +8,86 @@
    1. FIVE type sizes. Display, Heading, Section, Body, Caption.
       Nothing else. Hierarchy comes from weight and colour, not from
       inventing a 15px.
-   2. TWO text colours. #111111 and #6E6E73. The lighter Apple grey
-      (#86868B) measures 3.33:1 on this ground and fails AA, so it is
+   2. TWO text colours. #14130F and #66625B — warm near-black and warm
+      grey, both AA on every ground (worst pair 4.87:1). Lighter
+      Apple-style greys like #86868B fail here at 3.33:1, so they are
       not in the system.
    3. VARIED section rhythm. Uniform 80px padding everywhere is what
       makes a page feel flat. Hero breathes most, CTA closes biggest.
-   4. ONE accent. #2563EB. Everything else is ink, grey and material.
+   4. NO BRAND COLOUR. The system is ink, stone and graphite. Emphasis
+      comes from weight, scale and whitespace — not from a hue. The
+      only saturated colour anywhere on the site belongs to third-party
+      integration logos, which keep their real brand colours because
+      recolouring someone else's mark makes it unrecognisable.
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Ground ────────────────────────────────────────── */
-  --canvas:        #FAFAFA;   /* one continuous page ground */
-  --surface:       #FFFFFF;   /* sections, cards */
-  --surface-alt:   #FBFBFD;   /* alternating band */
-  --ink-ground:    #0F0F10;   /* the closing region — CTA + footer as one */
+  /* ── Ground ────────────────────────────────────────────
+     Warm neutrals, not cool ones. A stone-warm white reads as paper
+     and architecture; a blue-white reads as software chrome. The
+     ladder is deliberate: canvas is warm, surface stays pure white,
+     so cards lift off the page instead of dissolving into it. */
+  --canvas:        #F7F6F3;   /* warm white — one continuous ground */
+  --surface:       #FFFFFF;   /* cards — the light end of the ladder */
+  --surface-alt:   #F0EEEA;   /* stone — panel headers, inset rows */
+  --surface-sunk:  #E9E6E1;   /* the recess the live product sits in */
+  --ink-ground:    #14130F;   /* closing region — warm near-black */
 
   /* ── Text — two steps, both AA on every ground ────── */
-  --text:          #111111;   /* 17.3:1 */
-  --text-2:        #6E6E73;   /*  4.7:1 */
+  --text:          #14130F;   /* 17.2:1 on canvas */
+  --text-2:        #66625B;   /*  5.6:1 on canvas — warm grey */
   --text-on-dark:  #FFFFFF;
-  --text-on-dark-2:#A1A1A6;
+  --text-on-dark-2:#A8A49C;
 
-  /* ── Line ─────────────────────────────────────────── */
-  --border:        rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
+  /* ── Line — warm ink alpha, never pure black ──────── */
+  --border:        rgba(28, 25, 20, 0.10);
+  --border-strong: rgba(28, 25, 20, 0.18);
   --border-dark:   rgba(255, 255, 255, 0.12);
 
   /* ── Action ───────────────────────────────────────── */
-  --cta:           #111111;
+  --cta:           #14130F;
   --cta-hover:     #000000;
   --cta-text:      #FFFFFF;
 
-  /* ── One accent ───────────────────────────────────── */
-  --accent:        #2563EB;   /* 4.75:1 — safe as text */
-  --accent-hover:  #1D4ED8;
-  --accent-wash:   rgba(37, 99, 235, 0.06);
-  --accent-line:   rgba(37, 99, 235, 0.22);
+  /* ── One accent, and it is graphite ────────────────
+     Deliberately near-monochrome. Eyebrows, icons and active states
+     used to carry a cobalt that made the site read as generic AI
+     SaaS. They now sit one step off ink: distinct enough to separate
+     a label from a heading, quiet enough that nothing shouts. */
+  --accent:        #2E2A24;   /* deep graphite — 13.2:1 on canvas */
+  --accent-hover:  #14130F;
+  --accent-deep:   #14130F;   /* filled-block gradient end */
+  --accent-wash:   rgba(28, 25, 20, 0.045);
+  --accent-soft:   rgba(28, 25, 20, 0.08);
+  --accent-line:   rgba(28, 25, 20, 0.18);
+  --accent-edge:   rgba(28, 25, 20, 0.30);
+  --on-accent:     #FFFFFF;   /* 14.3:1 on --accent */
+  --on-accent-2:   rgba(255, 255, 255, 0.72);
 
-  /* ── Signal — status only ─────────────────────────── */
-  --risk:          #B42318;
-  --watch:         #B54708;
-  --steady:        #067647;
+  /* ── Signal — the product's own status semantics ────
+     Desaturated to sit inside a stone palette. These stay distinct
+     hues because they carry meaning inside Morning Intelligence, but
+     they are never the only cue — every status also carries a label. */
+  --risk:          #8C3A2E;
+  --watch:         #7A5A1E;
+  --steady:        #3D6350;
 
   /* ── Material ─────────────────────────────────────── */
   --glass:         rgba(255, 255, 255, 0.72);
   --glass-blur:    24px;
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 20px 60px -24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.03);
-  --shadow-nav: 0 8px 32px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  /* Warm-ink shadows. A cool or pure-black shadow on a warm ground
+     reads as dirt; a hue-matched one reads as depth. */
+  --shadow-xs: 0 1px 2px rgba(28, 25, 20, 0.05);
+  --shadow-sm: 0 1px 3px rgba(28, 25, 20, 0.07), 0 1px 2px rgba(28, 25, 20, 0.04);
+  --shadow-md: 0 6px 20px -6px rgba(28, 25, 20, 0.10), 0 2px 5px rgba(28, 25, 20, 0.05);
+  --shadow-lg: 0 24px 64px -26px rgba(28, 25, 20, 0.20), 0 2px 8px rgba(28, 25, 20, 0.05);
+  --shadow-nav: 0 8px 32px rgba(28, 25, 20, 0.09), 0 1px 2px rgba(28, 25, 20, 0.05);
+  /* The live product surface — it should sit above the page, not in it. */
+  --shadow-product:
+    0 40px 90px -40px rgba(28, 25, 20, 0.26),
+    0 12px 32px -12px rgba(28, 25, 20, 0.10),
+    0 0 0 1px rgba(28, 25, 20, 0.06);
 
   /* ── Radius ───────────────────────────────────────── */
   --r-nav:    24px;
@@ -103,6 +133,7 @@
   --color-canvas:        var(--canvas);
   --color-surface:       var(--surface);
   --color-surface-alt:   var(--surface-alt);
+  --color-surface-sunk:  var(--surface-sunk);
 
   --color-text:          var(--text);
   --color-text-2:        var(--text-2);
@@ -114,8 +145,13 @@
   --color-border-dark:   var(--border-dark);
 
   --color-accent:        var(--accent);
+  --color-accent-deep:   var(--accent-deep);
   --color-accent-wash:   var(--accent-wash);
+  --color-accent-soft:   var(--accent-soft);
   --color-accent-line:   var(--accent-line);
+  --color-accent-edge:   var(--accent-edge);
+  --color-on-accent:     var(--on-accent);
+  --color-on-accent-2:   var(--on-accent-2);
 
   --color-risk:          var(--risk);
   --color-watch:         var(--watch);
@@ -257,10 +293,10 @@ button { font: inherit; }
   border-color: var(--border-strong);
   box-shadow: var(--shadow-xs);
 }
-.btn-secondary:hover { border-color: rgba(0, 0, 0, 0.24); }
+.btn-secondary:hover { border-color: var(--border-strong); }
 
 .btn-ghost { background: transparent; color: var(--text-2); }
-.btn-ghost:hover { background: rgba(0, 0, 0, 0.04); color: var(--text); }
+.btn-ghost:hover { background: var(--accent-wash); color: var(--text); }
 
 .btn-invert { background: var(--surface); color: var(--text); }
 .btn-invert:hover { background: #E8E8ED; }
@@ -279,6 +315,66 @@ button { font: inherit; }
   border: 1px solid var(--border);
   border-radius: var(--r-card);
   box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-control) var(--ease-out),
+              border-color var(--t-control) var(--ease-out);
+}
+.card:hover { box-shadow: var(--shadow-md); }
+
+/* ── The live product surface ──────────────────────────────
+   Morning Intelligence is the running product, not a screenshot, so
+   it gets treated as an object sitting above the page: a recessed
+   tinted well behind it, a hue-matched shadow lifting it out, and a
+   hairline accent bloom along the top edge where the light lands.
+   Nothing here changes its layout — only what it sits on. */
+.product-well {
+  position: relative;
+  border-radius: calc(var(--r-card) + 12px);
+  background:
+    radial-gradient(ellipse 70% 120% at 50% 0%, var(--accent-wash), transparent 70%),
+    linear-gradient(180deg, var(--surface-sunk), var(--canvas));
+  padding: clamp(16px, 2.4vw, 34px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.product-well::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--border);
+  pointer-events: none;
+}
+.product-surface {
+  position: relative;
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-product);
+}
+/* Light catching the leading edge — the detail that reads as "real". */
+.product-surface::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  top: -1px;
+  height: 1px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-edge), transparent);
+  pointer-events: none;
+}
+
+/* A filled accent block. One per page, where the page makes its claim. */
+.accent-block {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: linear-gradient(150deg, var(--accent), var(--accent-deep));
+  color: var(--on-accent);
+  box-shadow: 0 22px 50px -26px rgba(28, 25, 20, 0.45);
+}
+.accent-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255, 255, 255, 0.16), transparent 65%);
+  pointer-events: none;
 }
 /* Apple's move: translucency over a tinted ground, not another flat white. */
 .glass {
@@ -348,19 +444,25 @@ button { font: inherit; }
   content: "";
   position: absolute;
   inset: 0;
+  /* Grid drawn in the brand hue rather than black, so the substrate
+     tints with the page instead of greying it. */
   background-image:
-    linear-gradient(rgba(0, 0, 0, 1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 1) 1px, transparent 1px);
+    linear-gradient(rgba(28, 25, 20, 1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 25, 20, 1) 1px, transparent 1px);
   background-size: 96px 96px;
-  opacity: 0.01;
+  opacity: 0.022;
 }
+/* Three light sources, not two: a cool wash at the crown, a second at
+   the shoulder, and a faint warm one low down so the page does not
+   read as uniformly cold from top to bottom. */
 .page-canvas::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% -5%, rgba(37, 99, 235, 0.07), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 85% 12%, rgba(37, 99, 235, 0.04), transparent 70%);
+    radial-gradient(ellipse 62% 52% at 50% -6%, rgba(255, 255, 255, 0.85), transparent 72%),
+    radial-gradient(ellipse 52% 42% at 86% 10%, rgba(28, 25, 20, 0.030), transparent 72%),
+    radial-gradient(ellipse 70% 40% at 12% 88%, rgba(28, 25, 20, 0.022), transparent 74%);
 }
 
 /* Fine grain so large flat areas do not band. */
@@ -413,19 +515,19 @@ button { font: inherit; }
 
    White on light glass. Soft border, soft hover — no dark theme and
    no heavy outline. Verified on the composited dialog (~#FDFDFD):
-   text 18.6:1, muted #6E6E73 5.0:1, accent #2563EB 5.1:1.
+   text 18.6:1, muted #66625B 5.4:1, accent #2E2A24 12.6:1.
 ═══════════════════════════════════════════════════════════ */
 .meeting-card {
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--border);
   border-radius: 20px;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.03);
+  box-shadow: var(--shadow-xs);
   transition: border-color 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
 }
 .meeting-card:hover {
-  border-color: rgba(37, 99, 235, 0.28);
-  box-shadow: 0 12px 32px -12px rgba(17, 17, 17, 0.14), 0 2px 6px rgba(17, 17, 17, 0.04);
+  border-color: var(--border-strong);
+  box-shadow: 0 12px 32px -12px rgba(28, 25, 20, 0.16), 0 2px 6px rgba(28, 25, 20, 0.05);
 }
 .meeting-card:focus-visible {
   outline: 2px solid var(--accent);
@@ -436,8 +538,8 @@ button { font: inherit; }
    whole card lifting — quieter than a translate. */
 .trust-card { transition: border-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out); }
 .trust-card:hover {
-  border-color: rgba(37, 99, 235, 0.24);
-  box-shadow: 0 16px 40px -18px rgba(17, 17, 17, 0.12);
+  border-color: var(--border-strong);
+  box-shadow: 0 16px 40px -18px rgba(28, 25, 20, 0.14);
 }
 .trust-card .trust-icon { transition: background 300ms var(--ease-out), border-color 300ms var(--ease-out); }
 .trust-card:hover .trust-icon {
@@ -497,28 +599,77 @@ button { font: inherit; }
   .faq .faq-mark { transition: none; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   Hero sound control
+
+   A cinematic media control, not a player: one circular icon button in
+   the bottom-right of the hero. No label — the icon is the only status
+   indicator, and the accessible name lives on aria-label.
+
+   It sits right of the centred hero column and below the LIVE strip,
+   so it clears the headline, the CTA and the fixed nav at every width.
+   Hidden until the autoplay attempt resolves.
+═══════════════════════════════════════════════════════════ */
+.hero-audio {
+  position: absolute;
+  right: var(--gutter);
+  bottom: clamp(16px, 2.5vw, 28px);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(20, 19, 15, 0.55);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 4px 16px -4px rgba(28, 25, 20, 0.35);
+  color: #FFFFFF;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms var(--ease-out),
+              background var(--t-micro) var(--ease-out),
+              transform var(--t-micro) var(--ease-out);
+}
+.hero-audio.is-ready { opacity: 1; pointer-events: auto; }
+.hero-audio:hover { background: rgba(20, 19, 15, 0.74); }
+.hero-audio:active { transform: scale(0.94); }
+.hero-audio:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+/* Visually compact, but a full touch target where fingers are used. */
+@media (pointer: coarse) {
+  .hero-audio { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-audio { transition: opacity 400ms linear; }
+  .hero-audio:active { transform: none; }
+}
+
 /* The footer sits on the same canvas as everything above it. */
 footer { background: transparent !important; }
 
 /* ═══════════════════════════════════════════════════════════
    Icon system — two tiers, one language.
 
-   Product UI icons are Lucide at stroke 1.75. Third-party marks are
-   Simple Icons geometry via <BrandIcon>. Nothing else, ever.
+   Product UI icons are Lucide at stroke 1.75, in ink. Third-party
+   marks are real vendor assets via <BrandIcon>. Nothing else, ever.
 
    .icon-ui      standalone icons — 18 mobile, 20 desktop
    .icon-inline  icons set inside a line of text — 14 / 15
-   .brand-icon   monochrome by default, brand colour on hover
+   .brand-icon   real vendor logo, full colour, aspect preserved
 ═══════════════════════════════════════════════════════════ */
-.icon-ui,
-.brand-icon {
+.icon-ui {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
 }
 @media (min-width: 768px) {
-  .icon-ui,
-  .brand-icon { width: 20px; height: 20px; }
+  .icon-ui { width: 20px; height: 20px; }
 }
 
 .icon-inline {
@@ -530,16 +681,24 @@ footer { background: transparent !important; }
   .icon-inline { width: 15px; height: 15px; }
 }
 
-/* Monochrome at rest so a row of logos reads as one texture. */
+/* Vendor logos keep their own colour and their own proportions.
+   Height is set inline per instance; width is whatever the ratio
+   says, so nothing is ever squashed into a square. No greyscale
+   filter — a desaturated Slack mark is not a Slack mark. */
 .brand-icon {
-  color: #6B7280;
-  opacity: 0.75;
-  transition: color 200ms ease, opacity 200ms ease;
+  height: var(--logo-h, 26px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
 }
-.brand-icon:hover,
-.group:hover .brand-icon {
-  color: var(--brand, #111111);
-  opacity: 1;
+/* Roadmap marks read as present but not yet wired: slightly reduced
+   presence, never a broken-looking greyscale. Status is always
+   carried by an adjacent text label as well, never by this alone. */
+.is-soon .brand-icon { opacity: 0.55; }
+.is-soon:hover .brand-icon { opacity: 0.8; }
+@media (prefers-reduced-motion: no-preference) {
+  .brand-icon { transition: opacity 200ms var(--ease-out); }
 }
 
 /* Icon + label pairs: 8px gap, optically centred. */

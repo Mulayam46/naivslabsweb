@@ -1,13 +1,13 @@
 import { Bot, LayoutGrid, Lock, ScrollText, ShieldCheck, UserCheck, Users } from "lucide-react";
 import { SystemBar, Footer } from "./chrome";
 import { MorningIntelligence } from "./dashboard";
-import { BrandIcon, MARKS } from "./logos";
+import { BrandIcon, SUPPORTED_MARKS } from "./logos";
 import { Pipeline } from "./pipeline";
 import { Reveal, Enter, ScrollSettle } from "./reveal";
 import { Card, Container, Eyebrow, Section } from "./ui";
 import { MeetingTrigger } from "@/components/meeting/meeting-trigger";
 import { FounderAvatar } from "@/components/meeting/founder-avatar";
-import { FOUNDER_LIST, FOUNDER_SUMMARY } from "@/lib/meetings";
+import { FOUNDER_FACES, FOUNDER_SUMMARY } from "@/lib/meetings";
 import { HeroFilm } from "./hero-film";
 
 /* ═══════════════════════════════════════════════════════════
@@ -33,7 +33,9 @@ import { HeroFilm } from "./hero-film";
 
 const ICON = { strokeWidth: 1.75, "aria-hidden": true, className: "icon-ui" } as const;
 
-const WATCHING = ["Gmail", "Slack", "Calendar", "Drive", "Docs", "GitHub"];
+/* Supported connectors only — this strip claims NavisLabs is watching
+   them right now, so GitHub (roadmap) cannot appear here. */
+const WATCHING = ["Gmail", "Slack", "Calendar", "Drive", "Docs", "Meet"];
 
 /* ── 1 · Hero + 2 · Dashboard (one unit, overlapping) ───── */
 
@@ -93,8 +95,8 @@ function Hero() {
       <div className="relative z-10">
         <Container>
           <ScrollSettle>
-            <div className="mx-auto max-w-[1100px]">
-              <MorningIntelligence className="rounded-[28px]" />
+            <div className="product-well mx-auto max-w-[1100px]">
+              <MorningIntelligence className="product-surface rounded-[28px]" />
             </div>
           </ScrollSettle>
         </Container>
@@ -135,13 +137,13 @@ function Systems() {
         <div className="mx-auto max-w-[820px]">
           <Reveal>
             <p className="t-label mb-5 text-center text-text-2">Your systems</p>
+            {/* Supported only. This strip sits directly under a claim about
+                what NavisLabs reads, so listing a roadmap connector here
+                would read as "already connected". */}
             <ul className="flex flex-wrap justify-center gap-x-8 gap-y-5 rounded-card border border-border bg-surface px-8 py-7">
-              {MARKS.map((m) => (
-                <li
-                  key={m.id}
-                  className="group flex items-center gap-2"
-                >
-                  <BrandIcon name={m.id} size={20} />
+              {SUPPORTED_MARKS.map((m) => (
+                <li key={m.id} className="flex items-center gap-2.5">
+                  <BrandIcon name={m.id} size={22} decorative />
                   <span className="t-caption text-text-2">{m.label}</span>
                 </li>
               ))}
@@ -151,14 +153,14 @@ function Systems() {
           <Thread />
 
           <Reveal delay={0.06}>
-            <div className="relative overflow-hidden rounded-card border border-accent-line bg-accent-wash px-6 py-10 text-center">
+            <div className="accent-block px-6 py-10 text-center">
               <span
                 aria-hidden
                 className="anim-sheen absolute inset-x-0 top-0 h-px"
-                style={{ background: "linear-gradient(90deg,transparent,var(--accent),transparent)" }}
+                style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.85),transparent)" }}
               />
-              <p className="t-heading text-text">NavisLabs</p>
-              <p className="t-caption mt-2 text-text-2">
+              <p className="t-heading relative text-on-accent">NavisLabs</p>
+              <p className="t-caption relative mt-2 text-on-accent-2">
                 One live understanding of how the organization operates
               </p>
             </div>
@@ -308,12 +310,13 @@ function Founders() {
           </p>
 
           <Reveal delay={0.06}>
-            <div className="mt-12 flex items-center justify-center gap-10 sm:gap-16">
-              {FOUNDER_LIST.map((f) => (
-                <div key={f.id} className="flex flex-col items-center">
+            {/* Names only. Titles live exclusively in the booking dialog —
+                the homepage stays minimal, so do not render f.role here. */}
+            <div className="mt-12 flex items-start justify-center gap-10 sm:gap-16">
+              {FOUNDER_FACES.map((f) => (
+                <div key={f.id} className="flex w-[140px] flex-col items-center">
                   <FounderAvatar founder={f} size={104} />
                   <p className="mt-4 text-[15px] font-medium text-text">{f.name}</p>
-                  <p className="t-caption mt-0.5 text-text-2">{f.role}</p>
                 </div>
               ))}
             </div>
@@ -360,7 +363,7 @@ function Close() {
 
             <div className="mt-12 flex flex-col items-center gap-4">
               <span className="flex items-center">
-                {FOUNDER_LIST.map((f, i) => (
+                {FOUNDER_FACES.map((f, i) => (
                   <FounderAvatar
                     key={f.id}
                     founder={f}

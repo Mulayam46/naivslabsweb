@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import type { Founder } from "@/lib/meetings";
+import type { Founder, FounderFace } from "@/lib/meetings";
 
 /* Photos live at the root of public/, so the path IS the URL — there is
    no /public prefix. Initials remain as a fallback if a file is ever
@@ -14,7 +14,10 @@ export function FounderAvatar({
   size = 64,
   className,
 }: {
-  founder: Founder;
+  /* FounderFace, not Founder: an avatar never needs the title, and
+     accepting the narrower shape keeps roles out of payloads that
+     must not carry them. */
+  founder: FounderFace;
   size?: number;
   className?: string;
 }) {
@@ -29,8 +32,8 @@ export function FounderAvatar({
       style={{
         width: size,
         height: size,
-        background: "rgba(0,0,0,0.04)",
-        border: "1px solid rgba(0,0,0,0.06)",
+        background: "var(--accent-wash)",
+        border: "1px solid var(--border)",
       }}
     >
       {failed ? (
@@ -60,7 +63,7 @@ export function FounderStack({
   founders,
   size = 28,
 }: {
-  founders: Founder[];
+  founders: FounderFace[];
   size?: number;
 }) {
   return (
@@ -77,8 +80,20 @@ export function FounderStack({
   );
 }
 
-/** Named founder row for the dialog shell. */
-export function FounderRow({ founders }: { founders: Founder[] }) {
+/**
+ * Named founder row.
+ *
+ * `showRole` is opt-in and defaults to false on purpose: founder titles
+ * belong only inside the booking dialog, and a shared component that
+ * renders them by default is how they end up back on the homepage.
+ */
+export function FounderRow({
+  founders,
+  showRole = false,
+}: {
+  founders: Founder[];
+  showRole?: boolean;
+}) {
   return (
     <ul className="flex flex-wrap gap-x-12 gap-y-6">
       {founders.map((f) => (
@@ -86,7 +101,9 @@ export function FounderRow({ founders }: { founders: Founder[] }) {
           <FounderAvatar founder={f} size={64} />
           <span>
             <span className="block text-[15px] font-medium text-text">{f.name}</span>
-            <span className="mt-0.5 block text-[13px] text-text-2">{f.role}</span>
+            {showRole && (
+              <span className="mt-0.5 block text-[13px] text-text-2">{f.role}</span>
+            )}
           </span>
         </li>
       ))}

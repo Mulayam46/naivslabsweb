@@ -35,8 +35,8 @@ function loadCalendly(): Promise<void> {
 function themed(raw: string) {
   const u = new URL(raw);
   u.searchParams.set("background_color", "ffffff");
-  u.searchParams.set("text_color", "111111");
-  u.searchParams.set("primary_color", "2563eb");
+  u.searchParams.set("text_color", "14130f");
+  u.searchParams.set("primary_color", "2e2a24");
   u.searchParams.set("hide_gdpr_banner", "1");
   /* Our header already states the title, duration and hosts. */
   u.searchParams.set("hide_landing_page_details", "1");

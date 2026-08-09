@@ -52,7 +52,7 @@ export function MeetingCard({
 
       <span
         className="mt-auto flex items-center justify-between gap-4 pt-6"
-        style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}
+        style={{ borderTop: "1px solid var(--border)" }}
       >
         <span className="flex items-center gap-2.5">
           <FounderStack founders={hosts} size={26} />

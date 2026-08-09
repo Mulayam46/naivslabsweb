@@ -259,7 +259,7 @@ export function SystemBar() {
           style={{
             maxWidth: floating ? 1180 : 1600,
             borderRadius: floating ? "var(--r-nav)" : 0,
-            background: floating ? "rgba(248,248,246,0.72)" : "transparent",
+            background: floating ? "rgba(247,246,243,0.72)" : "transparent",
             border: `1px solid ${floating ? "var(--border)" : "transparent"}`,
             boxShadow: floating ? "var(--shadow-nav)" : "none",
             backdropFilter: floating && !reduce ? "blur(20px) saturate(1.6)" : undefined,

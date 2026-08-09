@@ -80,7 +80,7 @@ export function MeetingDialog({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className="fixed inset-0 z-[90] backdrop-blur-xl"
-                style={{ background: "rgba(255,255,255,0.28)" }}
+                style={{ background: "rgba(20,19,15,0.30)" }}
               />
             </Dialog.Overlay>
 
@@ -93,10 +93,10 @@ export function MeetingDialog({
                 aria-describedby={undefined}
                 className="fixed inset-0 z-[100] flex flex-col overflow-hidden backdrop-blur-2xl sm:inset-auto sm:left-1/2 sm:top-1/2 sm:h-[88vh] sm:w-[95vw] sm:max-w-[1120px] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[32px]"
                 style={{
-                  background: "rgba(255,255,255,0.72)",
-                  border: "1px solid rgba(255,255,255,0.45)",
+                  background: "rgba(255,254,252,0.76)",
+                  border: "1px solid rgba(255,255,255,0.55)",
                   boxShadow:
-                    "0 48px 120px -24px rgba(17,17,17,0.28), 0 8px 32px -8px rgba(17,17,17,0.10)",
+                    "0 48px 120px -24px rgba(28,25,20,0.30), 0 8px 32px -8px rgba(28,25,20,0.10)",
                 }}
               >
                 {/* ── Chrome ── */}
@@ -122,8 +122,8 @@ export function MeetingDialog({
                       aria-label="Close"
                       className="flex h-10 w-10 items-center justify-center rounded-full text-text-2 transition-all duration-200 hover:scale-105 hover:text-text motion-reduce:hover:scale-100"
                       style={{
-                        background: "rgba(255,255,255,0.7)",
-                        border: "1px solid rgba(0,0,0,0.06)",
+                        background: "rgba(255,255,255,0.74)",
+                        border: "1px solid var(--border)",
                       }}
                     >
                       <X size={16} strokeWidth={1.75} aria-hidden />
@@ -261,21 +261,28 @@ export function MeetingDialog({
 
 /* ── Founder header — photos, names, then one warm line ── */
 
+/* Each founder is one column — photo, name, then title — so a face is
+   always directly above its own name. The previous version overlapped
+   both photos in a stack and listed the names separately beside it,
+   which left the reader guessing which face was which.
+
+   This is the ONLY place founder titles appear on the site. */
 function FounderHeader() {
   return (
     <div>
-      <FounderStack founders={FOUNDER_LIST} size={56} />
-
-      <div className="mt-6 flex flex-wrap gap-x-12 gap-y-4">
+      <ul className="flex flex-wrap gap-x-14 gap-y-8">
         {FOUNDER_LIST.map((f) => (
-          <div key={f.id}>
-            <p className="text-[15px] font-medium text-text">{f.name}</p>
-            <p className="mt-0.5 text-[13px] text-text-2">{f.role}</p>
-          </div>
+          <li key={f.id} className="flex w-[150px] flex-col items-start">
+            <FounderAvatar founder={f} size={56} />
+            <p className="mt-3.5 text-[15px] font-medium leading-tight text-text">
+              {f.name}
+            </p>
+            <p className="mt-1 text-[13px] leading-tight text-text-2">{f.role}</p>
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <p className="mt-6 text-[14px] text-text-2">{FOUNDER_TAGLINE}</p>
+      <p className="mt-7 text-[14px] text-text-2">{FOUNDER_TAGLINE}</p>
     </div>
   );
 }

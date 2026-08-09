@@ -76,7 +76,7 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   /* Matches --canvas so mobile browser chrome blends with the page. */
-  themeColor: "#FAFAFA",
+  themeColor: "#F5F7FC",
 };
 
 export default function RootLayout({

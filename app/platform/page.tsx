@@ -7,7 +7,7 @@ import {
 import { PageShell } from "@/components/site/chrome";
 import { MorningIntelligence } from "@/components/site/dashboard";
 import { FaqJsonLd } from "@/components/site/jsonld";
-import { AVAILABLE_MARKS, BrandIcon, SOON_MARKS } from "@/components/site/logos";
+import { BrandIcon, SOON_MARKS, SUPPORTED_MARKS } from "@/components/site/logos";
 import { Reveal } from "@/components/site/reveal";
 import { Button, Card, Container, Section, SectionHead } from "@/components/site/ui";
 import { MeetingTrigger } from "@/components/meeting/meeting-trigger";
@@ -117,8 +117,8 @@ export default function PlatformPage() {
       <Section id="morning-intelligence" pad="sm">
         <Container>
           <Reveal>
-            <div className="mx-auto max-w-[1100px]">
-              <MorningIntelligence />
+            <div className="product-well mx-auto max-w-[1100px]">
+              <MorningIntelligence className="product-surface" />
             </div>
           </Reveal>
           <p className="t-caption mx-auto mt-5 max-w-[1100px] text-text-2">
@@ -299,24 +299,21 @@ export default function PlatformPage() {
 
           <div className="mx-auto mt-12 max-w-[940px]">
             <div className="flex items-baseline justify-between gap-4">
-              <p className="t-label text-text">Available today</p>
-              <p className="t-caption text-text-2">{AVAILABLE_MARKS.length} systems</p>
+              <p className="t-label text-text">Supported</p>
+              <p className="t-caption text-text-2">{SUPPORTED_MARKS.length} systems</p>
             </div>
             <Reveal delay={0.04}>
               <ul className="mt-4 grid gap-px overflow-hidden rounded-card border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-                {AVAILABLE_MARKS.map((m) => (
+                {SUPPORTED_MARKS.map((m) => (
                   <li
                     key={m.id}
-                    className="group flex items-center justify-between gap-4 bg-surface px-5 py-4"
+                    className="flex items-center justify-between gap-4 bg-surface px-5 py-4"
                   >
-                    <span className="flex items-center gap-2.5">
-                      <BrandIcon name={m.id} />
-                      <span className="t-caption text-text">{m.label}</span>
+                    <span className="flex min-w-0 items-center gap-3">
+                      <BrandIcon name={m.id} size={26} decorative />
+                      <span className="t-caption truncate text-text">{m.label}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <span aria-hidden className="dot bg-steady" />
-                      <span className="t-label text-steady">Live</span>
-                    </span>
+                    <span className="t-label flex-shrink-0 text-text">Supported</span>
                   </li>
                 ))}
               </ul>
@@ -324,29 +321,28 @@ export default function PlatformPage() {
 
             <div className="mt-12 flex items-baseline justify-between gap-4">
               <p className="t-label text-text">Coming soon</p>
-              <p className="t-caption text-text-2">On the roadmap</p>
+              <p className="t-caption text-text-2">{SOON_MARKS.length} on the roadmap</p>
             </div>
             <Reveal delay={0.04}>
               <ul className="mt-4 grid gap-px overflow-hidden rounded-card border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
                 {SOON_MARKS.map((m) => (
                   <li
                     key={m.id}
-                    className="group flex items-center justify-between gap-4 bg-surface px-5 py-4"
+                    className="is-soon flex items-center justify-between gap-4 bg-surface px-5 py-4"
                   >
-                    <span className="flex items-center gap-2.5 opacity-70">
-                      <BrandIcon name={m.id} />
-                      <span className="t-caption text-text-2">{m.label}</span>
+                    <span className="flex min-w-0 items-center gap-3">
+                      <BrandIcon name={m.id} size={26} decorative />
+                      <span className="t-caption truncate text-text-2">{m.label}</span>
                     </span>
-                    <span className="t-label text-text-2">Planned</span>
+                    <span className="t-label flex-shrink-0 text-text-2">Coming soon</span>
                   </li>
                 ))}
               </ul>
             </Reveal>
 
             <p className="t-caption mx-auto mt-8 max-w-[64ch] text-center leading-relaxed text-text-2">
-              More enterprise integrations are on our roadmap, including Salesforce and
-              Microsoft 365. Need a specific system? Let us know during your demo and
-              we&rsquo;ll tell you exactly where it stands.
+              Need a specific system? Let us know during your demo and we&rsquo;ll tell
+              you exactly where it stands.
             </p>
           </div>
         </Container>

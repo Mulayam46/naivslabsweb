@@ -21,6 +21,10 @@ export type FounderId = "abhishek" | "mulayam";
 export type Founder = {
   id: FounderId;
   name: string;
+  /* Rendered ONLY inside the booking dialog. The homepage founders
+     section shows names alone — anything that consumes a Founder must
+     opt into the title rather than getting it for free, or the roles
+     leak back onto the homepage the next time a component is reused. */
   role: string;
   initials: string;
   /** Served from public/ — the path is the URL, with no /public prefix. */
@@ -38,13 +42,31 @@ export const FOUNDERS: Record<FounderId, Founder> = {
   mulayam: {
     id: "mulayam",
     name: "Mulayam Kumar",
-    role: "Co-founder",
+    role: "Co-founder & CTO",
     initials: "MK",
     photo: "/Mulayam.jpeg",
   },
 };
 
 export const FOUNDER_LIST: Founder[] = [FOUNDERS.abhishek, FOUNDERS.mulayam];
+
+/** A founder without their title — everything an avatar needs, nothing more. */
+export type FounderFace = Omit<Founder, "role">;
+
+/**
+ * For surfaces that must not carry titles — i.e. the homepage.
+ *
+ * Avatars are Client Components, so whatever object is handed to them
+ * is serialized into the RSC payload. Passing the full Founder would
+ * put "Founder & CEO" in the homepage's page source even though it is
+ * never displayed. This narrows it at the boundary instead.
+ */
+export const FOUNDER_FACES: FounderFace[] = FOUNDER_LIST.map((f) => ({
+  id: f.id,
+  name: f.name,
+  initials: f.initials,
+  photo: f.photo,
+}));
 
 /** Reads a required Calendly URL. Reports rather than substituting. */
 /* These values are inlined into the client bundle at build time and end

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/site/chrome";
 import { Crosshair, Layers, ShieldCheck, UserCheck } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
-import { BrandIcon, MARKS } from "@/components/site/logos";
+import { BrandIcon, SUPPORTED_MARKS } from "@/components/site/logos";
 import { Container, Section, SectionHead } from "@/components/site/ui";
 import { CONTACT_EMAIL } from "@/lib/site";
 
@@ -76,12 +76,9 @@ export default function CompanyPage() {
 
           <Reveal delay={0.06}>
             <ul className="mt-12 flex flex-wrap gap-x-10 gap-y-7">
-              {MARKS.map((m) => (
-                <li
-                  key={m.id}
-                  className="group flex items-center gap-2.5"
-                >
-                  <BrandIcon name={m.id} size={24} />
+              {SUPPORTED_MARKS.map((m) => (
+                <li key={m.id} className="flex items-center gap-2.5">
+                  <BrandIcon name={m.id} size={24} decorative />
                   <span className="t-caption text-text-2">{m.label}</span>
                 </li>
               ))}

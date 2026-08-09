@@ -5,7 +5,7 @@ import {
   TrendingUp, TriangleAlert, UserMinus,
 } from "lucide-react";
 import { PageShell } from "@/components/site/chrome";
-import { AVAILABLE_MARKS, BrandIcon } from "@/components/site/logos";
+import { BrandIcon, SUPPORTED_MARKS } from "@/components/site/logos";
 import { Reveal } from "@/components/site/reveal";
 import { Button, Card, Container, Section, SectionHead } from "@/components/site/ui";
 import { MeetingTrigger } from "@/components/meeting/meeting-trigger";
@@ -95,9 +95,9 @@ function Diagram() {
       <Reveal>
         <p className="t-label mb-4 text-center text-text-2">Your systems</p>
         <ul className="flex flex-wrap justify-center gap-x-7 gap-y-4 rounded-card border border-border bg-surface px-7 py-6">
-          {AVAILABLE_MARKS.map((m) => (
-            <li key={m.id} className="group flex items-center gap-2">
-              <BrandIcon name={m.id} />
+          {SUPPORTED_MARKS.map((m) => (
+            <li key={m.id} className="flex items-center gap-2.5">
+              <BrandIcon name={m.id} size={24} decorative />
               <span className="t-caption text-text-2">{m.label}</span>
             </li>
           ))}
@@ -107,14 +107,14 @@ function Diagram() {
       <Thread />
 
       <Reveal delay={0.06}>
-        <div className="relative overflow-hidden rounded-card border border-accent-line bg-accent-wash px-6 py-9 text-center">
+        <div className="accent-block px-6 py-9 text-center">
           <span
             aria-hidden
             className="anim-sheen absolute inset-x-0 top-0 h-px"
-            style={{ background: "linear-gradient(90deg,transparent,var(--accent),transparent)" }}
+            style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.85),transparent)" }}
           />
-          <p className="t-heading text-text">NavisLabs</p>
-          <p className="t-caption mt-2 text-text-2">
+          <p className="t-heading relative text-on-accent">NavisLabs</p>
+          <p className="t-caption relative mt-2 text-on-accent-2">
             One continuously updated understanding of the organization
           </p>
         </div>
