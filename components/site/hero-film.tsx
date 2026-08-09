@@ -30,7 +30,9 @@ function networkAllowsHeavyMedia(): boolean {
 export function HeroFilm() {
   const reduce = useReducedMotion();
   const [load, setLoad] = useState(false);
+  const [failed, setFailed] = useState(false);
   const holder = useRef<HTMLDivElement>(null);
+  const film = useRef<HTMLVideoElement>(null);
 
   /* Fetch only once the hero is on screen and the connection allows it.
      setState fires in the observer callback, never in the effect body. */
@@ -50,13 +52,25 @@ export function HeroFilm() {
     return () => io.disconnect();
   }, [reduce]);
 
-  if (reduce) return null;
+  /* Autoplay policy can still reject a muted video (a background tab at
+     mount, or a Low Power Mode iPhone). Nothing is audible and nothing
+     depends on it, so ask once and let it go quietly. */
+  useEffect(() => {
+    if (!load || !film.current) return;
+    const v = film.current;
+    const attempt = v.play();
+    if (attempt) attempt.catch(() => {});
+  }, [load]);
+
+  if (reduce || failed) return null;
 
   return (
     <div ref={holder} aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       {load && (
         <video
+          ref={film}
           src={FILM_SRC}
+          onError={() => setFailed(true)}
           className="h-full w-full object-cover"
           style={{
             opacity: 0.5,
@@ -71,7 +85,13 @@ export function HeroFilm() {
           muted
           loop
           playsInline
-          preload="none"
+          /* NOT "none". This element only mounts once the observer and the
+             connection check have already agreed to load the clip, so
+             telling the browser not to fetch it here just cancels that
+             decision — Chrome honours the hint and never issues the
+             request, which is why the hero rendered empty. The deferral
+             lives in the mount condition, not in this attribute. */
+          preload="auto"
         />
       )}
     </div>
