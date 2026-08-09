@@ -1,42 +1,39 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
-import { WarningsSuppressor } from "@/components/warning-suppressor";
 import { Analytics } from "@/components/analytics";
+import { SiteJsonLd } from "@/components/site/jsonld";
+import { MeetingProvider } from "@/components/meeting/meeting-provider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-ibm-mono",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://navislabs.in"),
   title: {
-    default: "Navis — Organizational Intelligence Infrastructure",
-    template: "%s · Navis",
+    default: "NavisLabs — Enterprise Intelligence Infrastructure",
+    template: "%s · NavisLabs",
   },
   description:
-    "Navis turns fragmented signals across email, meetings, Slack, and calendars into organizational understanding — so important work doesn\u2019t quietly slip. Built by NavisLabs.",
+    "NavisLabs connects the systems your organization already runs and continuously builds a live operational model your teams and AI agents use to make better decisions.",
   keywords: [
+    "Enterprise Intelligence Infrastructure",
     "Organizational Intelligence",
-    "Founder Daily Brief",
-    "Decision Intelligence",
-    "Company Brain",
-    "Navis AI",
+    "Operational model",
+    "Decision intelligence",
+    "Enterprise AI",
     "NavisLabs",
-    "AI for founders",
-    "AI infrastructure",
-    "Organizational memory",
   ],
   authors: [{ name: "NavisLabs" }],
   creator: "NavisLabs",
   publisher: "NavisLabs",
-  applicationName: "Navis",
-  category: "AI · Organizational Intelligence",
+  applicationName: "NavisLabs",
+  /* NOTE: `alternates` is deliberately NOT set here. Metadata fields
+     are inherited by every child route, so a canonical declared on the
+     root layout made /vision, /security and /how-it-works all canonicalize
+     to "/". Each route now declares its own. */
   robots: {
     index: true,
     follow: true,
@@ -48,18 +45,10 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: "/navis-logo.png",
-    apple: "/navis-logo.png",
-    shortcut: "/navis-logo.png",
-  },
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
-    title: "Navis · Organizational Intelligence Infrastructure",
+    title: "NavisLabs — Enterprise Intelligence Infrastructure",
     description:
-      "Navis turns fragmented company signals into continuously updated organizational understanding — so leaders know what matters before problems become expensive.",
+      "A live operational model of how your organization actually runs, built from the systems you already use.",
     siteName: "NavisLabs",
     url: "https://navislabs.in",
     locale: "en_US",
@@ -69,15 +58,15 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Navis · Organizational Intelligence Infrastructure",
+        alt: "NavisLabs — Enterprise Intelligence Infrastructure",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Navis · Organizational Intelligence Infrastructure",
+    title: "NavisLabs — Enterprise Intelligence Infrastructure",
     description:
-      "Turns fragmented company signals into continuously updated organizational understanding.",
+      "A live operational model of how your organization actually runs, built from the systems you already use.",
     images: ["/og.png"],
     creator: "@navislabs",
   },
@@ -86,31 +75,24 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  themeColor: "#050816",
+  /* Matches --canvas so mobile browser chrome blends with the page. */
+  themeColor: "#FAFAFA",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      data-scroll-behavior="smooth"
-      className={cn(GeistSans.variable, inter.variable, plexMono.variable, "font-sans")}
-      style={{ colorScheme: "dark", backgroundColor: "var(--bg)" }}
+      className={cn(GeistSans.variable, GeistMono.variable, inter.variable)}
     >
-      <body
-        className="min-h-screen antialiased font-sans"
-        style={{
-          backgroundColor: "var(--bg)",
-          color: "var(--ink)",
-        }}
-      >
-        <WarningsSuppressor />
+      <body className="min-h-screen antialiased">
+        <SiteJsonLd />
         <Analytics />
-        {children}
+        <MeetingProvider>{children}</MeetingProvider>
       </body>
     </html>
   );

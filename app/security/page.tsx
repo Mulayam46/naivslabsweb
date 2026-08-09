@@ -1,94 +1,119 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PageShell, ModuleLabel, Fade } from "@/components/site/chrome";
+import { PageShell } from "@/components/site/chrome";
+import { Reveal } from "@/components/site/reveal";
+import { Button, Card, Container, Section, SectionHead, Dot } from "@/components/site/ui";
+import { MeetingTrigger } from "@/components/meeting/meeting-trigger";
 
 export const metadata: Metadata = {
-  title: "Trust · Operating constraints",
+  title: "Security",
   description:
-    "How Navis treats your company's most sensitive data: read-only scopes, human-in-the-loop control, full explainability, and auditable actions.",
+    "How NavisLabs treats your organization's most sensitive systems: read-only OAuth scopes, human approval on every action, full explainability, and isolated data that never trains shared models.",
+  alternates: { canonical: "/security" },
 };
 
 const CONSTRAINTS: [string, string, string][] = [
   [
-    "SCOPE",
-    "Read-only, granted by you",
-    "Navis connects to Google Workspace and Slack through OAuth scopes you explicitly grant. It reads; it does not act on your accounts without you.",
+    "Scope",
+    "Read-only, granted by your administrator",
+    "NavisLabs connects through OAuth scopes your administrator explicitly grants, and which can be revoked at any time. It reads; it does not write to your systems or act on your accounts.",
   ],
   [
-    "CONTROL",
-    "Human-in-the-loop",
-    "No autonomous fantasy. Navis recommends, prepares, and drafts — the founder approves anything that matters.",
+    "Control",
+    "A person approves anything that acts",
+    "NavisLabs prepares, drafts and recommends. Nothing leaves the system without human approval. There is no autonomous mode to turn on.",
   ],
   [
-    "EXPLAINABILITY",
+    "Explainability",
     "Every conclusion shows its work",
-    "Each brief item traces to its source signals: which email, which meeting, which thread. If Navis can't show why, it doesn't say it.",
+    "Each item traces to the specific signals that produced it — which thread, which meeting, which document. If NavisLabs cannot show why, it does not surface the claim.",
   ],
   [
-    "AUDIT",
-    "Everything is logged",
-    "Every recommendation and approved action writes to an audit log. Your data stays yours — it is never used to train shared models.",
+    "Isolation",
+    "Your data stays yours",
+    "Your organization's data is never used to train shared or foundation models. Every recommendation and approved action writes to an audit log you can export.",
   ],
+];
+
+const DEPLOYMENT: [string, string][] = [
+  ["Access model", "Least-privilege OAuth. No endpoint agents, no browser extensions, no inbox rules."],
+  ["Data in transit", "TLS 1.2+ on every connection to your identity provider and source systems."],
+  ["Revocation", "Scopes are revocable from your admin console at any time; ingestion stops immediately."],
+  ["Audit", "Every surfaced conclusion and approved action is logged with its source signals."],
+  ["Retention", "Configurable per deployment, including full deletion on request."],
 ];
 
 export default function SecurityPage() {
   return (
     <PageShell
-      module="Trust"
+      eyebrow="Security"
       title="Trust is a design constraint,"
       titleMuted="not a page."
-      intro="Navis reads the most sensitive surface a company has — its inbox, calendar, and conversations. These are the constraints the system is built under, stated plainly."
+      lede="NavisLabs reads the most sensitive surface an organization has — its mail, calendars and conversations. These are the constraints the system is built under, stated plainly."
     >
-      <section className="border-t border-line bg-bg-2 px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-[1280px]">
-          <ModuleLabel n="01" title="Operating constraints" />
-          <div className="mt-16 grid gap-5 sm:grid-cols-2">
+      <Section id="constraints" ground="surface" line>
+        <Container>
+          <SectionHead eyebrow="Operating constraints" title="Four commitments the architecture enforces." />
+          <div className="mt-14 grid gap-5 sm:grid-cols-2">
             {CONSTRAINTS.map(([k, title, body], i) => (
-              <Fade key={k} delay={i * 0.05}>
-                <div className="h-full rounded-lg bg-white/[0.02] p-7 ring-1 ring-white/[0.07] transition-shadow duration-300 hover:ring-white/[0.14]">
-                  <span className="font-mono text-[10.5px] font-semibold tracking-[0.16em] text-ink-3">
-                    {k}
-                  </span>
-                  <h2 className="mt-4 font-heading text-[20px] font-semibold tracking-[-0.015em] text-ink">
-                    {title}
-                  </h2>
-                  <p className="mt-2.5 text-[14.5px] leading-[1.75] text-ink-2">
-                    {body}
-                  </p>
-                </div>
-              </Fade>
+              <Reveal key={k} delay={i * 0.06}>
+                <Card className="h-full p-7 md:p-8">
+                  <span className="t-label text-text-2">{k}</span>
+                  <h2 className="t-strong mt-4 text-text">{title}</h2>
+                  <p className="mt-3 t-body leading-relaxed text-text-2">{body}</p>
+                </Card>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      <section className="border-t border-line px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-[1280px]">
-          <ModuleLabel n="02" title="Honest posture" />
-          <div className="mt-14 max-w-[760px]">
-            <p className="text-[16.5px] leading-[1.8] text-ink-2">
-              Navis is in private beta. We don&apos;t claim certifications we
-              don&apos;t hold, logos we haven&apos;t earned, or correctness no
-              probabilistic system can guarantee. What we do claim: least
-              privilege, your approval on anything that matters, and a trace
-              behind every conclusion. Security questions —{" "}
-              <a
-                href="mailto:hello@navislabs.in"
-                className="text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
-              >
-                hello@navislabs.in
-              </a>
-              .
-            </p>
-            <Link
-              href="/request-access"
-              className="mt-10 inline-flex h-11 cursor-pointer items-center rounded-md bg-accent px-5 text-[13.5px] font-medium text-[#050816] transition-colors hover:bg-accent-ink"
-            >
-              Request access
-            </Link>
+      <Section ground="canvas">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+            <SectionHead eyebrow="Deployment" title="What your security team will ask." />
+            <Reveal>
+              <dl className="well p-7 md:p-8">
+                {DEPLOYMENT.map(([k, v], i) => (
+                  <div
+                    key={k}
+                    className={`grid gap-2 py-4 sm:grid-cols-[minmax(0,9rem)_1fr] sm:gap-6 ${
+                      i > 0 ? "border-t border-border" : ""
+                    }`}
+                  >
+                    <dt className="t-label pt-1 text-text-2">{k}</dt>
+                    <dd className="t-body leading-relaxed text-text-2">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
+
+      <Section ground="surface" line>
+        <Container>
+          <div className="max-w-[760px]">
+            <SectionHead eyebrow="Honest posture" title="What we do not claim." />
+            <p className="mt-8 t-body leading-relaxed text-text-2">
+              NavisLabs is early. We do not claim certifications we do not hold, logos we have
+              not earned, or correctness that no probabilistic system can guarantee. What we
+              do claim: least privilege, your approval on anything that acts, isolation of
+              your data, and a traceable path behind every conclusion. If your security
+              review needs something specific, ask us directly and we will answer plainly.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <MeetingTrigger />
+              <Button href="mailto:hello@navislabs.in" variant="secondary">
+                Send a security question
+              </Button>
+            </div>
+            <p className="mt-8 flex items-center gap-2.5 t-caption text-text-2">
+              <Dot signal="steady" />
+              Security questions are answered by an engineer, not a form.
+            </p>
+          </div>
+        </Container>
+      </Section>
     </PageShell>
   );
 }
