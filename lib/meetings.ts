@@ -177,4 +177,6 @@ export const FOUNDER_NOTE: string[] = [
   "If you're exploring AI inside your company, we'd love to learn how you think about the future of work.",
 ];
 
-export const CONTACT_EMAIL = "hello@navislabs.in";
+/* Re-exported so consumers of this module have one import path for
+   meeting content + the contact email. Source of truth is lib/site.ts. */
+export { CONTACT_EMAIL } from "./site";

@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useSafeReducedMotion } from "@/lib/motion";
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -28,7 +29,7 @@ export function Reveal({
   className?: string;
   as?: "div" | "li" | "span";
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const Tag = motion[as];
 
   if (reduce) {
@@ -49,33 +50,21 @@ export function Reveal({
   );
 }
 
-/** Page-load reveal for above-the-fold content — plays immediately, not on scroll. */
-export function Enter({
-  children,
-  delay = 0,
-  y = 18,
-  className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  y?: number;
-  className?: string;
-}) {
-  const reduce = useReducedMotion();
+/* ── There is deliberately no <Enter> ─────────────────────────
+   A page-load equivalent of <Reveal> used to live here, and the hero
+   used it. Don't bring it back.
 
-  if (reduce) return <div className={className}>{children}</div>;
+   A motion component renders its `initial` as inline style, so the
+   prerendered HTML ships `opacity:0` on whatever it wraps. Above the
+   fold that is the LCP element: it stays invisible until the client
+   bundle downloads, hydrates and runs the delay — and stays invisible
+   forever if the bundle never arrives.
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y, filter: "blur(8px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.85, ease: EASE, delay }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+   Above-the-fold entrances use the CSS `anim-rise` + `d-1`…`d-6`
+   classes in globals.css instead. They paint on the first frame with
+   no JS, and the reduced-motion media query already collapses them.
+   <Reveal> is fine below the fold: the reader cannot see the start
+   state, and content that far down is not the LCP candidate. */
 
 /**
  * Scroll-driven settle for the product shot.
@@ -86,7 +75,7 @@ export function Enter({
  * not a timer, so it tracks the user rather than playing at them.
  */
 export function ScrollSettle({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,

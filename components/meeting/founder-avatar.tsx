@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import type { Founder, FounderFace } from "@/lib/meetings";
+import type { FounderFace } from "@/lib/meetings";
 
 /* Photos live at the root of public/, so the path IS the URL — there is
    no /public prefix. Initials remain as a fallback if a file is ever
@@ -77,36 +77,5 @@ export function FounderStack({
         />
       ))}
     </span>
-  );
-}
-
-/**
- * Named founder row.
- *
- * `showRole` is opt-in and defaults to false on purpose: founder titles
- * belong only inside the booking dialog, and a shared component that
- * renders them by default is how they end up back on the homepage.
- */
-export function FounderRow({
-  founders,
-  showRole = false,
-}: {
-  founders: Founder[];
-  showRole?: boolean;
-}) {
-  return (
-    <ul className="flex flex-wrap gap-x-12 gap-y-6">
-      {founders.map((f) => (
-        <li key={f.id} className="flex items-center gap-4">
-          <FounderAvatar founder={f} size={64} />
-          <span>
-            <span className="block text-[15px] font-medium text-text">{f.name}</span>
-            {showRole && (
-              <span className="mt-0.5 block text-[13px] text-text-2">{f.role}</span>
-            )}
-          </span>
-        </li>
-      ))}
-    </ul>
   );
 }

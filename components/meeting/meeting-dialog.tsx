@@ -3,7 +3,8 @@
 import { useCallback, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useSafeReducedMotion } from "@/lib/motion";
 import {
   FOUNDERS,
   FOUNDER_LIST,
@@ -49,7 +50,7 @@ export function MeetingDialog({
   initialView?: DialogView;
   onOpenChange: (open: boolean) => void;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   /* Initial state, not synced state. The provider remounts this on every
      open (see its `key`), so each session starts on the requested view
      without a setState-in-effect cascade. */

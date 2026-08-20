@@ -15,8 +15,10 @@ export default function manifest(): MetadataRoute.Manifest {
       "NavisLabs connects the systems your organization already runs and continuously builds a live operational model your teams and AI agents use to make better decisions.",
     start_url: "/",
     display: "browser",
-    background_color: "#FAFAFA",
-    theme_color: "#FAFAFA",
+    /* Warm neutrals — matches --canvas so the installed shell and the
+       mobile browser chrome (viewport.themeColor) do not disagree. */
+    background_color: "#F7F6F3",
+    theme_color: "#F7F6F3",
     icons: [
       { src: "/icon.png", sizes: "256x256", type: "image/png" },
       { src: "/apple-icon.png", sizes: "180x180", type: "image/png" },

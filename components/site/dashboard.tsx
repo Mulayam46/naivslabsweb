@@ -90,7 +90,11 @@ function PriorityRow({ item, index }: { item: Priority; index: number }) {
         <span className="t-label text-text-2">Owner · {item.owner}</span>
       </div>
 
-      <h4 className="t-strong mt-2.5 text-text">{item.title}</h4>
+      {/* Not a heading. This whole surface is a single `role="img"`, so
+          its contents are already hidden from assistive tech and a real
+          <h4> here only shows up as an out-of-order level in automated
+          audits — it lands between the page <h1> and the first <h2>. */}
+      <p className="t-strong mt-2.5 text-text">{item.title}</p>
       <p className="mt-1.5 t-caption leading-relaxed text-text-2">{item.detail}</p>
 
       <p className="mt-3 flex flex-wrap items-baseline gap-x-2 rounded-[10px] bg-surface-alt px-3 py-2 t-caption leading-relaxed text-text-2">

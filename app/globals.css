@@ -203,6 +203,30 @@ button { font: inherit; }
   border-radius: 4px;
 }
 
+/* ── Skip link ─────────────────────────────────────────────
+   Off-screen until focused, then a real button in the top-left.
+   The nav is fixed and carries five stops, so without this a
+   keyboard user tabs through the whole header on every page. */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  padding: 10px 18px;
+  border-radius: var(--r-button);
+  background: var(--cta);
+  color: var(--cta-text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  transform: translateY(calc(-100% - 24px));
+  transition: transform var(--t-control) var(--ease-out);
+}
+.skip-link:focus { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}
+
 /* ═══════════════════════════════════════════════════════════
    Type — five sizes
 ═══════════════════════════════════════════════════════════ */
@@ -495,8 +519,19 @@ button { font: inherit; }
 .anim-breathe { animation: breathe 2.6s ease-in-out infinite; }
 .anim-sheen   { background-size: 180% 100%; animation: sheen 4.5s ease-in-out infinite; }
 
+/* Staggered entrance delays.
+   These exist so above-the-fold content can be revealed by CSS alone.
+   A JS-driven reveal (<Enter>) ships its start state as inline
+   `opacity:0` in the prerendered HTML, which parks the LCP element
+   behind hydration — and leaves it invisible forever if the bundle
+   never arrives. CSS animations run on first paint, so the hero paints
+   at its natural time and the stagger is pure decoration on top. */
 .d-1 { animation-delay: 70ms; }
 .d-2 { animation-delay: 140ms; }
+.d-3 { animation-delay: 210ms; }
+.d-4 { animation-delay: 280ms; }
+.d-5 { animation-delay: 350ms; }
+.d-6 { animation-delay: 430ms; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -504,6 +539,14 @@ button { font: inherit; }
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    /* Negative delay, not 0 — it starts the animation already past its
+       end, so the element paints in its FINAL state on the first frame.
+       Collapsing the duration alone is not enough: `.d-1`…`.d-6` still
+       apply, and with `animation-fill-mode: both` the element would sit
+       in its `from` state (opacity 0) for the whole delay. That is up to
+       430ms of invisible hero for exactly the readers who asked for
+       less motion. */
+    animation-delay: -0.01ms !important;
   }
 }
 
@@ -600,21 +643,30 @@ button { font: inherit; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Hero sound control
+   Hero media controls
 
-   A cinematic media control, not a player: one circular icon button in
-   the bottom-right of the hero. No label — the icon is the only status
-   indicator, and the accessible name lives on aria-label.
+   Two circular icon buttons, bottom-right: pause/play the film, and
+   mute/unmute the score. No labels — the icon carries the meaning and
+   the accessible name lives on aria-label.
 
-   It sits right of the centred hero column and below the LIVE strip,
-   so it clears the headline, the CTA and the fixed nav at every width.
-   Hidden until the autoplay attempt resolves.
+   `fixed`, not `absolute`. Both the film and the score keep running
+   while the reader scrolls, so a control anchored inside the hero
+   would scroll out of reach and leave motion and audio running with no
+   way to stop them. That is a WCAG 2.2.2 (Pause, Stop, Hide) failure
+   for the film and 1.4.2 (Audio Control) for the score. Pinned to the
+   viewport, both stop controls are reachable from anywhere.
 ═══════════════════════════════════════════════════════════ */
-.hero-audio {
-  position: absolute;
+.hero-controls {
+  position: fixed;
   right: var(--gutter);
   bottom: clamp(16px, 2.5vw, 28px);
-  z-index: 20;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-ctl {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -628,26 +680,22 @@ button { font: inherit; }
   box-shadow: 0 4px 16px -4px rgba(28, 25, 20, 0.35);
   color: #FFFFFF;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 400ms var(--ease-out),
-              background var(--t-micro) var(--ease-out),
+  transition: background var(--t-micro) var(--ease-out),
               transform var(--t-micro) var(--ease-out);
 }
-.hero-audio.is-ready { opacity: 1; pointer-events: auto; }
-.hero-audio:hover { background: rgba(20, 19, 15, 0.74); }
-.hero-audio:active { transform: scale(0.94); }
-.hero-audio:focus-visible {
+.hero-ctl:hover { background: rgba(20, 19, 15, 0.74); }
+.hero-ctl:active { transform: scale(0.94); }
+.hero-ctl:focus-visible {
   outline: 2px solid var(--text);
   outline-offset: 3px;
 }
 /* Visually compact, but a full touch target where fingers are used. */
 @media (pointer: coarse) {
-  .hero-audio { width: 44px; height: 44px; }
+  .hero-ctl { width: 44px; height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-audio { transition: opacity 400ms linear; }
-  .hero-audio:active { transform: none; }
+  .hero-ctl { transition: none; }
+  .hero-ctl:active { transform: none; }
 }
 
 /* The footer sits on the same canvas as everything above it. */
@@ -701,9 +749,3 @@ footer { background: transparent !important; }
   .brand-icon { transition: opacity 200ms var(--ease-out); }
 }
 
-/* Icon + label pairs: 8px gap, optically centred. */
-.icon-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}

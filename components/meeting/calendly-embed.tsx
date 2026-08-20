@@ -37,7 +37,11 @@ function themed(raw: string) {
   u.searchParams.set("background_color", "ffffff");
   u.searchParams.set("text_color", "14130f");
   u.searchParams.set("primary_color", "2e2a24");
-  u.searchParams.set("hide_gdpr_banner", "1");
+  /* `hide_gdpr_banner=1` is deliberately NOT set. Suppressing a third
+     party's own cookie notice does not remove the cookies it sets — it
+     only removes the disclosure, which is the part that matters under
+     GDPR. Calendly is a processor here and this widget runs for EU
+     visitors, so its banner stays visible. */
   /* Our header already states the title, duration and hosts. */
   u.searchParams.set("hide_landing_page_details", "1");
   u.searchParams.set("hide_event_type_details", "1");

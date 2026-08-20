@@ -12,6 +12,24 @@ import { cn } from "@/lib/utils";
 
 /* ── Layout ──────────────────────────────────────────────── */
 
+/**
+ * First tabbable element on every page.
+ *
+ * The nav is `position: fixed` and carries five stops plus a burger, so
+ * without this a keyboard or switch user re-tabs the entire header
+ * before reaching content on every single navigation. Off-screen until
+ * focused (see `.skip-link`), so it costs sighted readers nothing.
+ *
+ * Its target is `#content` — the `<main>` of whichever page renders it.
+ */
+export function SkipLink() {
+  return (
+    <a href="#content" className="skip-link">
+      Skip to content
+    </a>
+  );
+}
+
 export function Container({
   children,
   className,

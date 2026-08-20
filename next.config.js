@@ -44,12 +44,44 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
-  /* Redirects removed with the old booking route: /request-access,
-     /talk-to-founder and /book-demo all pointed at /lets-talk, which
-     no longer exists — a 308 to a 404 is worse than nothing. Restore
-     them pointing at the new booking route once it ships. */
+  /* The old booking paths pointed at /lets-talk, which no longer
+     exists. Booking is now a dialog rather than a route, so there is
+     no booking URL to redirect to — but these were public, so they
+     land on the homepage, where the CTA opens that dialog. A 308 to a
+     live page beats a 404 for anything already linked or indexed. */
+  async redirects() {
+    return ["/request-access", "/talk-to-founder", "/book-demo"].map((source) => ({
+      source,
+      destination: "/",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
+      /* Assets under /public are NOT content-hashed, so Next serves them
+         with `max-age=0` and they revalidate on every visit. That costs a
+         round trip per asset per page load — and the hero clip is large
+         enough that the round trip is the cheap part. A day of hard
+         caching with a week of stale-while-revalidate keeps repeat visits
+         free while still letting a replaced logo propagate quickly.
+
+         The `(?!_next/)` guard is load-bearing. Everything under
+         /_next/static IS content-hashed and Next already serves it
+         `immutable` — without the lookahead this rule also matched the
+         hashed woff2 fonts and DOWNGRADED them from a year to a day,
+         re-validating fonts on every repeat visit. And `webm` belongs
+         in this list: it is the encode ~95% of browsers actually get,
+         so leaving it out cached the fallback and not the primary. */
+      {
+        source:
+          "/:file((?!_next/).*\\.(?:mp4|webm|mp3|woff2|png|jpe?g|svg|webp|avif|ico))",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: [

@@ -1,7 +1,8 @@
 "use client";
 
 import { ArrowRight, Clock, Users } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useSafeReducedMotion } from "@/lib/motion";
 import { FOUNDERS, type Meeting } from "@/lib/meetings";
 import { FounderStack } from "./founder-avatar";
 
@@ -16,7 +17,7 @@ export function MeetingCard({
   index: number;
   onSelect: (meeting: Meeting) => void;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const hosts = meeting.hosts.map((h) => FOUNDERS[h]);
 
   return (

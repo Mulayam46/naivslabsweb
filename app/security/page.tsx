@@ -58,7 +58,10 @@ export default function SecurityPage() {
               <Reveal key={k} delay={i * 0.06}>
                 <Card className="h-full p-7 md:p-8">
                   <span className="t-label text-text-2">{k}</span>
-                  <h2 className="t-strong mt-4 text-text">{title}</h2>
+                  {/* h3, not h2 — SectionHead above already owns the h2
+                      for this section, so a sibling h2 here would flatten
+                      four cards into four peer sections. */}
+                  <h3 className="t-strong mt-4 text-text">{title}</h3>
                   <p className="mt-3 t-body leading-relaxed text-text-2">{body}</p>
                 </Card>
               </Reveal>
@@ -72,7 +75,7 @@ export default function SecurityPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
             <SectionHead eyebrow="Deployment" title="What your security team will ask." />
             <Reveal>
-              <dl className="well p-7 md:p-8">
+              <dl className="card p-7 md:p-8">
                 {DEPLOYMENT.map(([k, v], i) => (
                   <div
                     key={k}

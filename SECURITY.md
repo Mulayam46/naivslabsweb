@@ -1,21 +1,32 @@
 # Security Policy
 
-## Supported Versions
+## Reporting a vulnerability
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+If you believe you have found a security issue in this site or in the
+NavisLabs platform, please report it by email:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+- **security@navislabs.in** (preferred)
+- hello@navislabs.in
 
-## Reporting a Vulnerability
+We acknowledge reports within two business days and aim to resolve
+verified vulnerabilities as quickly as reasonable.
 
-Use this section to tell people how to report a vulnerability.
+The machine-readable contact record lives at
+[`/.well-known/security.txt`](public/.well-known/security.txt) per
+RFC 9116.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Scope
+
+This repository is the marketing site (Next.js, statically prerendered).
+It talks to Calendly for scheduling and, when configured, PostHog for
+analytics. It has no server routes, no user accounts, and stores no
+customer data.
+
+For product-platform vulnerabilities, use the same contact addresses and
+mention the platform component in the subject line.
+
+## Please do not
+
+- Perform automated scans that generate significant traffic.
+- Attempt denial-of-service testing.
+- Publish details of an unresolved vulnerability.

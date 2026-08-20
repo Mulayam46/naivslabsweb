@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { useSafeReducedMotion } from "@/lib/motion";
 import { Plug, Layers, Sparkles, UserCheck } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════
@@ -71,7 +72,7 @@ function Step({
 }
 
 export function Pipeline() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,

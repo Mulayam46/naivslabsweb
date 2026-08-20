@@ -3,8 +3,8 @@ import { SystemBar, Footer } from "./chrome";
 import { MorningIntelligence } from "./dashboard";
 import { BrandIcon, SUPPORTED_MARKS } from "./logos";
 import { Pipeline } from "./pipeline";
-import { Reveal, Enter, ScrollSettle } from "./reveal";
-import { Card, Container, Eyebrow, Section } from "./ui";
+import { Reveal, ScrollSettle } from "./reveal";
+import { Card, Container, Eyebrow, Section, SkipLink } from "./ui";
 import { MeetingTrigger } from "@/components/meeting/meeting-trigger";
 import { FounderAvatar } from "@/components/meeting/founder-avatar";
 import { FOUNDER_FACES, FOUNDER_SUMMARY } from "@/lib/meetings";
@@ -27,8 +27,10 @@ import { HeroFilm } from "./hero-film";
    page (see .page-canvas), so the scroll reads continuously instead of
    as stacked white blocks separated by hairlines.
 
-   Server Component. Only Reveal/Enter, Pipeline, the nav, the video
-   and the meeting triggers cross to the client.
+   Server Component. Only Reveal, Pipeline, the nav, the video and the
+   meeting triggers cross to the client. Above-the-fold content is
+   revealed by CSS (`anim-rise`) so nothing on the first screen waits
+   for hydration.
 ═══════════════════════════════════════════════════════════ */
 
 const ICON = { strokeWidth: 1.75, "aria-hidden": true, className: "icon-ui" } as const;
@@ -46,47 +48,45 @@ function Hero() {
         <HeroFilm />
 
         <Container className="relative">
+          {/* Every entrance here is a CSS animation, never <Reveal>/<Enter>.
+              A motion component ships its start state as inline
+              `opacity:0` in the prerendered HTML, which puts the LCP
+              element — this <h1> — behind bundle download, hydration and
+              an animation delay, and leaves the hero permanently blank
+              if the JS never arrives. `anim-rise` runs on first paint
+              with no JS at all, and `prefers-reduced-motion` already
+              collapses it in globals.css. */}
           <div className="mx-auto max-w-[880px] text-center">
-            <Enter delay={0.05}>
-              <Eyebrow>Introducing NavisLabs</Eyebrow>
-            </Enter>
+            <Eyebrow className="anim-rise d-1">Introducing NavisLabs</Eyebrow>
 
-            <Enter delay={0.14}>
-              <h1 className="t-display mt-6 text-text">
-                The shared understanding{" "}
-                <span className="text-text-2">for your organization.</span>
-              </h1>
-            </Enter>
+            <h1 className="t-display anim-rise d-2 mt-6 text-text">
+              The shared understanding{" "}
+              <span className="text-text-2">for your organization.</span>
+            </h1>
 
-            <Enter delay={0.26}>
-              <p className="t-body mx-auto mt-7 max-w-[600px] text-text-2">
-                NavisLabs continuously understands how your organization operates,
-                turning activity across your business systems into trusted operational
-                intelligence for people and AI agents.
-              </p>
-            </Enter>
+            <p className="t-body anim-rise d-4 mx-auto mt-7 max-w-[600px] text-text-2">
+              NavisLabs continuously understands how your organization operates,
+              turning activity across your business systems into trusted operational
+              intelligence for people and AI agents.
+            </p>
 
             {/* One action, and only one. */}
-            <Enter delay={0.34}>
-              <div className="mt-10 flex justify-center">
-                <MeetingTrigger size="lg" />
-              </div>
-            </Enter>
+            <div className="anim-rise d-5 mt-10 flex justify-center">
+              <MeetingTrigger size="lg" />
+            </div>
 
-            <Enter delay={0.44}>
-              <div className="mt-14 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-                <span className="inline-flex items-center gap-2">
-                  <span className="dot bg-steady anim-breathe" aria-hidden />
-                  <span className="t-label text-steady">Live</span>
+            <div className="anim-rise d-6 mt-14 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              <span className="inline-flex items-center gap-2">
+                <span className="dot bg-steady anim-breathe" aria-hidden />
+                <span className="t-label text-steady">Live</span>
+              </span>
+              <span className="t-caption text-text-2">Watching</span>
+              {WATCHING.map((w) => (
+                <span key={w} className="t-caption text-text">
+                  {w}
                 </span>
-                <span className="t-caption text-text-2">Watching</span>
-                {WATCHING.map((w) => (
-                  <span key={w} className="t-caption text-text">
-                    {w}
-                  </span>
-                ))}
-              </div>
-            </Enter>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
@@ -387,20 +387,31 @@ function Close() {
 
 export function Home() {
   return (
-    <main className="relative">
+    /* SystemBar and Footer sit OUTSIDE <main>. A <header>/<footer>
+       nested inside main is not a `banner`/`contentinfo` landmark —
+       the implicit role only applies at document scope — so keeping
+       them here is what gives screen readers real landmark navigation
+       instead of one undifferentiated main region. */
+    <>
+      <SkipLink />
+
       {/* One canvas behind the entire scroll. */}
       <div aria-hidden className="page-canvas" />
       <div aria-hidden className="page-noise" />
 
       <SystemBar />
-      <Hero />
-      <Systems />
-      <How />
-      <Intelligence />
-      <Trust />
-      <Founders />
-      <Close />
+
+      <main id="content" className="relative">
+        <Hero />
+        <Systems />
+        <How />
+        <Intelligence />
+        <Trust />
+        <Founders />
+        <Close />
+      </main>
+
       <Footer />
-    </main>
+    </>
   );
 }
